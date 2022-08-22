@@ -7,6 +7,9 @@
   - ModelやLogicなどの流れ理解
   - 画面を一画面で出来るように
   - Logic→Service→Controllerの順で考えるといいかも
+<div style="text-align: right;">
+【右揃えにする文章を記述】
+</div>
 
 ## 作成するAPI
 - **一覧取得API** <br>
