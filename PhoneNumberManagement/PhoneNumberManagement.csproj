@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DAO\" />
   </ItemGroup>
 
 </Project>
