@@ -1,4 +1,6 @@
-﻿using PhoneNumberManagement.;
+﻿using PhoneNumberManagement.Entity;
+using PhoneNumberManagement.Dto;
+using PhoneNumberManagement.DTO;
 
 
 namespace PhoneNumberManagement.Logics

@@ -15,13 +15,18 @@ namespace PhoneNumberManagement.Controllers
 
 
             result = PhoneNumberManagementService.FirstService();
-
             //Dtol→ViewModelの詰め替え
             //foreach的なやつかく
+
+            foreach (var item in result)
+            {
+
+            }
         }
     }
 }
 
+/*
 // Service
 public PhoneNumberManagementDto StoreService()
 {
@@ -46,3 +51,4 @@ public PhoneNumberManagementDto StoreLogic()
     }
     return result;
 }
+*/

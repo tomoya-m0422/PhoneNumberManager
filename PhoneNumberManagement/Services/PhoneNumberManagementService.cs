@@ -8,7 +8,8 @@ namespace PhoneNumberManagement.Services
     {
         public PhoneNumberManagementDto FirstService()
         {
-            var PhoneNumberManagementDto = PhoneNumberManagementLogic.FirstLogic();
+
+            var PhoneNumberManagementDto = new PhoneNumberManagementLogic.FirstLogic();
             return PhoneNumberManagementDto;
 
         }
