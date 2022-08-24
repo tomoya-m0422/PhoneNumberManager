@@ -9,7 +9,7 @@ namespace PhoneNumberManagement.Controllers
     [ApiController]
     public class PhoneNumberManegementController : ControllerBase
     {
-        public PhoneNumberManagementViewModel First()
+        public PhoneNumberManagementViewModel FirstController()
         {
             var result = new PhoneNumberManagementViewModel();
 
