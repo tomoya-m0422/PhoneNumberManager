@@ -6,7 +6,7 @@ using PhoneNumberManagement.DAO;
 namespace PhoneNumberManagement.Logics
 
 {
-    public class PhoneNumberManagementLogic
+    public class PhoneNumberManagementLogic : IPhoneNumberManagementLogic
     {
         public PhoneNumberManagementDto FirstLogic()
         {
