@@ -25,7 +25,7 @@ SQLServer → (DAO) → Entity → DTO → Model
 
 - **誰が何してるか**<br>
 1. DAO: SQLServerから元のデータを取ってくる
-2. Logic: 
+2. Logic: <br>
   2-1. DAOへ上記の処理をするように指示をする<br>
   2-2. DAOからもらったデータをEntityに入れる<br>
   2-3. EntityのデータをDTOに入れる<br>
