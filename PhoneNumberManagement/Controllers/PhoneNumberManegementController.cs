@@ -20,7 +20,7 @@ namespace PhoneNumberManagement.Controllers
 
             foreach (var entity in Service)
             {
-                result.Add = Service;
+                result = Service;
             }
 
             return result;
