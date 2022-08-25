@@ -1,5 +1,5 @@
 ﻿using PhoneNumberManagement.Logics;
-using PhoneNumberManagement.Dto;
+using PhoneNumberManagement.DTO;
 
 namespace PhoneNumberManagement.Services
 
@@ -9,9 +9,9 @@ namespace PhoneNumberManagement.Services
         public PhoneNumberManagementDto FirstService()
         {
 
-            var PhoneNumberManagementDto = new PhoneNumberManagementLogic.FirstLogic();
-            return PhoneNumberManagementDto;
-
+            var PhoneNumberManagementDto = new PhoneNumberManagementLogic();
+            return PhoneNumberManagementDto.FirstLogic();
+            
         }
     }
 }

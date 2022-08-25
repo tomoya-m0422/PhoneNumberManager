@@ -1,4 +1,4 @@
-﻿namespace PhoneNumberManagement.Dto
+﻿namespace PhoneNumberManagement.DTO
 {
     public class PhoneNumberManagementDto
     {

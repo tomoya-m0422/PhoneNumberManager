@@ -1,6 +1,6 @@
 ﻿namespace PhoneNumberManagement.Entity
 {
-    public class PhoneNumberManagementDto
+    public class PhoneNumberManagementEntity
     {
         public int StaffNumber { get; set; }
         public string StaffName { get; set; }

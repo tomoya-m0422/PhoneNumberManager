@@ -12,16 +12,18 @@ namespace PhoneNumberManagement.Controllers
         public PhoneNumberManagementViewModel FirstController()
         {
             var result = new PhoneNumberManagementViewModel();
+            var Service = new PhoneNumberManagementService();
 
-
-            result = PhoneNumberManagementService.FirstService();
-            //Dtol→ViewModelの詰め替え
+            Service = Service.FirstService();
+            //Dto→ViewModelの詰め替え
             //foreach的なやつかく
 
-            foreach (var item in result)
+            foreach (var entity in Service)
             {
-
+                result.Add = Service;
             }
+
+            return result;
         }
     }
 }
@@ -39,12 +41,12 @@ public PhoneNumberManagementDto StoreService()
 // Logic
 public PhoneNumberManagementDto StoreLogic()
 {
-    //Dto→Entity
+    //Dto→Entity    
     //Dao ←SQL
-    var phoneNumberManagementEntity = new PhoneNumberManagementEntity();
-    phoneNumberManagementEntity = PerSonDao.aaaa();
-    var result = new (List)phoneNumberManagementDto();
-    foreach (var entity in phoneNumberManagementEntity)
+    var phoneNumberManagementEntity = new PhoneNumberManagementEntity(); //Enitityのインスタンス
+    phoneNumberManagementEntity = PerSonDao.aaaa();　//DaoのやつをEntityに持ってきてる
+    var result = new (List)phoneNumberManagementDto();　//Dtoのインスタンス
+    foreach (var entity in phoneNumberManagementEntity) //DtoをEntityに入れてる？？？
     {
         entity.FirstName = result.LastName;
         entity.LastName = result.FirstName;
