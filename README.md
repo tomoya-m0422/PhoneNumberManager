@@ -30,6 +30,9 @@ SQLServer → (DAO) → Entity → DTO → Model
   2-2. DAOからもらったデータをEntityに入れる<br>
   2-3. EntityのデータをDTOに入れる<br>
 3. Service:<br>
-  3-1. Logicに上記の処理をするように指示
-  3-2. DTOのデータを返す(?)
+  3-1. Logicに上記の処理をするように指示<br>
+  3-2. DTOのデータを返す(?)<br>
+4. Controller:<br>
+  4-1. Serviceに上記の処理をするように指示<br>
+  4-2. DTOのデータをModelに入れる<br>
 
