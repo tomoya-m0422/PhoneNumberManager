@@ -6,7 +6,7 @@ namespace PhoneNumberManagement.DAO
 {
 
 
-    public class ManagementDao
+    public class ManagementDao : IManagementDao
     {
         public IEnumerable<PhoneNumberManagementEntity> FirstConnect()
         {
@@ -15,7 +15,7 @@ namespace PhoneNumberManagement.DAO
             // データベース接続の準備
             var connection = new SqlConnection(connectionString);
             // データベースの接続開始
-            connection.Open();
+            connection.Open();//Serviceで書く
 
             /* // 実行するSQLの準備
             var command = new SqlCommand();

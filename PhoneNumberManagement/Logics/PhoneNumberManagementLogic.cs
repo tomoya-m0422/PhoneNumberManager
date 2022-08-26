@@ -1,30 +1,51 @@
 ﻿using PhoneNumberManagement.Entity;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DAO;
-using System.Collections.Generic;
 
 namespace PhoneNumberManagement.Logics
 
 {
     public class PhoneNumberManagementLogic : IPhoneNumberManagementLogic
     {
+        #region メンバー変数
+        private IManagementDao managementDao;
+        #endregion 
+
+        #region コンストラクタ
+        public PhoneNumberManagementLogic(IManagementDao managementDao)
+        {
+            this.managementDao = managementDao;
+        }
+        #endregion 
+
+
         public IEnumerable<PhoneNumberManagementDto> FirstLogic()
         {
             //DaoにSQLServerからデータを取ってくるように指示したあとDaoResultにデータを入れる
-            var Dao = new ManagementDao();
-            var DaoResult = Dao.FirstConnect();
+            var entity = managementDao.FirstConnect();
 
+            var result = setPhoneNumberManagementDto(entity);
 
-            var phoneNumberManagementEntity = new List<PhoneNumberManagementEntity>();
-            
-
-
-            var result = new List<PhoneNumberManagementDto>();
-            foreach(var item in DaoResult)
-            {
-                result.Add(item);
-            }
             return result;
+        }
+
+        public IEnumerable<PhoneNumberManagementDto> setPhoneNumberManagementDto(IEnumerable<PhoneNumberManagementEntity> entities)
+        {
+            var dtos = new List<PhoneNumberManagementDto>();
+
+            foreach (var entity in entities)
+            {
+                foreach(var dto in dtos)
+                {
+                    dto.StaffNumber = entity.StaffNumber;
+                    dto.StaffName = entity.StaffName;
+                    dto.DepartmentName = entity.DepartmentName;
+                    dto.ExtensionNumber = entity.ExtensionNumber;
+                    dto.CompanyName = entity.CompanyName;
+                    dto.Memo = entity.Memo;
+                }
+            }
+            return dtos;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace PhoneNumberManagement.DTO
+﻿using PhoneNumberManagement.Entity;
+
+namespace PhoneNumberManagement.DTO
 {
     public class PhoneNumberManagementDto
     {
@@ -11,6 +13,9 @@
         public string CompanyName { get; set; }
         public string DepartmentName { get; set; }
 
-
+        public static explicit operator PhoneNumberManagementDto(PhoneNumberManagementEntity v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

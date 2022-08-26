@@ -14,7 +14,7 @@ namespace PhoneNumberManagement.Controllers
             var result = new PhoneNumberManagementViewModel();
             var Service = new PhoneNumberManagementService();
 
-            Service = Service.FirstService();
+            var a = Service.FirstService();
             //Dto→ViewModelの詰め替え
             //foreach的なやつかく
 
