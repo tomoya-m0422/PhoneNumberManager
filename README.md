@@ -19,7 +19,7 @@
   社員番号を引数っとして受け取り、該当する社員をPersonから削除する。
 
 
-### 初期処理について
+### 初期処理について(一覧取得API)
 - **データの流れ**<br>
 SQLServer → (DAO) → Entity → DTO → Model
 
@@ -29,4 +29,10 @@ SQLServer → (DAO) → Entity → DTO → Model
   2-1. DAOへ上記の処理をするように指示をする<br>
   2-2. DAOからもらったデータをEntityに入れる<br>
   2-3. EntityのデータをDTOに入れる<br>
+3. Service:<br>
+  3-1. Logicに上記の処理をするように指示<br>
+  3-2. DTOのデータを返す(?)<br>
+4. Controller:<br>
+  4-1. Serviceに上記の処理をするように指示<br>
+  4-2. DTOのデータをModelに入れる<br>
 
