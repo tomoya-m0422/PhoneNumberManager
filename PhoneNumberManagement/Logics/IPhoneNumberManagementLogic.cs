@@ -9,6 +9,6 @@ namespace PhoneNumberManagement.Logics
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        PhoneNumberManagementDto FirstLogic();
+        IEnumerable<PhoneNumberManagementDto> FirstLogic();
     }
 }
