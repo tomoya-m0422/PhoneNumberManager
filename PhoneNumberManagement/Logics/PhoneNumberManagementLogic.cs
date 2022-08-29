@@ -9,6 +9,7 @@ namespace PhoneNumberManagement.Logics
     {
         #region メンバー変数
         private IManagementDao managementDao;
+
         #endregion 
 
         #region コンストラクタ
@@ -19,7 +20,7 @@ namespace PhoneNumberManagement.Logics
         #endregion 
 
 
-        public IEnumerable<PhoneNumberManagementDto> FirstLogic()
+        public IEnumerable<PhoneNumberManagementDto> FirstDawnLogic()
         {
             //DaoにSQLServerからデータを取ってくるように指示したあとDaoResultにデータを入れる
             var entity = managementDao.FirstConnect();
@@ -35,18 +36,22 @@ namespace PhoneNumberManagement.Logics
 
             foreach (var entity in entities)
             {
-                foreach(var dto in dtos)
-                {
-                    dto.StaffNumber = entity.StaffNumber;
-                    dto.StaffName = entity.StaffName;
-                    dto.DepartmentName = entity.DepartmentName;
-                    dto.ExtensionNumber = entity.ExtensionNumber;
-                    dto.CompanyName = entity.CompanyName;
-                    dto.Memo = entity.Memo;
-                }
+                var dto = new PhoneNumberManagementDto();
+                
+                dto.StaffNumber = entity.StaffNumber;
+                dto.StaffName = entity.StaffName;
+                dto.CompanyID = entity.CompanyID;
+                dto.DepartmentID = entity.DepartmentID;
+                dto.ExtensionNumber = entity.ExtensionNumber;
+                dto.Memo = entity.Memo;
+                dto.DepartmentName = entity.DepartmentName;
+                dto.CompanyName = entity.CompanyName;
+
+                dtos.Add(dto);
             }
             return dtos;
         }
+
     }
 }
 

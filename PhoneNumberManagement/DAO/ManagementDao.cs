@@ -10,12 +10,14 @@ namespace PhoneNumberManagement.DAO
     {
         public IEnumerable<PhoneNumberManagementEntity> FirstConnect()
         {
+            /*
             // 接続文字列の取得
             var connectionString = "Data Source = NCP - TM04945 - 1; Initial Catalog = ManagementDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
             // データベース接続の準備
             var connection = new SqlConnection(connectionString);
             // データベースの接続開始
             connection.Open();//Serviceで書く
+            */
 
             /* // 実行するSQLの準備
             var command = new SqlCommand();

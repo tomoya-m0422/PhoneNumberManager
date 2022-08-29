@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Services;
 
@@ -9,21 +10,48 @@ namespace PhoneNumberManagement.Controllers
     [ApiController]
     public class PhoneNumberManegementController : ControllerBase
     {
-        public PhoneNumberManagementViewModel FirstController()
+        #region メンバー変数
+        private PhoneNumberManagementService managementService;
+        #endregion
+
+        #region コンストラクター
+        public PhoneNumberManegementController(PhoneNumberManagementService phoneNumberManagementService)
         {
-            var result = new PhoneNumberManagementViewModel();
-            var Service = new PhoneNumberManagementService();
+            this.managementService = phoneNumberManagementService;
+        }
+        #endregion
 
-            var a = Service.FirstService();
-            //Dto→ViewModelの詰め替え
-            //foreach的なやつかく
+        public IEnumerable< PhoneNumberManagementViewModel> FirstDawnController()
+        {
+            var service = managementService.FirstDawnService();
 
-            foreach (var entity in Service)
-            {
-                result = Service;
-            }
+            var result = setManagementViewModel(service);
 
             return result;
+        }
+
+
+
+        public IEnumerable<PhoneNumberManagementViewModel> setManagementViewModel(IEnumerable<PhoneNumberManagementDto> DTO)
+        {
+            var viewModels = new List<PhoneNumberManagementViewModel>();
+            foreach (var items in DTO)
+            {
+                var gomi = new PhoneNumberManagementViewModel();
+
+                gomi.StaffNumber = items.StaffNumber;
+                gomi.StaffName = items.StaffName;
+                gomi.CompanyID = items.CompanyID;
+                gomi.DepartmentID = items.DepartmentID;
+                gomi.ExtensionNumber = items.ExtensionNumber;
+                gomi.Memo = items.Memo;
+                gomi.DepartmentName = items.DepartmentName;
+                gomi.CompanyName = items.CompanyName;
+
+                viewModels.Add(gomi);
+            }
+
+            return viewModels;
         }
     }
 }
