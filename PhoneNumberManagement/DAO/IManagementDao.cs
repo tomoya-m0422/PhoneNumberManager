@@ -8,7 +8,7 @@ namespace PhoneNumberManagement.DAO
 
     public interface IManagementDao
     {
-        IEnumerable<PhoneNumberManagementEntity> FirstConnect();
+        IEnumerable<ManagementEntity> FirstConnect(SqlConnection connection);
         
     }
 }

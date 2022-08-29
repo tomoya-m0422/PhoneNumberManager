@@ -1,27 +1,28 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Services;
 
 namespace PhoneNumberManagement.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class PhoneNumberManegementController : ControllerBase
+    [Route("[controller]")]
+    public class ManegementController : ControllerBase
     {
         #region メンバー変数
-        private PhoneNumberManagementService managementService;
+        private ManagementService managementService;
         #endregion
 
         #region コンストラクター
-        public PhoneNumberManegementController(PhoneNumberManagementService phoneNumberManagementService)
+        public ManegementController()
         {
-            this.managementService = phoneNumberManagementService;
+            this.managementService = new ManagementService(new Logics.ManagementLogic(new DAO.ManagementDao()));
         }
         #endregion
 
-        public IEnumerable< PhoneNumberManagementViewModel> FirstDawnController()
+
+        [HttpGet]
+        public IEnumerable< ManagementViewModel> FirstDawnController()
         {
             var service = managementService.FirstDawnService();
 
@@ -32,12 +33,12 @@ namespace PhoneNumberManagement.Controllers
 
 
 
-        public IEnumerable<PhoneNumberManagementViewModel> setManagementViewModel(IEnumerable<PhoneNumberManagementDto> DTO)
+        public IEnumerable<ManagementViewModel> setManagementViewModel(IEnumerable<ManagementDto> DTO)
         {
-            var viewModels = new List<PhoneNumberManagementViewModel>();
+            var viewModels = new List<ManagementViewModel>();
             foreach (var items in DTO)
             {
-                var gomi = new PhoneNumberManagementViewModel();
+                var gomi = new ManagementViewModel();
 
                 gomi.StaffNumber = items.StaffNumber;
                 gomi.StaffName = items.StaffName;

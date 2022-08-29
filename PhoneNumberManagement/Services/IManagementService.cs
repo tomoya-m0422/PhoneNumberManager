@@ -1,15 +1,16 @@
 ﻿using PhoneNumberManagement.DTO;
+using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
 
 {
-    public interface IPhoneNumberManagementService
+    public interface IManagementService
     {
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        PhoneNumberManagementDto FirstService();
+        ManagementDto FirstService(SqlConnection connection);
     }
 
 }

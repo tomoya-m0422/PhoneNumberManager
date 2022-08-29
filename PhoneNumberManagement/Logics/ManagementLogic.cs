@@ -1,42 +1,45 @@
 ﻿using PhoneNumberManagement.Entity;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DAO;
+using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
 
 {
-    public class PhoneNumberManagementLogic : IPhoneNumberManagementLogic
+    public class ManagementLogic : IManagementLogic
     {
         #region メンバー変数
         private IManagementDao managementDao;
-
         #endregion 
 
         #region コンストラクタ
-        public PhoneNumberManagementLogic(IManagementDao managementDao)
+        public ManagementLogic(IManagementDao managementDao)
         {
             this.managementDao = managementDao;
         }
         #endregion 
 
 
-        public IEnumerable<PhoneNumberManagementDto> FirstDawnLogic()
+        public IEnumerable<ManagementDto> FirstDawnLogic(SqlConnection connection)
         {
             //DaoにSQLServerからデータを取ってくるように指示したあとDaoResultにデータを入れる
-            var entity = managementDao.FirstConnect();
-
+            var entity = managementDao.FirstConnect(connection);
             var result = setPhoneNumberManagementDto(entity);
-
             return result;
         }
 
-        public IEnumerable<PhoneNumberManagementDto> setPhoneNumberManagementDto(IEnumerable<PhoneNumberManagementEntity> entities)
+        public IEnumerable<ManagementDto> FirstDawnLogic()
         {
-            var dtos = new List<PhoneNumberManagementDto>();
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ManagementDto> setPhoneNumberManagementDto(IEnumerable<ManagementEntity> entities)
+        {
+            var dtos = new List<ManagementDto>();
 
             foreach (var entity in entities)
             {
-                var dto = new PhoneNumberManagementDto();
+                var dto = new ManagementDto();
                 
                 dto.StaffNumber = entity.StaffNumber;
                 dto.StaffName = entity.StaffName;

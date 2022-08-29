@@ -2,7 +2,7 @@
 
 namespace PhoneNumberManagement.DTO
 {
-    public class PhoneNumberManagementDto
+    public class ManagementDto
     {
         public int StaffNumber { get; set; }
         public string StaffName { get; set; }
@@ -13,7 +13,7 @@ namespace PhoneNumberManagement.DTO
         public string CompanyName { get; set; }
         public string DepartmentName { get; set; }
 
-        public static explicit operator PhoneNumberManagementDto(PhoneNumberManagementEntity v)
+        public static explicit operator ManagementDto(ManagementEntity v)
         {
             throw new NotImplementedException();
         }

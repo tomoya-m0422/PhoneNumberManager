@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Models;
+using PhoneNumberManagement.Services;
 
 namespace PhoneNumberManagement.Controllers
 {
@@ -12,23 +14,55 @@ namespace PhoneNumberManagement.Controllers
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
+
+        #region メンバー変数
+        private ManagementService managementService;
+        #endregion
+
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
+            this.managementService = new ManagementService(new Logics.ManagementLogic(new DAO.ManagementDao()));
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<Models.PhoneNumberManagementViewModel> Get()
+        //#region コンストラクター
+        //public ManegementController(ManagementService ManagementService)
+        //{
+        //    this.managementService = ManagementService;
+        //}
+        //#endregion
+
+        [HttpGet]
+        public IEnumerable<ManagementViewModel> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new PhoneNumberManagement
+            var service = managementService.FirstDawnService();
+
+            var result = setManagementViewModel(service);
+
+            return result;
+        }
+        public IEnumerable<ManagementViewModel> setManagementViewModel(IEnumerable<ManagementDto> DTO)
+        {
+            var viewModels = new List<ManagementViewModel>();
+            foreach (var items in DTO)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                var gomi = new ManagementViewModel();
+
+                gomi.StaffNumber = items.StaffNumber;
+                gomi.StaffName = items.StaffName;
+                gomi.CompanyID = items.CompanyID;
+                gomi.DepartmentID = items.DepartmentID;
+                gomi.ExtensionNumber = items.ExtensionNumber;
+                gomi.Memo = items.Memo;
+                gomi.DepartmentName = items.DepartmentName;
+                gomi.CompanyName = items.CompanyName;
+
+                viewModels.Add(gomi);
+            }
+
+            return viewModels;
         }
     }
 }

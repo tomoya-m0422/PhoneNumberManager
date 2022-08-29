@@ -2,13 +2,13 @@
 
 namespace PhoneNumberManagement.Logics
 {
-    public interface IPhoneNumberManagementLogic
+    public interface IManagementLogic
     {
         /// <summary>
         /// 最初のLogic
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        IEnumerable<PhoneNumberManagementDto> FirstDawnLogic();
+        IEnumerable<ManagementDto> FirstDawnLogic();
     }
 }
