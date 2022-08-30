@@ -12,8 +12,7 @@ namespace PhoneNumberManagement.Controllers
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
+        };
 
         #region メンバー変数
         private ManagementService managementService;
@@ -21,14 +20,16 @@ namespace PhoneNumberManagement.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
+        #region コンストラクタ
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
             this.managementService = new ManagementService(new Logics.ManagementLogic(new DAO.ManagementDao()));
         }
+        #endregion
 
         //#region コンストラクター
-        //public ManegementController(ManagementService ManagementService)
+        //public ManagementController(ManagementService ManagementService)
         //{
         //    this.managementService = ManagementService;
         //}
@@ -38,11 +39,11 @@ namespace PhoneNumberManagement.Controllers
         public IEnumerable<ManagementViewModel> Get()
         {
             var service = managementService.FirstDawnService();
-
             var result = setManagementViewModel(service);
-
             return result;
         }
+
+
         public IEnumerable<ManagementViewModel> setManagementViewModel(IEnumerable<ManagementDto> DTO)
         {
             var viewModels = new List<ManagementViewModel>();

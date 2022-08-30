@@ -5,19 +5,18 @@ using PhoneNumberManagement.Models;
 using System.Data.SqlTypes;
 using System.Data.SqlClient;
 using static Dapper.SqlMapper;
+using PhoneNumberManagement.DAO;
+using System;
 
 namespace PhoneNumberManagement.Services
 
 {
-    public class ManagementService
+    public class ManagementService : IManagementService
     {
-        
-        
+                
         #region メンバー変数
         private ManagementLogic managementLogic;
         #endregion
-
-
 
         #region コンストラクタ
         public ManagementService(ManagementLogic phoneNumberManagementLogic)
@@ -28,22 +27,45 @@ namespace PhoneNumberManagement.Services
 
 
 
-        public IEnumerable<ManagementDto> FirstDawnService()
+        public List<ManagementDto> FirstDawnService()
         {
 
+            var dto = new List<ManagementDto>();
+
+            var connectionString = "Data Source=NCP-TM04945-1;Initial Catalog=ManagementDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = connection.CreateCommand())
+            {
+                try
+                {
+                    //DB接続開始
+                    connection.Open();
+                    //SQLの実行
+                    dto = managementLogic.FirstDawnLogic(connection);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+               
+
+            /*
             //DB接続
             var connectionString = "Data Source = NCP - TM04945 - 1; Initial Catalog = ManagementDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
             // データベース接続の準備
             var connection = new SqlConnection(connectionString);
             // データベースの接続開始
-            connection.Open();//Serviceで書く
-
-
-            var Dto = managementLogic.FirstDawnLogic(connection);
-
-            connection.Close();
-
-            return Dto;
+            connection.Open();
+            */
+            return dto;
         }
 
 

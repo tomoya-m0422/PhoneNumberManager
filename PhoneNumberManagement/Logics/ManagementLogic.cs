@@ -20,20 +20,17 @@ namespace PhoneNumberManagement.Logics
         #endregion 
 
 
-        public IEnumerable<ManagementDto> FirstDawnLogic(SqlConnection connection)
+        public List<ManagementDto> FirstDawnLogic(SqlConnection connection)
         {
-            //DaoにSQLServerからデータを取ってくるように指示したあとDaoResultにデータを入れる
+            //DaoにSQLServerからデータを取ってくるように指示したあとenetityにデータを入れる
             var entity = managementDao.FirstConnect(connection);
             var result = setPhoneNumberManagementDto(entity);
             return result;
         }
 
-        public IEnumerable<ManagementDto> FirstDawnLogic()
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<ManagementDto> setPhoneNumberManagementDto(IEnumerable<ManagementEntity> entities)
+
+        public List<ManagementDto> setPhoneNumberManagementDto(IEnumerable<ManagementEntity> entities)
         {
             var dtos = new List<ManagementDto>();
 

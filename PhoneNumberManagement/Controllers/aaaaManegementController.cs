@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Services;
@@ -6,25 +6,32 @@ using PhoneNumberManagement.Services;
 namespace PhoneNumberManagement.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("【controller】")]
     public class ManegementController : ControllerBase
     {
+
+        private static readonly string[] Summaries = new[]
+        {
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
         #region メンバー変数
-        private ManagementService managementService;
+        private IManagementService managementService;
         #endregion
 
         #region コンストラクター
-        public ManegementController()
+        public ManegementController(IManagementService managementService)
         {
-            this.managementService = new ManagementService(new Logics.ManagementLogic(new DAO.ManagementDao()));
+            this.managementService = managementService;
         }
         #endregion
 
 
-        [HttpGet]
+        [HttpGet (Name = "GetManagement")]
         public IEnumerable< ManagementViewModel> FirstDawnController()
         {
-            var service = managementService.FirstDawnService();
+
+
+            var service = this.managementService.FirstDawnService();
 
             var result = setManagementViewModel(service);
 
@@ -53,6 +60,18 @@ namespace PhoneNumberManagement.Controllers
             }
 
             return viewModels;
+        }
+
+        [HttpGet(Name = "GetManagement")]
+        public IEnumerable<WeatherForecast> Get()
+        {
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            })
+            .ToArray();
         }
     }
 }

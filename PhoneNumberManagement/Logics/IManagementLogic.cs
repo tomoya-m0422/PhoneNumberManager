@@ -1,4 +1,6 @@
 ﻿using PhoneNumberManagement.DTO;
+using PhoneNumberManagement.Entity;
+using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
 {
@@ -9,6 +11,7 @@ namespace PhoneNumberManagement.Logics
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        IEnumerable<ManagementDto> FirstDawnLogic();
+        List<ManagementDto> FirstDawnLogic(SqlConnection connection);
+        List<ManagementDto> setPhoneNumberManagementDto(IEnumerable<ManagementEntity> entities);
     }
 }
