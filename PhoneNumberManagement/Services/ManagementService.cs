@@ -13,26 +13,56 @@ namespace PhoneNumberManagement.Services
 {
     public class ManagementService : IManagementService
     {
-                
+
+        #region テスト用
+        /*
         #region メンバー変数
         private ManagementLogic managementLogic;
         #endregion
 
         #region コンストラクタ
-        public ManagementService(ManagementLogic phoneNumberManagementLogic)
+        public ManagementService()
         {
-            this.managementLogic = phoneNumberManagementLogic;
+            this.managementLogic =new  ManagementLogic();
         }
-         #endregion
+        #endregion
 
-        
+
+        public string FirstService()
+        {
+            string testService = "Serviceには通ったよ";
+            /*
+            //DB接続
+            var connectionString = "Data Source = NCP - TM04945 - 1; Initial Catalog = ManagementDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
+            // データベース接続の準備
+            var connection = new SqlConnection(connectionString);
+            // データベースの接続開始
+            connection.Open();
+            
+            //return testService;
+        }
+        */
+
+
+        #endregion
+        #region 本番用
+
+        #region メンバー変数
+        private ManagementLogic managementLogic;
+        #endregion
+
+        #region コンストラクタ
+        public ManagementService()
+        {
+            this.managementLogic = new ManagementLogic();
+        }
+        #endregion
+
+
         public List<ManagementDto> FirstService()
         {
-
             var dto = new List<ManagementDto>();
-
             var connectionString = "Data Source=NCP-TM04945-1;Initial Catalog=ManagementDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
             using (var connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
             {
@@ -52,20 +82,20 @@ namespace PhoneNumberManagement.Services
                 {
                     connection.Close();
                 }
-
             }
-               
+             return dto;           
 
-            /*
             //DB接続
-            var connectionString = "Data Source = NCP - TM04945 - 1; Initial Catalog = ManagementDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
+            //var connectionString = "Data Source = NCP - TM04945 - 1; Initial Catalog = ManagementDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
             // データベース接続の準備
-            var connection = new SqlConnection(connectionString);
+            //var connection = new SqlConnection(connectionString);
             // データベースの接続開始
-            connection.Open();
-            */
-            return dto;
+            //connection.Open();
+            
+
         }
+    
+        #endregion
 
 
     }

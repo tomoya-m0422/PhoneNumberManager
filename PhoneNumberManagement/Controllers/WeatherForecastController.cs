@@ -1,3 +1,5 @@
+/*
+
 using Microsoft.AspNetCore.Mvc;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Models;
@@ -24,7 +26,7 @@ namespace PhoneNumberManagement.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            this.managementService = new ManagementService(new Logics.ManagementLogic(new DAO.ManagementDao()));
+            //this.managementService = new ManagementService(new Logics.ManagementLogic(new DAO.ManagementDao()));
         }
         #endregion
 
@@ -37,10 +39,12 @@ namespace PhoneNumberManagement.Controllers
 
         [HttpGet]
         public IEnumerable<ManagementViewModel> Get()
+        //public string Get()
         {
             var service = managementService.FirstService();
             var result = setManagementViewModel(service);
-            return result;
+            return service;
+
         }
 
 
@@ -67,3 +71,4 @@ namespace PhoneNumberManagement.Controllers
         }
     }
 }
+*/

@@ -19,7 +19,7 @@ namespace PhoneNumberManagement.DAO
             //command.CommandText = @"SELECT * FROM Person,Company,Department";
             */
 
-            var query = "SELECT *FROM Person AS p,Company AS c,Department AS d WHERE p.CompanyID = c.CompanyID AND p.DepartmentID = d.DepartmentID";
+            var query = "SELECT * FROM Person AS p,Company AS c,Department AS d WHERE p.CompanyID = c.CompanyID AND p.DepartmentID = d.DepartmentID";
             var result = connection.Query<ManagementEntity>(query);
 
 

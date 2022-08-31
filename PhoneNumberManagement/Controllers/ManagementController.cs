@@ -11,41 +11,57 @@ namespace PhoneNumberManagement.Controllers
     [ApiController]
     public class ManagementController : ControllerBase
     {
+        #region テスト:上手くつながっているか確認用
 
+        /*
         #region メンバー変数
-        private IManagementService _managementService;
+        private ManagementService managementService;
         #endregion
 
         #region コンストラクター
-        public ManagementController(IManagementService managementService)
+
+        public ManagementController()
         {
-            _managementService = managementService;
+            this.managementService = new ManagementService();
         }
         #endregion
 
+        #region 初期処理：一覧表示(全件取得)
+        [HttpGet]
+        public string Get()
+        {
+            var service = managementService.FirstService();
+            string result = "Controllerやで";
+            return result+service;
+        }
+        #endregion
+       */
+        #endregion
 
-        // GET: api/<ValuesController>
+        #region 本番
+
+        #region メンバー変数
+        private ManagementService managementService;
+        private PersonRegistService personRegisterService;
+        #endregion
+
+        #region コンストラクター
+        public ManagementController()
+        {
+            this.managementService = new ManagementService();
+            this.personRegisterService = new PersonRegistService();
+        }
+        #endregion
+
+        #region 初期処理：一覧表示(全件取得)
         [HttpGet]
         public IEnumerable<ManagementViewModel> Get()
         {
-            var service = _managementService.FirstService();
-
-            var result = setManagementViewModel(service);
-
-            return result;
-            //return new string[] { "value1", "value2" };
+           var service = managementService.FirstService();
+           var result = setManagementViewModel(service);
+           return result;
         }
-
-        // GET api/<ValuesController>/5
-       /* 
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-
-            return "value";
-        }
-       */
-
+        
         public IEnumerable<ManagementViewModel> setManagementViewModel(IEnumerable<ManagementDto> DTO)
         {
             var viewModels = new List<ManagementViewModel>();
@@ -67,25 +83,46 @@ namespace PhoneNumberManagement.Controllers
 
             return viewModels;
         }
+        #endregion
 
-        /*
-        // POST api/<ValuesController>
+
+        #region　新規作成
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+       public void registPerson()
+       {
+            PersonViewModel personViewModel = new PersonViewModel();
+            personViewModel.StaffNumber = 2;
+            personViewModel.StaffName = "トニースターク";
+            personViewModel.CompanyID = 2;
+            personViewModel.DepartmentID = 2;
+            personViewModel.ExtensionNumber = "07055000427";
+            var result = setDtoRegistPerson((IEnumerable<PersonViewModel>)personViewModel);
+            personRegisterService.registService(result);
+       }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+       public IEnumerable<PersonDto> setDtoRegistPerson(IEnumerable<PersonViewModel> personViewModel)
+       {
+            var registerMan = new List<PersonDto>();
+            foreach (var item in personViewModel)
+            {
+                var gomi = new PersonDto();
 
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-        */
+                gomi.StaffNumber = item.StaffNumber;
+                gomi.StaffName = item.StaffName;
+                gomi.CompanyID = item.CompanyID;
+                gomi.DepartmentID = item.DepartmentID;
+                gomi.ExtensionNumber = item.ExtensionNumber;
+
+                registerMan.Add(gomi);
+            }
+            return registerMan;
+
+            
+       }
+       #endregion
+        
+        #endregion
+
+
     }
 }

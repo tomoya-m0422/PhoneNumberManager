@@ -13,9 +13,9 @@ namespace PhoneNumberManagement.Logics
         #endregion 
 
         #region コンストラクタ
-        public ManagementLogic(IManagementDao managementDao)
+        public ManagementLogic()
         {
-            this.managementDao = managementDao;
+            this.managementDao = new ManagementDao();
         }
         #endregion 
 
