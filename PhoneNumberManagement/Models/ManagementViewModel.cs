@@ -10,7 +10,5 @@ namespace PhoneNumberManagement.Models
         public string Memo { get; set; }
         public string CompanyName { get; set; }
         public string DepartmentName { get; set; }
-
-
     }
 }

@@ -38,7 +38,7 @@ namespace PhoneNumberManagement.Controllers
         [HttpGet]
         public IEnumerable<ManagementViewModel> Get()
         {
-            var service = managementService.FirstDawnService();
+            var service = managementService.FirstService();
             var result = setManagementViewModel(service);
             return result;
         }

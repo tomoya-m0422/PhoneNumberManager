@@ -10,7 +10,7 @@ namespace PhoneNumberManagement.Services
         /// 
         /// </summary>
         /// <returns></returns>
-        List<ManagementDto> FirstDawnService();
+        List<ManagementDto> FirstService();
     }
 
 }

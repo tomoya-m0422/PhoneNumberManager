@@ -11,7 +11,7 @@ namespace PhoneNumberManagement.Logics
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        List<ManagementDto> FirstDawnLogic(SqlConnection connection);
+        List<ManagementDto> FirstLogic(SqlConnection connection);
         List<ManagementDto> setPhoneNumberManagementDto(IEnumerable<ManagementEntity> entities);
     }
 }

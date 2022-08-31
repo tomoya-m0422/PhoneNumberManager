@@ -13,13 +13,13 @@ namespace PhoneNumberManagement.Controllers
     {
 
         #region メンバー変数
-        private IManagementService managementService;
+        private IManagementService _managementService;
         #endregion
 
         #region コンストラクター
         public ManagementController(IManagementService managementService)
         {
-            this.managementService = managementService;
+            _managementService = managementService;
         }
         #endregion
 
@@ -28,7 +28,7 @@ namespace PhoneNumberManagement.Controllers
         [HttpGet]
         public IEnumerable<ManagementViewModel> Get()
         {
-            var service = this.managementService.FirstDawnService();
+            var service = _managementService.FirstService();
 
             var result = setManagementViewModel(service);
 

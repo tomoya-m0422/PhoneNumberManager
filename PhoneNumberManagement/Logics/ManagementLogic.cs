@@ -20,7 +20,7 @@ namespace PhoneNumberManagement.Logics
         #endregion 
 
 
-        public List<ManagementDto> FirstDawnLogic(SqlConnection connection)
+        public List<ManagementDto> FirstLogic(SqlConnection connection)
         {
             //DaoにSQLServerからデータを取ってくるように指示したあとenetityにデータを入れる
             var entity = managementDao.FirstConnect(connection);

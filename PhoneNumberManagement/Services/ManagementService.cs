@@ -25,9 +25,8 @@ namespace PhoneNumberManagement.Services
         }
          #endregion
 
-
-
-        public List<ManagementDto> FirstDawnService()
+        
+        public List<ManagementDto> FirstService()
         {
 
             var dto = new List<ManagementDto>();
@@ -42,7 +41,7 @@ namespace PhoneNumberManagement.Services
                     //DB接続開始
                     connection.Open();
                     //SQLの実行
-                    dto = managementLogic.FirstDawnLogic(connection);
+                    dto = managementLogic.FirstLogic(connection);
                 }
                 catch (Exception exception)
                 {
