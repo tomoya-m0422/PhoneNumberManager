@@ -9,7 +9,6 @@
 - 検索機能は作ったけど確認していない
 - 編集は製造中(Controllerは作ったのでServiceから)
 ## 今後の予定
-- 09/12以降PostManの謎を解く
 - 可能であればDepartment,Companyの新規登録機能も付けてみる
 - DepartmentTBの見直し(Companyと紐づけるか)
 ## 作成するAPI
