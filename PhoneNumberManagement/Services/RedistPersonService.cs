@@ -4,14 +4,22 @@ using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
 {
-    public class PersonRegistService
+    public class RedistPersonService : IRedistPersonService
     {
 
         #region メンバー変数
-        private 
+        private PersonRegistLogic personRegistLogic;
         #endregion
 
-        public void registService(IEnumerable<PersonDto> personDtos)
+        #region コンストラクター
+        public RedistPersonService()
+        {
+            this.personRegistLogic = new PersonRegistLogic();
+        }
+        #endregion
+
+
+        public void registService(PersonDto personDtos)
         {
             var connectionString = "Data Source=NCP-TM04945-1;Initial Catalog=ManagementDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             using (var connection = new SqlConnection(connectionString))
@@ -22,7 +30,7 @@ namespace PhoneNumberManagement.Services
                     //DB接続開始
                     connection.Open();
                     //SQLの実行
-                    dto = managementLogic.FirstLogic(connection);
+                    personRegistLogic.registLogic(connection,personDtos);
                 }
                 catch (Exception exception)
                 {

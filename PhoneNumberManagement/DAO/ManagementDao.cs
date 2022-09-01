@@ -1,6 +1,7 @@
 ﻿using System.Data.SqlClient;
 using Dapper;
 using PhoneNumberManagement.Entity;
+using PhoneNumberManagement.Models;
 
 namespace PhoneNumberManagement.DAO
 {
@@ -33,6 +34,14 @@ namespace PhoneNumberManagement.DAO
             // SQLの実行
             //command.ExecuteNonQuery
 
+
+            return result;
+        }
+
+        public IEnumerable<ManagementEntity> searchDao(SqlConnection connection,SearchViewModel search)
+        {
+            var query = "SELECT * FROM Person AS p,Company AS c,Department AS d WHERE p.StaffName = " + search.StaffName + "OR c.CompanyID = " + search.CompanyID + "OR p.Memo = " + search.Memo;
+            var result = connection.Query<ManagementEntity>(query);
 
             return result;
         }

@@ -42,14 +42,18 @@ namespace PhoneNumberManagement.Controllers
 
         #region メンバー変数
         private ManagementService managementService;
-        private PersonRegistService personRegisterService;
+        private RedistPersonService personRegisterService;
+        private DeletePersonService deletePersonService;
+        private SearchPersonService searchPersonService;
         #endregion
 
         #region コンストラクター
         public ManagementController()
         {
             this.managementService = new ManagementService();
-            this.personRegisterService = new PersonRegistService();
+            this.personRegisterService = new RedistPersonService();
+            this.deletePersonService = new DeletePersonService();
+            this.searchPersonService = new SearchPersonService();
         }
         #endregion
 
@@ -87,40 +91,66 @@ namespace PhoneNumberManagement.Controllers
 
 
         #region　新規作成
-        [HttpPost]
-       public void registPerson()
+        [HttpPost("register")]
+       public void registPerson(PersonViewModel viewModel)
        {
-            PersonViewModel personViewModel = new PersonViewModel();
-            personViewModel.StaffNumber = 2;
-            personViewModel.StaffName = "トニースターク";
-            personViewModel.CompanyID = 2;
-            personViewModel.DepartmentID = 2;
-            personViewModel.ExtensionNumber = "07055000427";
-            var result = setDtoRegistPerson((IEnumerable<PersonViewModel>)personViewModel);
+            var result = setDtoRegistPerson(viewModel);
             personRegisterService.registService(result);
        }
 
-       public IEnumerable<PersonDto> setDtoRegistPerson(IEnumerable<PersonViewModel> personViewModel)
+       public PersonDto setDtoRegistPerson(PersonViewModel viewModel)
        {
-            var registerMan = new List<PersonDto>();
-            foreach (var item in personViewModel)
-            {
-                var gomi = new PersonDto();
+            var registerMan = new PersonDto();
+           
+            registerMan.StaffName = viewModel.StaffName;
+            registerMan.CompanyID = viewModel.CompanyID;
+            registerMan.DepartmentID = viewModel.DepartmentID;
+            registerMan.ExtensionNumber = viewModel.ExtensionNumber;
+            registerMan.Memo = viewModel.Memo;  
 
-                gomi.StaffNumber = item.StaffNumber;
-                gomi.StaffName = item.StaffName;
-                gomi.CompanyID = item.CompanyID;
-                gomi.DepartmentID = item.DepartmentID;
-                gomi.ExtensionNumber = item.ExtensionNumber;
-
-                registerMan.Add(gomi);
-            }
             return registerMan;
-
-            
        }
-       #endregion
-        
+        #endregion
+
+        #region  削除
+        [HttpDelete("{staffNumber}")]
+        public void DeletePerson(int staffNumber)
+        {
+            deletePersonService.deleteService(staffNumber);
+        }
+        #endregion
+
+        #region 検索
+        [HttpGet("Seach")]
+        public IEnumerable<ManagementViewModel> SearchController(SearchViewModel search)
+        {
+            var service = searchPersonService.searchService(search);
+            var result = setManagementViewModel(service);
+            return result;
+        }
+        #endregion
+
+        #region 編集
+        public void editPerson(PersonViewModel personViewModel)
+        {
+            var result = setDtoEditPerson(personViewModel);
+
+        }
+
+        public PersonDto setDtoEditPerson (PersonViewModel personViewModel)
+        {
+            var editMan = new PersonDto();
+
+            editMan.StaffName = personViewModel.StaffName;
+            editMan.CompanyID = personViewModel.CompanyID;
+            editMan.DepartmentID = personViewModel.DepartmentID;
+            editMan.ExtensionNumber = personViewModel.ExtensionNumber;
+            editMan.Memo = personViewModel.Memo;
+
+            return editMan;
+        }
+        #endregion
+
         #endregion
 
 
