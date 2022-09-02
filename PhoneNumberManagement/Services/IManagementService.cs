@@ -11,6 +11,11 @@ namespace PhoneNumberManagement.Services
         /// </summary>
         /// <returns></returns>
 
+        #region　テスト用
+        /*
+        string FirstService();
+        */
+        #endregion
 
         #region 本番用
         List<ManagementDto> FirstService();

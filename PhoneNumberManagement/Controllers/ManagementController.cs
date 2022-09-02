@@ -11,6 +11,35 @@ namespace PhoneNumberManagement.Controllers
     [ApiController]
     public class ManagementController : ControllerBase
     {
+        #region テスト:上手くつながっているか確認用
+
+        /*
+        #region メンバー変数
+        private ManagementService managementService;
+        #endregion
+
+        #region コンストラクター
+
+        public ManagementController()
+        {
+            this.managementService = new ManagementService();
+        }
+        #endregion
+
+        #region 初期処理：一覧表示(全件取得)
+        [HttpGet]
+        public string Get()
+        {
+            var service = managementService.FirstService();
+            string result = "Controllerやで";
+            return result+service;
+        }
+        #endregion
+       */
+        #endregion
+
+        #region 本番
+
         #region メンバー変数
         private ManagementService managementService;
         private RedistPersonService personRegisterService;
@@ -125,6 +154,8 @@ namespace PhoneNumberManagement.Controllers
 
             return editMan;
         }
+        #endregion
+
         #endregion
 
 

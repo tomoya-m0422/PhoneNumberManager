@@ -54,3 +54,21 @@ namespace PhoneNumberManagement.Logics
 
     }
 }
+
+/*
+// Logic
+public PhoneNumberManagementDto StoreLogic()
+{
+    //Dto→Entity    
+    //Dao ←SQL
+    var phoneNumberManagementEntity = new PhoneNumberManagementEntity(); //Enitityのインスタンス
+    phoneNumberManagementEntity = PerSonDao.aaaa();　//DaoのやつをEntityに持ってきてる
+    var result = new(List)phoneNumberManagementDto();　//Dtoのインスタンス
+    foreach (var entity in phoneNumberManagementEntity) //DtoをEntityに入れてる？？？
+    {
+        entity.FirstName = result.LastName;
+        entity.LastName = result.FirstName;
+    }
+    return result;
+}
+*/
