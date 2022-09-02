@@ -45,6 +45,7 @@ namespace PhoneNumberManagement.Controllers
         private RedistPersonService personRegisterService;
         private DeletePersonService deletePersonService;
         private SearchPersonService searchPersonService;
+        private EditPersonService editPersonService;
         #endregion
 
         #region コンストラクター
@@ -54,6 +55,7 @@ namespace PhoneNumberManagement.Controllers
             this.personRegisterService = new RedistPersonService();
             this.deletePersonService = new DeletePersonService();
             this.searchPersonService = new SearchPersonService();
+            this.editPersonService = new EditPersonService();
         }
         #endregion
 
@@ -121,7 +123,7 @@ namespace PhoneNumberManagement.Controllers
         #endregion
 
         #region 検索
-        [HttpGet("Seach")]
+        [HttpGet("Search")]
         public IEnumerable<ManagementViewModel> SearchController(SearchViewModel search)
         {
             var service = searchPersonService.searchService(search);
@@ -131,9 +133,11 @@ namespace PhoneNumberManagement.Controllers
         #endregion
 
         #region 編集
-        public void editPerson(PersonViewModel personViewModel)
+        [HttpPost("edit")]
+        public void editController(PersonViewModel personViewModel)
         {
             var result = setDtoEditPerson(personViewModel);
+            editPersonService.editService(result);
 
         }
 
@@ -141,6 +145,7 @@ namespace PhoneNumberManagement.Controllers
         {
             var editMan = new PersonDto();
 
+            editMan.StaffNumber = personViewModel.StaffNumber;
             editMan.StaffName = personViewModel.StaffName;
             editMan.CompanyID = personViewModel.CompanyID;
             editMan.DepartmentID = personViewModel.DepartmentID;
