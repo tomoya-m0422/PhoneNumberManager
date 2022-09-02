@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.Design;
-using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using Dapper;
 using PhoneNumberManagement.Entity;
 using PhoneNumberManagement.Models;
 using System.Data;
-using System.Runtime.CompilerServices;
 
 namespace PhoneNumberManagement.DAO
 {
@@ -36,7 +33,25 @@ namespace PhoneNumberManagement.DAO
             command.Parameters.Add("@Memo", SqlDbType.NVarChar).Value = search.Memo;
             #endregion
 
-            var result = connection.Query<ManagementEntity>(query);
+            //var result = connection.Query<ManagementEntity>(query);
+            var gomi = command.ExecuteReader();
+            var result = new List<ManagementEntity>();
+            //var ans = new List<ManagementEntity>();
+            
+            while (gomi.Read())
+            {
+                var hoge = new ManagementEntity();
+                hoge.StaffNumber = (int)gomi["StaffNumber"];
+                hoge.StaffName = (string)gomi["StaffName"];
+                hoge.CompanyID = (int)gomi["CompanyID"];
+                hoge.DepartmentID = (int)gomi["DepartmentID"];
+                hoge.ExtensionNumber = (string)gomi["ExtensionNumber"];
+                hoge.Memo = (string)gomi["Memo"];
+                hoge.CompanyName = (string)gomi["CompanyName"];
+                hoge.DepartmentName = (string)gomi["DepartmentName"];
+
+                result.Add(hoge);
+            }
 
             return result;
         }
