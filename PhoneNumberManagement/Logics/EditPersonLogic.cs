@@ -1,7 +1,6 @@
 ﻿using PhoneNumberManagement.DAO;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Entity;
-using PhoneNumberManagement.Models;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
