@@ -22,6 +22,12 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseStaticFiles();
+
 app.MapControllers();
+
+#region ’Ç‰Á
+app.UseDefaultFiles();
+#endregion
 
 app.Run();
