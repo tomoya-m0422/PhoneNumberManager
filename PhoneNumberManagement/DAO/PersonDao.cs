@@ -41,21 +41,21 @@ namespace PhoneNumberManagement.DAO
         #region 編集
         public void editDao(SqlConnection connection, PersonEntity personEntities)
         {
-            var query = "UPDATE Person SET StaffName = @Name,CompanyID = @CompanyID,DepartmentID = @DepartmentID,ExtensionNumber = @PNumber,Memo = @Memo" +
-                                "WHERE StaffNumber = @SNumber;";
+            var query = "UPDATE Person SET StaffName = @Name,CompanyID = @CompanyID,DepartmentID = @DepartmentID,ExtensionNumber = @PNumber,Memo = @Memo " +
+                              "WHERE StaffNumber = @SNumber;";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
             #region cmd.Parameters
             cmd.Parameters.Add("@SNumber", SqlDbType.Int).Value = personEntities.StaffNumber;
-            cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = personEntities.StaffName; ;
-            cmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = personEntities.CompanyID; ;
+            cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = personEntities.StaffName;
+            cmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = personEntities.CompanyID;
             cmd.Parameters.Add("@DepartmentID", SqlDbType.Int).Value = personEntities.DepartmentID;
             cmd.Parameters.Add("@PNumber",SqlDbType.NVarChar).Value = personEntities.ExtensionNumber;
             cmd.Parameters.Add("@Memo", SqlDbType.NVarChar).Value = personEntities.Memo;
             #endregion
 
-            connection.Query<PersonEntity>(query);
+            cmd.ExecuteNonQuery();
         }
         #endregion
 

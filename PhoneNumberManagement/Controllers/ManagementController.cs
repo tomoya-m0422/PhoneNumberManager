@@ -7,7 +7,7 @@ using PhoneNumberManagement.Services;
 
 namespace PhoneNumberManagement.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ManagementController : ControllerBase
     {
