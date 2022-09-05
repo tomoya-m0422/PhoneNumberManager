@@ -20,7 +20,7 @@ namespace PhoneNumberManagement.Services
         }
         #endregion
 
-        public IEnumerable<ManagementDto> searchService(SearchViewModel search)
+        public IEnumerable<ManagementDto> searchService(SearchDto search)
         {
             var dto = new List<ManagementDto>();
             var connectionString = "Data Source=NCP-TM04945-1;Initial Catalog=ManagementDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";

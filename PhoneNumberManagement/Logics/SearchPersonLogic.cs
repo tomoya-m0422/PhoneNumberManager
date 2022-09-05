@@ -19,14 +19,26 @@ namespace PhoneNumberManagement.Logics
         }
         #endregion
 
-        public List<ManagementDto> searchLogic (SqlConnection connection , SearchViewModel search)
+        public List<ManagementDto> searchLogic (SqlConnection connection , SearchDto search)
         {
-            var entities = managementDao.searchDao(connection,search);
-            var result = setSearchLogic(entities);
+            var entity = setEntitySearchLogic(search);
+            var entities = managementDao.searchDao(connection, entity);
+            var result = setDtoSearchLogic(entities);
             return result;
         }
 
-        public List<ManagementDto> setSearchLogic(IEnumerable<ManagementEntity>entities)
+        public SearchEntity setEntitySearchLogic (SearchDto search)
+        {
+            var searchMan = new SearchEntity();
+
+            searchMan.StaffName = search.StaffName;
+            searchMan.CompanyID = search.CompanyID;
+            searchMan.Memo = search.Memo;
+
+            return searchMan;
+        }
+
+        public List<ManagementDto> setDtoSearchLogic(IEnumerable<ManagementEntity>entities)
         {
             var dtos = new List<ManagementDto>();
             foreach(var entity in entities)

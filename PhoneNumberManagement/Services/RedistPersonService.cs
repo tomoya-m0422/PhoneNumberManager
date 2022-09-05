@@ -8,13 +8,13 @@ namespace PhoneNumberManagement.Services
     {
 
         #region メンバー変数
-        private PersonRegistLogic personRegistLogic;
+        private RegistPersonLogic personRegistLogic;
         #endregion
 
         #region コンストラクター
         public RedistPersonService()
         {
-            this.personRegistLogic = new PersonRegistLogic();
+            this.personRegistLogic = new RegistPersonLogic();
         }
         #endregion
 

@@ -5,14 +5,14 @@ using PhoneNumberManagement.DAO;
 
 namespace PhoneNumberManagement.Logics
 {
-    public class PersonRegistLogic : IPersonRegistLogic
+    public class RegistPersonLogic : IRegistPersonLogic
     {
         #region メンバー変数
         private PersonDao personRegistDao;
         #endregion
 
         #region　コンストラクター
-        public PersonRegistLogic()
+        public RegistPersonLogic()
         {
             this.personRegistDao = new PersonDao();
         }

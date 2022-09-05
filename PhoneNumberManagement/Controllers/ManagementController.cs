@@ -11,32 +11,6 @@ namespace PhoneNumberManagement.Controllers
     [ApiController]
     public class ManagementController : ControllerBase
     {
-        #region テスト:上手くつながっているか確認用
-
-        /*
-        #region メンバー変数
-        private ManagementService managementService;
-        #endregion
-
-        #region コンストラクター
-
-        public ManagementController()
-        {
-            this.managementService = new ManagementService();
-        }
-        #endregion
-
-        #region 初期処理：一覧表示(全件取得)
-        [HttpGet]
-        public string Get()
-        {
-            var service = managementService.FirstService();
-            string result = "Controllerやで";
-            return result+service;
-        }
-        #endregion
-       */
-        #endregion
 
         #region 本番
 
@@ -91,7 +65,6 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
 
-
         #region　新規作成
         [HttpPost("register")]
        public void registPerson(PersonViewModel viewModel)
@@ -126,9 +99,20 @@ namespace PhoneNumberManagement.Controllers
         [HttpGet("Search")]
         public IEnumerable<ManagementViewModel> SearchController(SearchViewModel search)
         {
-            var service = searchPersonService.searchService(search);
+            var Dto = setSearchDto(search);
+            var service = searchPersonService.searchService(Dto);
             var result = setManagementViewModel(service);
             return result;
+        }
+
+        public SearchDto setSearchDto (SearchViewModel search)
+        {
+            var searchMan = new SearchDto();
+            searchMan.StaffName = search.StaffName;
+            searchMan.CompanyID = search.CompanyID;
+            searchMan.Memo = search.Memo;
+
+            return searchMan;
         }
         #endregion
 
