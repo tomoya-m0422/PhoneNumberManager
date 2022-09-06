@@ -1,13 +1,30 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>WebClient</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WebClient</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.scss">
+    <script src="main.ts"></script>
+  </head>
+
+  <body class="mat-typography">
+    <app-root></app-root>
+    <form method="get" action="#" class="SearchName">
+    <!--methodは送信方法、actionは送信先(JSとかになるかな？)-->
+      <input type="text" size="25" placeholder="名前で検索">
+      <input type="text" size="25" placeholder="部署IDで検索">
+      <input type="text" size="25" placeholder="メモで検索">
+      <input type="submit" value="検索">
+    </form>
+    <div id="app"></div>
+    <div id="result"></div>
+    <!---検索フォームの下にJS(TS)でテーブルというか表というかを定義(データ数によって数変わるから)-->
+
+  </body>
 </html>

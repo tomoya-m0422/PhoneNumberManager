@@ -1,3 +1,5 @@
+using Microsoft.Extensions.FileProviders;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,6 +30,16 @@ app.MapControllers();
 
 #region ’Ç‰Á
 app.UseDefaultFiles();
+
+app.UseStaticFiles();
+/*
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "WebClient")),
+    RequestPath = "/WebClient"
+});
+*/
 #endregion
 
 app.Run();
