@@ -17,7 +17,7 @@
   <body class="mat-typography">
     <app-root></app-root>
     <form method="get" action="#" class="SearchName"><!--methodは送信方法、actionは送信先(JSとかになるかな？)-->
-
+      <!--A-1-->
       <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
       <datalist id="NameList">
       </datalist>
@@ -43,7 +43,23 @@
         <th>内線番号</th>
         <th>メモ</th>
       </tr>
-
+      <!--A-2.ここに社員データが入ってくる-->
     </table>
+
+<br>
+
+    <table border="2" id="detailTable">
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>会社ID</th>
+        <th>会社名</th>
+        <th>部署ID</th>
+        <th>部署</th>
+        <th>内線番号</th>
+        <th>メモ</th>
+      </tr>
+    </table>
+
   </body>
 </html>

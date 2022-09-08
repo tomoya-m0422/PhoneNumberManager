@@ -11,7 +11,7 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
-  //#region  確認用
+//#region  確認用
 /*
 // 1. Select the div element using the id property
 const app = document.getElementById("app");
@@ -24,6 +24,7 @@ app?.appendChild(p);
 */
 //#endregion
 
+//#region 初期処理
   $(function () {
     $.ajax(
       {
@@ -35,7 +36,7 @@ app?.appendChild(p);
       }
     )
       .done(function (data) {
-        //検索欄の初期処理
+        //A-1.検索欄の初期処理
         $.each(data,function(index,item){
           $("#NameList").append
           ('<option value="'+item.staffName+'">')
@@ -44,11 +45,11 @@ app?.appendChild(p);
           ('<option value="'+item.departmentName+'">')
         })
 
-        //一覧表示の初期処理
+        //A-2.一覧表示の初期処理
         $.each(data,function(index,item){
           $("#table").append
           ("<tr>"+
-            "<td>"+item.staffName+"</td>"+
+            "<td id ="+item.staffNumber+">"+item.staffName+"</td>"+
             "<td>"+item.companyName+"</td>"+
             "<td>"+item.departmentName+"</td>"+
             "<td>"+item.extensionNumber+"</td>"+
@@ -66,4 +67,11 @@ app?.appendChild(p);
       )
   }
   )
+//#endregion
 
+$(document).on("click","#table td",function(e){
+  alert(e.target.id)
+  //var $cur_td = $(this)[0];
+  //var $cur_tr = $(this).parent()[0];
+
+})
