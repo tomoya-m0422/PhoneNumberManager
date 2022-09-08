@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Services;
+using System.Net;
+using System.Text;
+using System.Web;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -35,13 +40,17 @@ namespace PhoneNumberManagement.Controllers
 
         #region 初期処理：一覧表示(全件取得)
         [HttpGet]
-        public IEnumerable<ManagementViewModel> Get()
+        public ActionResult<IEnumerable<ManagementViewModel>> Get()
         {
-           var service = managementService.FirstService();
-           var result = setManagementViewModel(service);
-           return result;
+            //var response = this.Request.CreateResponse(HttpStatusCode.OK);
+            //Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:4200");
+            var service = managementService.FirstService();
+            var result = setManagementViewModel(service);
+            //return new HttpResponse(result);
+            return Ok(result);
         }
-        
+
+
         public IEnumerable<ManagementViewModel> setManagementViewModel(IEnumerable<ManagementDto> DTO)
         {
             var viewModels = new List<ManagementViewModel>();

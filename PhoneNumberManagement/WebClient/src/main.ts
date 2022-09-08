@@ -11,59 +11,18 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
-  // 1. Select the div element using the id property
+  //#region  確認用
+/*
+// 1. Select the div element using the id property
 const app = document.getElementById("app");
 // 2. Create a new <p></p> element programmatically
 const p = document.createElement("p");
 // 3. Add the text content
-p.textContent = "Hello, World!";
+p.textContent = "Hello, TypeScript!";
 // 4. Append the p element to the div element
 app?.appendChild(p);
-
-$.ajax({
-  url: "https://localhost:7059/Management",
-  type: "GET"
-})
-.done(function(data){
-  $("#result").appendTo(data)
-})
-.fail(function(){
-  window.alert("無理");
-})
-
-/*
-$(function() {
-    $.ajax(
-      {
-        async: true,
-        url: "https://localhost:7059/Management",
-        type: "get",
-      }
-    )
-    // 検索成功時にはページに結果を反映
-    .done(function(data) {
-      // 結果リストをクリア
-      $('#result').empty();
-      // <Question>要素（個々の質問情報）を順番に処理
-      $('Question', data).each(function() {
-        // <Url>（詳細ページ）、<Content>（質問本文）を基にリンクリストを生成
-        $('#result').append(
-          $('<li></li>').append(
-            $('<a></a>')
-              .attr({
-                href: $('Url', this).text(),
-                target: '_blank'
-              })
-              .text($('Content', this).text().substring(0, 255) + '...')
-          )
-        );
-      });
-    })
-    // 検索失敗時には、その旨をダイアログ表示
-    .fail(function() {
-      window.alert('正しい結果を得られませんでした。');
-    });
-  });
+*/
+//#endregion
 
   $(function () {
     $.ajax(
@@ -71,24 +30,40 @@ $(function() {
         async: true,
         url: "https://localhost:7059/Management",
         type: "get",
+        dataType: "json"
 
       }
     )
       .done(function (data) {
-        $("#result").empty();
-        $("Question", data).each(function () {
-          $("#result").append(
-            $("<a></a>")
-              .attr({
-                href: $("Url", this).text(),
-                target: "_brank"
-              })
-              .text($("Content,this").text().substring(0, 255) + "...")
-          )
+        //検索欄の初期処理
+        $.each(data,function(index,item){
+          $("#NameList").append
+          ('<option value="'+item.staffName+'">')
+
+          $("#DepartmentList").append
+          ('<option value="'+item.departmentName+'">')
         })
-      })
+
+        //一覧表示の初期処理
+        $.each(data,function(index,item){
+          $("#table").append
+          ("<tr>"+
+            "<td>"+item.staffName+"</td>"+
+            "<td>"+item.companyName+"</td>"+
+            "<td>"+item.departmentName+"</td>"+
+            "<td>"+item.extensionNumber+"</td>"+
+            "<td>"+item.memo+"</td>"+
+            "</tr>"
+          )
+
+        }
+        )
+      }
+      )
       .fail(function () {
-        window.alert("だめ");
-      })
-  })
-*/
+        window.alert("ERROR:データベースと接続できませんでした");
+      }
+      )
+  }
+  )
+
