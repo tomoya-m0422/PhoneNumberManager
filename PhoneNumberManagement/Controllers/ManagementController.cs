@@ -7,6 +7,7 @@ using PhoneNumberManagement.Services;
 using System.Net;
 using System.Text;
 using System.Web;
+using static Dapper.SqlMapper;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,14 +18,13 @@ namespace PhoneNumberManagement.Controllers
     public class ManagementController : ControllerBase
     {
 
-        #region 本番
-
         #region メンバー変数
         private ManagementService managementService;
         private RedistPersonService personRegisterService;
         private DeletePersonService deletePersonService;
         private SearchPersonService searchPersonService;
         private EditPersonService editPersonService;
+        private DetailPersonService detailPersonService;
         #endregion
 
         #region コンストラクター
@@ -35,6 +35,7 @@ namespace PhoneNumberManagement.Controllers
             this.deletePersonService = new DeletePersonService();
             this.searchPersonService = new SearchPersonService();
             this.editPersonService = new EditPersonService();
+            this.detailPersonService = new DetailPersonService();
         }
         #endregion
 
@@ -125,6 +126,39 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
 
+        #region 詳細
+        [HttpGet("Detail")]
+        public ManagementViewModel DetailController(DetailViewModel detail)
+        {
+            var Dto = setDetailDto(detail);
+            var service = detailPersonService.detailService(Dto);
+            var result = setDownManagementViewModel(service);
+            return result;
+        }
+
+        public DetailDto setDetailDto(DetailViewModel detail)
+        {
+            var detailMan = new DetailDto();
+            detailMan.StaffNumber = detail.StaffNumber;
+            return detailMan;
+        }
+
+        public ManagementViewModel setDownManagementViewModel(ManagementDto service)
+        {
+            var result = new ManagementViewModel();
+            result.StaffNumber = service.StaffNumber;
+            result.StaffName = service.StaffName;
+            result.CompanyID = service.CompanyID;
+            result.CompanyName = service.CompanyName;
+            result.DepartmentID = service.DepartmentID;
+            result.DepartmentName = service.DepartmentName;
+            result.Memo = service.Memo;
+            result.ExtensionNumber = service.ExtensionNumber;
+
+            return result;
+        }
+        #endregion
+
         #region 編集
         [HttpPost("edit")]
         public void editController(PersonViewModel personViewModel)
@@ -147,8 +181,6 @@ namespace PhoneNumberManagement.Controllers
 
             return editMan;
         }
-        #endregion
-
         #endregion
 
 

@@ -16,8 +16,8 @@
 
   <body class="mat-typography">
     <app-root></app-root>
+    <!--A-1.検索欄-->
     <form method="get" action="#" class="SearchName"><!--methodは送信方法、actionは送信先(JSとかになるかな？)-->
-      <!--A-1-->
       <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
       <datalist id="NameList">
       </datalist>
@@ -29,12 +29,8 @@
       <input type="text" size="25" placeholder="メモで検索"/>
       <input type="submit" value="検索"/>
     </form>
-    <div id="app"></div>
 
-    <!---検索フォームの下にJS(TS)でテーブルというか表というかを定義(データ数によって数変わるから)-->
-
-    <ul id="result"></ul>
-
+    <!--A-2.一覧表示-->
     <table border="5" id="table">
       <tr>
         <th>名前</th>
@@ -42,14 +38,11 @@
         <th>部署</th>
         <th>内線番号</th>
         <th>メモ</th>
-        <th>
-        </th>
       </tr>
-      <!--A-2.ここに社員データが入ってくる-->
     </table>
 
 <br>
-
+    <!--TS-1.詳細表示-->
     <table border="2" id="detailTable">
       <tr>
         <th>ID</th>
@@ -63,22 +56,5 @@
       </tr>
     </table>
 
-<!--
-    <div>
-      <button class='button' data-id='one'>ONE</button>
-      <button class='button' data-id='two'>TWO</button>
-      <button class='button' data-id='three'>THREE</button>
-  </div>
-
-  <p id='selected'>選択してください</p>
-
-  <script type="text/javascript">
-      $('.button').on('click', function(){
-          var click =  $(this).data('id');
-
-          $('#selected').text(click);
-      });
-  </script>
--->
   </body>
 </html>

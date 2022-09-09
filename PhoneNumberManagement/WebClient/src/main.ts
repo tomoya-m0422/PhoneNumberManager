@@ -50,7 +50,8 @@ app?.appendChild(p);
         //A-2.一覧表示の初期処理
         $.each(data,function(index,item){
           $("#table").append
-          ("<tr>"+
+          (
+            "<tr>"+
             "<td class='Name' data-id="+item.staffNumber+">"+item.staffName+"</td>"+
             "<td>"+item.companyName+"</td>"+
             "<td>"+item.departmentName+"</td>"+
@@ -74,6 +75,10 @@ app?.appendChild(p);
       )
       .fail(function () {
         window.alert("ERROR:データベースと接続できませんでした");
+        $("#table").append
+        (
+          "<tr><td colspan='6'>データベースと接続できませんでした</td></tr>"
+        )
       }
       )
   }

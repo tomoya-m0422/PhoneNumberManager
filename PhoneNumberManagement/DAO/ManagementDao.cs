@@ -57,5 +57,33 @@ namespace PhoneNumberManagement.DAO
             return result;
         }
         #endregion
+
+        #region 詳細
+        public ManagementEntity detailDao(SqlConnection connection, DetailPersonEntity upEntity)
+        {
+            var query = "SELECT * FROM Person AS p,Company AS c,Department AS d " +
+                                "WHERE p.StaffNumber = @Number AND p.CompanyID = c.CompanyID AND p.DepartmentID = d.DepartmentID";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.Add("@Number", SqlDbType.Int).Value = upEntity.StaffNumber;
+
+            var kekka = cmd.ExecuteReader();
+            var result = new ManagementEntity();
+
+            while (kekka.Read())
+            {
+                result.StaffNumber = (int)kekka["StaffNumber"];
+                result.StaffName = (string)kekka["StaffName"];
+                result.CompanyID = (int)kekka["CompanyID"];
+                result.DepartmentID = (int)kekka["DepartmentID"];
+                result.ExtensionNumber = (string)kekka["ExtensionNumber"];
+                result.Memo = (string)kekka["Memo"];
+                result.CompanyName = (string)kekka["CompanyName"];
+                result.DepartmentName = (string)kekka["DepartmentName"];
+            }
+            return result;
+
+        }
+        #endregion
     }
 }
