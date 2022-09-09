@@ -11,6 +11,8 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
+
+
 //#region  確認用
 /*
 // 1. Select the div element using the id property
@@ -49,16 +51,25 @@ app?.appendChild(p);
         $.each(data,function(index,item){
           $("#table").append
           ("<tr>"+
-            "<td id ="+item.staffNumber+">"+item.staffName+"</td>"+
+            "<td class='Name' data-id="+item.staffNumber+">"+item.staffName+"</td>"+
             "<td>"+item.companyName+"</td>"+
             "<td>"+item.departmentName+"</td>"+
             "<td>"+item.extensionNumber+"</td>"+
             "<td>"+item.memo+"</td>"+
+            "<td><button class = 'button' data-id="+item.staffNumber+"> 詳細　</button></td>"+
             "</tr>"
           )
 
         }
         )
+
+        //TS-1.詳細表示の処理
+        $(".Name , .button").on('click',function(){
+          var staffNumber =  $(this).data('id');
+          alert(staffNumber)
+        });
+
+
       }
       )
       .fail(function () {
@@ -68,10 +79,3 @@ app?.appendChild(p);
   }
   )
 //#endregion
-
-$(document).on("click","#table td",function(e){
-  alert(e.target.id)
-  //var $cur_td = $(this)[0];
-  //var $cur_tr = $(this).parent()[0];
-
-})
