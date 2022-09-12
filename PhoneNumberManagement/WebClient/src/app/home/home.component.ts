@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
           })
 
           //A-2.一覧表示の初期処理
+          //これが難しい
           $.each(data,function(index,item){
             managementPerson.push(item)
           }
