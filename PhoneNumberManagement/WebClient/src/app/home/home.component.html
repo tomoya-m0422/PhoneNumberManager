@@ -16,7 +16,6 @@
 
   <body class="mat-typography">
 
-    <app-root></app-root>
     <button>新規登録</button>
     <!--A-1.検索欄-->
     <form method="get" action="#" class="SearchName"><!--methodは送信方法、actionは送信先(JSとかになるかな？)-->
@@ -41,22 +40,17 @@
         <th>内線番号</th>
         <th>メモ</th>
       </tr>
-    </table>
-
-<br>
-    <!--TS-1.詳細表示-->
-    <table border="2" id="detailTable">
-      <tr>
-        <th>ID</th>
-        <th>名前</th>
-        <th>会社ID</th>
-        <th>会社名</th>
-        <th>部署ID</th>
-        <th>部署</th>
-        <th>内線番号</th>
-        <th>メモ</th>
+      <tr *ngFor="let person of managementPerson">
+        <td>{{person.StaffName}}</td>
+        <td>{{person.CompanyName}}</td>
+        <td>{{person.DepartmentName}}</td>
+        <td>{{person.ExtensionNumber}}</td>
+        <td>{{person.Memo}}</td>
       </tr>
     </table>
 
+    <a routerLink="./../person-create">くりえいと</a>
+    <br>
+    <a routerLink='./../person-edit'>詳細</a>
   </body>
 </html>

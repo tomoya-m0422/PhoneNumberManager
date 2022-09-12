@@ -17,10 +17,12 @@ import { environment } from './environments/environment';
 import * as $ from 'jquery'
 import { HomeComponent } from './app/home/home.component';
 import { AppComponent } from './app/app.component';
+//本番環境か開発環境か判定している
 if (environment.production) {
   enableProdMode();
 }
 
+//Angularアプリを起動する
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
