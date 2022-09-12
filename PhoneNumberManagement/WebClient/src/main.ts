@@ -1,9 +1,22 @@
 import { enableProdMode } from '@angular/core';
+//本番環境用でアプリを起動する際に実行される
+//20行目のif文によるチェックで実行の是非が決まる
+
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+//ブラウザでアプリを起動するために用意されたAngular標準のモジュール
 
 import { AppModule } from './app/app.module';
+//Angularアプリの本体となるモジュール
+//app.module.tsで定義されている
+
 import { environment } from './environments/environment';
+//環境設定ファイル
+//ここで定義されている productionの値をif文でチェックする
+//trueならば本番環境、falseなら開発環境
+
 import * as $ from 'jquery'
+import { HomeComponent } from './app/home/home.component';
+import { AppComponent } from './app/app.component';
 if (environment.production) {
   enableProdMode();
 }
@@ -12,75 +25,3 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
 
-
-//#region  確認用
-/*
-// 1. Select the div element using the id property
-const app = document.getElementById("app");
-// 2. Create a new <p></p> element programmatically
-const p = document.createElement("p");
-// 3. Add the text content
-p.textContent = "Hello, TypeScript!";
-// 4. Append the p element to the div element
-app?.appendChild(p);
-*/
-//#endregion
-
-//#region 初期処理
-  $(function () {
-    $.ajax(
-      {
-        async: true,
-        url: "https://localhost:7059/Management",
-        type: "get",
-        dataType: "json"
-
-      }
-    )
-      .done(function (data) {
-        //A-1.検索欄の初期処理
-        $.each(data,function(index,item){
-          $("#NameList").append
-          ('<option value="'+item.staffName+'">')
-
-          $("#DepartmentList").append
-          ('<option value="'+item.departmentName+'">')
-        })
-
-        //A-2.一覧表示の初期処理
-        $.each(data,function(index,item){
-          $("#table").append
-          (
-            "<tr>"+
-            "<td class='Name' data-id="+item.staffNumber+">"+item.staffName+"</td>"+
-            "<td>"+item.companyName+"</td>"+
-            "<td>"+item.departmentName+"</td>"+
-            "<td>"+item.extensionNumber+"</td>"+
-            "<td>"+item.memo+"</td>"+
-            "<td><button class = 'button' data-id="+item.staffNumber+"> 詳細　</button></td>"+
-            "</tr>"
-          )
-
-        }
-        )
-
-        //TS-1.詳細表示の処理
-        $(".Name , .button").on('click',function(){
-          var staffNumber =  $(this).data('id');
-          alert(staffNumber)
-        });
-
-
-      }
-      )
-      .fail(function () {
-        window.alert("ERROR:データベースと接続できませんでした");
-        $("#table").append
-        (
-          "<tr><td colspan='6'>データベースと接続できませんでした</td></tr>"
-        )
-      }
-      )
-  }
-  )
-//#endregion
