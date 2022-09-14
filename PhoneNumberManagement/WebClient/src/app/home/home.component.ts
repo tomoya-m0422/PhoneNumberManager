@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery'
 import { Router } from '@angular/router';
 import { ManagementPerson } from './home.viewmodel';
+import { isArrayLiteralExpression } from 'typescript';
 
 @Component({
   selector: 'app-home',
   templateUrl: "home.component.html",
   styleUrls: ['home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
 
   managementPerson: ManagementPerson[] = [];
@@ -15,6 +17,13 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) {
     this.managementPerson = this.managementPerson
    }
+
+   DetailClick(staffNumber:number): void{
+    alert("DetailClickできた!!")
+    this.router.navigate(['/person-edit'],{queryParams:{id:staffNumber} })
+    //this.router.navigate(['/products'], { queryParams: { order: 'popular' } });
+   }
+
 
   ngOnInit(): void {
     let managementPerson: ManagementPerson[] = [];
@@ -53,16 +62,10 @@ export class HomeComponent implements OnInit {
               ExtensionNumber: item.extensionNumber,
               Memo: item.memo
             })
-            hoge(managementPerson)
-            var aaa = 0;
-            moge(aaa);
+
           }
           )
-          //TS-1.詳細表示の処理
-          $(".Name , .button").on('click',function(){
-            var staffNumber =  $(this).data('id');
-            //HomeComponent.router.navigateByUrl("./../person-create")
-          });
+
         }
         )
 
@@ -74,35 +77,11 @@ export class HomeComponent implements OnInit {
           )
         }
         )
-
-      function hoge(managementPerson: ManagementPerson){
-        this.managementPerson = managementPerson
-      }
-
     }
     )
     //#endregion
-    function moge(managementPerson: ManagementPerson[]){
-      this.managementPerson = managementPerson;
-    }
     this.managementPerson = managementPerson;
   }
 
-  /*
-  hoge(item: any) : void {
-    let res: ManagementPerson = {
-      StaffNumber: item.staffNumber,
-      StaffName: item.staffName,
-      CompanyID: item.CompanyID,
-      CompanyName: item.CompanyName,
-      DepartmentID: item.DepartmentID,
-      DepartmentName: item.DepartmentName,
-      ExtensionNumber: item.ExtensionNumber,
-      Memo: item.Memo
-    }
-
-    this.managementPerson.push(res);
-  }
-
 }
-*/
+

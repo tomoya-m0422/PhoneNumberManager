@@ -46,11 +46,10 @@
         <td>{{person.DepartmentName}}</td>
         <td>{{person.ExtensionNumber}}</td>
         <td>{{person.Memo}}</td>
+        <td><button id="button" (click)="DetailClick(person.StaffNumber)">詳細</button></td>
       </tr>
     </table>
 
     <a routerLink="./../person-create">くりえいと</a>
-    <br>
-    <a routerLink='./../person-edit'>詳細</a>
   </body>
 </html>

@@ -127,19 +127,19 @@ namespace PhoneNumberManagement.Controllers
         #endregion
 
         #region 詳細
-        [HttpGet("Detail")]
-        public ManagementViewModel DetailController(DetailViewModel detail)
+        [HttpGet("Detail/{id}")]
+        public ManagementViewModel DetailController(int id)
         {
-            var Dto = setDetailDto(detail);
+            var Dto = setDetailDto(id);
             var service = detailPersonService.detailService(Dto);
             var result = setDownManagementViewModel(service);
             return result;
         }
 
-        public DetailDto setDetailDto(DetailViewModel detail)
+        public DetailDto setDetailDto(int detail)
         {
             var detailMan = new DetailDto();
-            detailMan.StaffNumber = detail.StaffNumber;
+            detailMan.StaffNumber = detail;
             return detailMan;
         }
 

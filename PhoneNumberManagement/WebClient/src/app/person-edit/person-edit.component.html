@@ -20,6 +20,16 @@
     <th>内線番号</th>
     <th>メモ</th>
   </tr>
+  <tr *ngFor="let person of editPerson">
+    <td>{{person.StaffNumber}}</td>
+    <td>{{person.StaffName}}</td>
+    <td>{{person.CompanyID}}</td>
+    <td>{{person.CompanyName}}</td>
+    <td>{{person.DepartmentID}}</td>
+    <td>{{person.DepartmentName}}</td>
+    <td>{{person.ExtensionNumber}}</td>
+    <td>{{person.Memo}}</td>
+  </tr>
 
 
 </table>
