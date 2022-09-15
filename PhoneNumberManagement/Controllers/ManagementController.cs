@@ -98,11 +98,13 @@ namespace PhoneNumberManagement.Controllers
         #endregion
 
         #region  削除
-        [HttpDelete("{staffNumber}")]
-        public void DeletePerson(int staffNumber)
+        [HttpGet("Delete/{staffNumber}")]
+        public ActionResult DeletePerson(int staffNumber)
         {
             deletePersonService.deleteService(staffNumber);
+            return Ok();
         }
+
         #endregion
 
         #region 検索

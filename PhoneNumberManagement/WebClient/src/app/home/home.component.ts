@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
    }
 
    DetailClick(staffNumber:number): void{
-    alert("DetailClickできた!!")
+    //alert("DetailClickできた!!")
     this.router.navigate(['/person-edit'],{queryParams:{id:staffNumber} })
     //this.router.navigate(['/products'], { queryParams: { order: 'popular' } });
    }
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
         }
       )
         .done(function (data) {
-          alert("done")
+          //alert("done")
           //A-1.検索欄の初期処理
           $.each(data,function(index,item){
             $("#NameList").append

@@ -20,13 +20,14 @@ export class PersonEditComponent implements OnInit {
 
    }
 
+   //初期処理：詳細表示
   ngOnInit(): void {
+    //id受取
     var id = null
     this.activatedRoute.queryParamMap.subscribe((params:ParamMap)=>{
        id = params.get("id");
     })
 
-    //this.activatedRoute.params.subscribe(params=>(this.id = params["id"]))
     let editPerson: EditPerson[] = [];
     var url = "https://localhost:7059/Management/Detail/"+id;
     $(function(){
@@ -39,7 +40,7 @@ export class PersonEditComponent implements OnInit {
         }
       )
       .done(function(data){
-        alert("EditDone")
+        //alert("EditDone")
         editPerson.push({
           StaffNumber: data.staffNumber,
           StaffName: data.staffName,
@@ -56,6 +57,40 @@ export class PersonEditComponent implements OnInit {
       })
     })
   this.editPerson = editPerson;
+  }
+
+  //削除機能
+  DeleteClick(id: number):void{
+    //alert(id);
+    var deleteConfirm = confirm("削除してもよろしいでしょうか");
+    var aurl = "https://localhost:7059/Management/Delete/"+id;
+    const that = this
+    if(deleteConfirm == true){
+      $(function(){
+        $.ajax({
+          async: false,
+          url: aurl,
+          type: "GET",
+          //dataType:"json"
+          //contentType: "application/json"
+        })
+        .done(function(){
+          alert("削除しました")
+          that.router.navigate(["/home"])
+          //tsconfig.jsonの"noImplicitThis": false
+        })
+        .fail(function(XMLHttpRequest, textStatus, errorThrown){
+          console.log(XMLHttpRequest.status);
+          console.log(textStatus);
+          console.log(errorThrown);
+          alert("ERROR")
+
+        })
+      })
+    }else{
+      alert("削除を取りやめました")
+    }
+
   }
 
 }

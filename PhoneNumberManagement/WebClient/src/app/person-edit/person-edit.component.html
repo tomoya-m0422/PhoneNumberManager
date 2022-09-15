@@ -30,9 +30,12 @@
     <td>{{person.ExtensionNumber}}</td>
     <td>{{person.Memo}}</td>
   </tr>
-
-
 </table>
+<div *ngFor="let person of editPerson">
+  <button id="DeleteButton" (click)="DeleteClick(person.StaffNumber)">削除</button>
+  <button id="EditButton" >編集</button>
+</div>
+
 
 </body>
 </html>

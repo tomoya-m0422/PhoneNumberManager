@@ -1,1 +1,22 @@
-<p>person-create works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新規登録画面</title>
+</head>
+<body>
+  <h1>新規登録画面</h1>
+  <table >
+    <tr><th>社員名</th><input type="text"></tr>
+    <tr><th>会社名</th><input list="CompanyList" id="Company" name="Company" placeholder="会社を入力または選択" autocomplete="off"/><datalist id="CompanyList"></datalist></tr>
+    <tr><th>部署</th><input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"><datalist id="DepartmentList"></datalist></tr>
+    <tr><th>内線番号</th><input type="text"></tr>
+    <tr><th>メモ</th><input type="text"></tr>
+    <button>登録</button>
+    <button>リセット</button>
+  </table>
+
+</body>
+</html>
