@@ -83,5 +83,20 @@ export class HomeComponent implements OnInit {
     this.managementPerson = managementPerson;
   }
 
+  TestButton(): void{
+    $.ajax({
+      type: "GET",
+      url:"https://localhost:7059/Management/TestButton",
+      data:"json"
+    })
+    .done(function(data){
+      alert(data)
+      console.log(data)
+    })
+    .fail(function(){
+      alert("むり")
+    })
+  }
+
 }
 

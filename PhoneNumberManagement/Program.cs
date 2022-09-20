@@ -36,8 +36,11 @@ var app = builder.Build();
 app.Use(async (context, next) =>
 {
     context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-    context.Response.Headers.Add("Access-Control-Allow-Methods", "*");
-    //context.Response.Headers.Add("Access-Control-Allow-Headers", "*");
+    context.Response.Headers.Add("Access-Control-Allow-Credentials", "*");
+    //context.Response.Headers.Add("Access-Control-Allow-Methods", "*");
+    context.Response.Headers.Add("strict-origin-when-cross-origin", "*");
+    context.Response.Headers.Add("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
+    context.Response.Headers.Add("Access-Control-Allow-Methods", "PUT, DELETE, OPTIONS");
     await next();
 });
 

@@ -25,6 +25,8 @@ namespace PhoneNumberManagement.Controllers
         private SearchPersonService searchPersonService;
         private EditPersonService editPersonService;
         private DetailPersonService detailPersonService;
+        private GetCompanyService getCompanyService;
+        private GetDepartmentService getDepartmentService;
         #endregion
 
         #region コンストラクター
@@ -36,10 +38,12 @@ namespace PhoneNumberManagement.Controllers
             this.searchPersonService = new SearchPersonService();
             this.editPersonService = new EditPersonService();
             this.detailPersonService = new DetailPersonService();
+            this.getCompanyService = new GetCompanyService();
+            this.getDepartmentService = new GetDepartmentService();
         }
         #endregion
 
-        #region 初期処理：一覧表示(全件取得)
+        #region 初期処理：一覧表示(全件取得) HttpGet
         [HttpGet]
         public ActionResult<IEnumerable<ManagementViewModel>> Get()
         {
@@ -75,12 +79,68 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
 
-        #region　新規作成
+        #region 会社一覧取得
+        [HttpGet ("Company")]
+        public ActionResult<IEnumerable<CompanyViewModel>> CompanyGet()
+        {
+            var service = getCompanyService.Service();
+            var result = setCompanyViewModel(service);
+            return Ok(result);
+        }
+
+        public IEnumerable<CompanyViewModel> setCompanyViewModel(IEnumerable<CompanyDto> dtos)
+        {
+            var viewModel = new List<CompanyViewModel>();
+            
+            foreach(var items in dtos)
+            {
+                var company = new CompanyViewModel();
+
+                company.CompanyID = items.CompanyID;
+                company.CompanyName = items.CompanyName;
+
+                viewModel.Add(company);
+            }
+            return viewModel;
+        }
+
+        #endregion
+
+        
+        #region 部署一覧取得
+        [HttpGet("Department")]
+        public ActionResult<IEnumerable<DepartmentViewModel>> DepartmentGet()
+        {
+            var service = getDepartmentService.Service();
+            var result = setDepartmentViewModel(service);
+            return Ok(result);
+        }
+
+        public IEnumerable<DepartmentViewModel> setDepartmentViewModel(IEnumerable<DepartmentDto> dtos)
+        {
+            var viewModel = new List<DepartmentViewModel>();
+
+            foreach(var item in dtos)
+            {
+                DepartmentViewModel department = new DepartmentViewModel();
+
+                department.DepartmentID = item.DepartmentID;
+                department.DepartmentName = item.DepartmentName;
+
+                viewModel.Add(department);
+            }
+            return viewModel;
+        }
+        #endregion
+        
+
+        #region　新規作成 HttpPost("register")
         [HttpPost("register")]
-       public void registPerson(PersonViewModel viewModel)
+       public ActionResult registPerson(PersonViewModel viewModel)
        {
             var result = setDtoRegistPerson(viewModel);
             personRegisterService.registService(result);
+            return Ok();
        }
 
        public PersonDto setDtoRegistPerson(PersonViewModel viewModel)
@@ -97,7 +157,7 @@ namespace PhoneNumberManagement.Controllers
        }
         #endregion
 
-        #region  削除
+        #region  削除 HttpGet ("Delete/{staffNumber}")
         [HttpGet("Delete/{staffNumber}")]
         public ActionResult DeletePerson(int staffNumber)
         {
@@ -107,7 +167,7 @@ namespace PhoneNumberManagement.Controllers
 
         #endregion
 
-        #region 検索
+        #region 検索 HttpGet("Search")
         [HttpGet("Search")]
         public IEnumerable<ManagementViewModel> SearchController(SearchViewModel search)
         {
@@ -128,7 +188,7 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
 
-        #region 詳細
+        #region 詳細 HttpGet("Fetail/{id}")
         [HttpGet("Detail/{id}")]
         public ManagementViewModel DetailController(int id)
         {
@@ -161,7 +221,7 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
 
-        #region 編集
+        #region 編集 HttpPost("edit")
         [HttpPost("edit")]
         public void editController(PersonViewModel personViewModel)
         {
@@ -185,6 +245,13 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
 
+        #region テスト用
+        [HttpGet("TestButton")]
+        public string aaa()
+        {
+            return "<aaa";
+        }
+        #endregion  
 
     }
 }

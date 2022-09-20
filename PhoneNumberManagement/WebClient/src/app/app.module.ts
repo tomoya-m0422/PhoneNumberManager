@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PersonEditComponent } from './person-edit/person-edit.component';
 import { PersonCreateComponent } from './person-create/person-create.component';
 import { HomeComponent } from './home/home.component';
+import { PersonRealEditingComponent } from './person-real-editing/person-real-editing.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     PersonEditComponent,
     PersonCreateComponent,
-    HomeComponent
+    HomeComponent,
+    PersonRealEditingComponent
   ],
   imports: [
     //現在のモジュールで私用する他のモジュール宣言

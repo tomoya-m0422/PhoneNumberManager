@@ -1,6 +1,6 @@
 ﻿namespace PhoneNumberManagement.Models
 {
-    public class Department
+    public class DepartmentViewModel
     {
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; } 

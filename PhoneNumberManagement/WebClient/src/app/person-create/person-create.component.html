@@ -8,15 +8,38 @@
 </head>
 <body>
   <h1>新規登録画面</h1>
-  <table >
-    <tr><th>社員名</th><input type="text"></tr>
-    <tr><th>会社名</th><input list="CompanyList" id="Company" name="Company" placeholder="会社を入力または選択" autocomplete="off"/><datalist id="CompanyList"></datalist></tr>
-    <tr><th>部署</th><input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"><datalist id="DepartmentList"></datalist></tr>
-    <tr><th>内線番号</th><input type="text"></tr>
-    <tr><th>メモ</th><input type="text"></tr>
-    <button>登録</button>
-    <button>リセット</button>
-  </table>
+  <form id="form">
+    <table>
+      <tr>
+        <th>社員名</th>
+        <input id="staffName" type="text">
+      </tr>
+
+      <tr>
+        <th>会社名</th>
+        <input list="CompanyList" id="Company" name="Company" placeholder="会社を入力または選択" autocomplete="off"/><datalist id="CompanyList"></datalist>
+      </tr>
+
+      <tr>
+        <th>部署名</th>
+        <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"><datalist id="DepartmentList"></datalist>
+      </tr>
+
+      <tr>
+        <th>内線番号</th>
+        <input id="ExectionNumber" type="text">
+      </tr>
+
+      <tr>
+        <th>メモ</th>
+        <input id="memo" type="text">
+      </tr>
+
+      <button id="redister" (click)="StaffRedister()">登録</button>
+      <input type="reset" value="リセット">
+    </table>
+  </form>
+
 
 </body>
 </html>
