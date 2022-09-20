@@ -1,1 +1,36 @@
-<p>person-real-editing works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>編集画面</title>
+</head>
+<body>
+
+  <h1>編集画面</h1>
+<table border="5" id="edittable">
+  <tr>
+    <th>ID</th>
+    <th>名前</th>
+    <th>会社ID</th>
+    <th>会社名</th>
+    <th>部署ID</th>
+    <th>部署名</th>
+    <th>内線番号</th>
+    <th>メモ</th>
+  </tr>
+  <tr *ngFor="let person of realEditPerson">
+    <td>{{person.StaffNumber}}</td>
+    <td><input type="text" value="{{person.StaffName}}"></td>
+    <td>{{person.CompanyID}}</td>
+    <td>{{person.CompanyName}}</td>
+    <td>{{person.DepartmentID}}</td>
+    <td>{{person.DepartmentName}}</td>
+    <td><input type="text" value="{{person.ExtensionNumber}}"></td>
+    <td><input type="text" value="{{person.Memo}}"></td>
+  </tr>
+</table>
+</body>
+
+</html>

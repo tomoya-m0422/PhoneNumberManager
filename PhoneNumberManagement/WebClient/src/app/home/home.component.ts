@@ -3,6 +3,7 @@ import * as $ from 'jquery'
 import { Router } from '@angular/router';
 import { ManagementPerson } from './home.viewmodel';
 import { isArrayLiteralExpression } from 'typescript';
+import { type } from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,10 @@ export class HomeComponent implements OnInit {
     //alert("DetailClickできた!!")
     this.router.navigate(['/person-edit'],{queryParams:{id:staffNumber} })
     //this.router.navigate(['/products'], { queryParams: { order: 'popular' } });
+   }
+
+   EditClick(staffNumber:number):void{
+    this.router.navigate(["/person-real-editing"],{queryParams:{id:staffNumber} })
    }
 
 
@@ -45,12 +50,9 @@ export class HomeComponent implements OnInit {
             $("#NameList").append
             ('<option value="'+item.staffName+'">')
 
-            $("#DepartmentList").append
-            ('<option value="'+item.departmentName+'">')
-          })
 
+          })
           //A-2.一覧表示の初期処理
-          //これが難しい
           $.each(data,function(index,item){
             managementPerson.push({
               StaffNumber: item.staffNumber,
@@ -62,10 +64,8 @@ export class HomeComponent implements OnInit {
               ExtensionNumber: item.extensionNumber,
               Memo: item.memo
             })
-
           }
           )
-
         }
         )
 
@@ -79,9 +79,28 @@ export class HomeComponent implements OnInit {
         )
     }
     )
-    //#endregion
+
     this.managementPerson = managementPerson;
+    //検索欄の部署の部分の処理
+    $(function(){
+      $.ajax({
+        async:false,
+        url:"https://localhost:7059/Management/Department",
+        type: "get",
+        dataType: "json"
+      })
+      .done(function(data){
+        $.each(data,function(index,item){
+          $("#DepartmentList").append
+          ('<option value="'+item.departmentName+'">')
+        })
+      })
+      .fail(function(){
+        alert("EERROR:部署の検索欄")
+      })
+    })
   }
+  //#endregion
 
   TestButton(): void{
     $.ajax({

@@ -14,11 +14,12 @@ export class PersonCreateComponent implements OnInit {
 
   ngOnInit(): void {
     //初期処理
+    //会社の欄の作成
     $(function(){
       $.ajax(
         {
           async: false,
-          url: "https://localhost:7059/Management",
+          url: "https://localhost:7059/Management/Company",
           type: "get",
           dataType: "json",
         }
@@ -28,16 +29,37 @@ export class PersonCreateComponent implements OnInit {
         $.each(data,function(index,item){
           $("#CompanyList").append
           ("<option class='companyID' id="+item.companyID+" value='"+item.companyName+"'>")
+        })
 
+      })
+      .fail(function(){
+        window.alert("ERROR:会社欄");
+      })
+    })
+
+    //部署の欄の作成
+    $(function(){
+      $.ajax(
+        {
+          async: false,
+          url: "https://localhost:7059/Management/Department",
+          type: "get",
+          dataType: "json",
+        }
+      )
+      .done(function(data){
+        //会社と部署の欄の作成
+        $.each(data,function(index,item){
           $("#DepartmentList").append
           ("<option class='departmentID' id="+item.departmentID+" value='"+item.departmentName+"'>")
         })
 
       })
       .fail(function(){
-        window.alert("ERROR");
+        window.alert("ERROR:部署欄");
       })
     })
+
   }
 
   StaffRedister() :void {

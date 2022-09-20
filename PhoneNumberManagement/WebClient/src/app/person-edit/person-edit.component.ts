@@ -17,7 +17,6 @@ export class PersonEditComponent implements OnInit {
 
   constructor(private router: Router,private activatedRoute: ActivatedRoute) {
     this.editPerson = this.editPerson
-
    }
 
    //初期処理：詳細表示
@@ -92,5 +91,9 @@ export class PersonEditComponent implements OnInit {
     }
 
   }
+
+  EditClick(staffNumber:number):void{
+    this.router.navigate(["/person-real-editing"],{queryParams:{id:staffNumber} })
+   }
 
 }

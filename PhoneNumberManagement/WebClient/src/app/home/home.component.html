@@ -45,11 +45,11 @@
         <td>{{person.ExtensionNumber}}</td>
         <td>{{person.Memo}}</td>
         <td><button id="button" (click)="DetailClick(person.StaffNumber)">詳細</button></td>
+        <td><button id="button" (click)="EditClick(person.StaffNumber)">編集</button></td>
       </tr>
     </table>
     <!--↓は無視しておｋ-->
     <button (click)="TestButton()">テストボタン</button>
-    <a routerLink="../person-real-editing">編集画面てきな</a>
 
   </body>
 </html>
