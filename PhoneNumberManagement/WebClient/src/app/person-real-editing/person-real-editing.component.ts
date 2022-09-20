@@ -56,7 +56,41 @@ export class PersonRealEditingComponent implements OnInit {
     })
   this.realEditPerson = realEditPerson;
 
+  //会社取得
+  $(function(){
+    $.ajax({
+      async: false,
+      url: "https://localhost:7059/Management/Company",
+      type: "GET",
+      dataType: "json"
+    })
+    .done(function(data){
+      $.each(data,function(index,item){
+        $("#CompanySelect").append
+        ("<option class='CompanyID' value='"+item.companyID+"'>"+item.companyID+":"+item.companyName+"</option>")
+      })
+    })
+    .fail(function(){
+      alert("ERROR:会社データ取得")
+    })
+  })
 
+  //部署取得
+  $(function(){
+    $.ajax({
+      async: false,
+      url: "https://localhost:7059/Management/Department",
+      type: "GET",
+      dataType: "json"
+    })
+    .done(function(data){
+      $.each(data,function(index,item){
+      $("#DepartmentSelect").append
+      ("<option class='CompanyID' value='"+item.departmentID+"'>"+item.departmentID+":"+item.departmentName+"</option>")
+      })
+    })
+
+  })
   }
 
 }

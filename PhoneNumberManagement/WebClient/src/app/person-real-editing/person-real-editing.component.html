@@ -13,22 +13,37 @@
   <tr>
     <th>ID</th>
     <th>名前</th>
-    <th>会社ID</th>
-    <th>会社名</th>
-    <th>部署ID</th>
-    <th>部署名</th>
+    <th>会社</th>
+    <th>部署</th>
     <th>内線番号</th>
     <th>メモ</th>
   </tr>
   <tr *ngFor="let person of realEditPerson">
-    <td>{{person.StaffNumber}}</td>
-    <td><input type="text" value="{{person.StaffName}}"></td>
-    <td>{{person.CompanyID}}</td>
-    <td>{{person.CompanyName}}</td>
-    <td>{{person.DepartmentID}}</td>
-    <td>{{person.DepartmentName}}</td>
-    <td><input type="text" value="{{person.ExtensionNumber}}"></td>
-    <td><input type="text" value="{{person.Memo}}"></td>
+    <td>
+      {{person.StaffNumber}}
+    </td>
+
+    <td>
+      <input type="text" value="{{person.StaffName}}">
+    </td>
+    <!--<td>{{person.CompanyID}}</td>-->
+    <td>
+      <select name="CompanySelect" id="CompanySelect">
+      </select>
+    </td>
+
+    <td>
+      <select name="DepartmentSelect" id="DepartmentSelect">
+      </select>
+    </td>
+
+    <td>
+      <input type="text" value="{{person.ExtensionNumber}}">
+    </td>
+
+    <td>
+      <input type="text" value="{{person.Memo}}">
+    </td>
   </tr>
 </table>
 </body>
