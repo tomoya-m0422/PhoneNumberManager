@@ -1,72 +1,57 @@
 using Microsoft.Extensions.FileProviders;
+using PhoneNumberManagement.Controllers;
+using PhoneNumberManagement.Services;
+//’Ç‰Á‚µ‚½
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//’Ç‰Á‚µ‚½
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-            builder => builder
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .WithOrigins(new string[] { "http://localhost:4200" })
-    );
-
-    options.AddPolicy("CorsPolicyName", 
-        builder => builder
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-        .WithOrigins(new string[] { "https://localhost:7059" }));
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          //policy.WithOrigins("http://localhost:5500",
+                          //                    "https://localhost:5501",
+                          //                    "http://localhost:7297",
+                          //                    "http://127.0.0.1:5501")
+                          policy.WithOrigins("*")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
 });
+// Add services to the container.
+builder.Services.AddRazorPages();
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
-/*
- if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
-*/
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-    context.Response.Headers.Add("Access-Control-Allow-Credentials", "*");
-    //context.Response.Headers.Add("Access-Control-Allow-Methods", "*");
-    context.Response.Headers.Add("strict-origin-when-cross-origin", "*");
-    context.Response.Headers.Add("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
-    context.Response.Headers.Add("Access-Control-Allow-Methods", "PUT, DELETE, OPTIONS");
-    await next();
-});
-
-
-app.UseRouting();
+//‚±‚Á‚©‚ç
+app.MapGet("/h", () => "Hello World!");
+app.MapGet("/a", () => "Hello World!");
+app.UseStaticFiles();
+//Console.WriteLine("Hello");
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//        Path.Combine(Directory.GetCurrentDirectory(), "Test")),
+//    RequestPath = "/Test"
+//});
+app.UseCors(MyAllowSpecificOrigins);
+//‚±‚±‚Ü‚Å
 
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
+app.UseRouting();
 app.UseAuthorization();
-
-app.UseStaticFiles();
-
-app.MapControllers();
-
-#region ’Ç‰Á
+//app.MapRazorPages();
+//
 app.UseDefaultFiles();
-
-app.UseStaticFiles();
-/*
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "WebClient")),
-    RequestPath = "/WebClient"
-});
-*/
-#endregion
-
+app.MapControllers();
+//
 app.Run();

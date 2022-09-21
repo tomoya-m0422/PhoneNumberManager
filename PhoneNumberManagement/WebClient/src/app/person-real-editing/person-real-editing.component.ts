@@ -3,6 +3,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EditPerson } from '../person-edit/person-edit.viewmodel';
 import { RealEditingPerson } from './person-real-editing.viewmodel';
 import * as $ from 'jquery';
+import { Location } from '@angular/common';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-person-real-editing',
@@ -15,7 +17,7 @@ export class PersonRealEditingComponent implements OnInit {
   realEditPerson: RealEditingPerson[] = [];
   //id: string;
 
-  constructor(private router: Router,private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router,private activatedRoute: ActivatedRoute,private location: Location) {
     this.realEditPerson = this.realEditPerson
    }
 
@@ -67,7 +69,7 @@ export class PersonRealEditingComponent implements OnInit {
     .done(function(data){
       $.each(data,function(index,item){
         $("#CompanySelect").append
-        ("<option class='CompanyID' value='"+item.companyID+"'>"+item.companyID+":"+item.companyName+"</option>")
+        ("<option class='CompanyID' id='"+item.companyID+"' value='"+item.companyID+"'>"+item.companyID+":"+item.companyName+"</option>")
       })
     })
     .fail(function(){
@@ -86,11 +88,54 @@ export class PersonRealEditingComponent implements OnInit {
     .done(function(data){
       $.each(data,function(index,item){
       $("#DepartmentSelect").append
-      ("<option class='CompanyID' value='"+item.departmentID+"'>"+item.departmentID+":"+item.departmentName+"</option>")
+      ("<option class='DepartmentID' value='"+item.departmentID+"'>"+item.departmentID+":"+item.departmentName+"</option>")
       })
     })
 
   })
+  }
+
+  updatingButton(): void{
+    //alert("ok")
+    var staffNumber = $("#StaffNumber").text().trim()
+    var staffName = $("#StaffName").val()
+    var companyID = $("#CompanySelect").val()
+    var departmentID = $("#DepartmentSelect").val()
+    var extensionNumber = $("#ExtensionNumber").val()
+    var memo = $("#Memo").val()
+    //alert(memo);
+    var updatingData = {
+      "staffNumber":staffNumber,
+      "staffName":staffName,
+      "companyID":companyID,
+      "departmentID":departmentID,
+      "extensionNumber":extensionNumber,
+      "memo":memo
+    }
+
+    var updatingJson = JSON.stringify(updatingData)
+    console.log(updatingJson)
+
+    $(function(){
+      $.ajax({
+        async: false,
+        url:"https://localhost:7059/Management/edit",
+        type: "POST",
+        data: updatingJson,
+        contentType: 'application/json'
+      })
+      .done(function(){
+        alert("更新しました")
+      })
+      .fail(function(){
+        alert("ERROR")
+      })
+    })
+
+  }
+
+  backButton(): void{
+    this.location.back();
   }
 
 }

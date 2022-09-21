@@ -11,6 +11,7 @@ import { PersonEditComponent } from './person-edit/person-edit.component';
 import { PersonCreateComponent } from './person-create/person-create.component';
 import { HomeComponent } from './home/home.component';
 import { PersonRealEditingComponent } from './person-real-editing/person-real-editing.component';
+import { PersonSearchComponent } from './person-search/person-search.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PersonRealEditingComponent } from './person-real-editing/person-real-ed
     PersonEditComponent,
     PersonCreateComponent,
     HomeComponent,
-    PersonRealEditingComponent
+    PersonRealEditingComponent,
+    PersonSearchComponent
   ],
   imports: [
     //現在のモジュールで私用する他のモジュール宣言

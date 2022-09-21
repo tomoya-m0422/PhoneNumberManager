@@ -12,27 +12,29 @@
     <table>
       <tr>
         <th>社員名</th>
-        <input id="staffName" type="text">
+        <input id="staffName" type="text" autocomplete="off">
       </tr>
 
       <tr>
         <th>会社名</th>
-        <input list="CompanyList" id="Company" name="Company" placeholder="会社を入力または選択" autocomplete="off"/><datalist id="CompanyList"></datalist>
+        <select name="CompanySelect" id="CompanySelect">
+        </select>
       </tr>
 
       <tr>
         <th>部署名</th>
-        <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"><datalist id="DepartmentList"></datalist>
+        <select name="DepartmentSelect" id="DepartmentSelect">
+        </select>
       </tr>
 
       <tr>
         <th>内線番号</th>
-        <input id="ExectionNumber" type="text">
+        <input id="ExectionNumber" type="text" autocomplete="off">
       </tr>
 
       <tr>
         <th>メモ</th>
-        <input id="memo" type="text">
+        <input id="memo" type="text" autocomplete="off">
       </tr>
 
       <button id="redister" (click)="StaffRedister()">登録</button>

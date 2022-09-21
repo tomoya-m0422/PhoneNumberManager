@@ -19,12 +19,12 @@
     <th>メモ</th>
   </tr>
   <tr *ngFor="let person of realEditPerson">
-    <td>
-      {{person.StaffNumber}}
+    <td id="StaffNumber">
+    {{person.StaffNumber}}
     </td>
 
     <td>
-      <input type="text" value="{{person.StaffName}}">
+      <input id="StaffName" type="text" value="{{person.StaffName}}">
     </td>
     <!--<td>{{person.CompanyID}}</td>-->
     <td>
@@ -38,14 +38,19 @@
     </td>
 
     <td>
-      <input type="text" value="{{person.ExtensionNumber}}">
+      <input id="ExtensionNumber" type="text" value="{{person.ExtensionNumber}}">
     </td>
 
     <td>
-      <input type="text" value="{{person.Memo}}">
+      <input id="Memo" type="text" value="{{person.Memo}}">
     </td>
   </tr>
 </table>
+
+<button (click)="updatingButton()">更新する</button>
+<button (click)="backButton()">キャンセル</button>
 </body>
+
+
 
 </html>

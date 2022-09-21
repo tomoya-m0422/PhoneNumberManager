@@ -27,8 +27,8 @@ export class PersonCreateComponent implements OnInit {
       .done(function(data){
         //会社と部署の欄の作成
         $.each(data,function(index,item){
-          $("#CompanyList").append
-          ("<option class='companyID' id="+item.companyID+" value='"+item.companyName+"'>")
+          $("#CompanySelect").append
+          ("<option class='CompanyID' id='"+item.companyID+"' value='"+item.companyID+"'>"+item.companyID+":"+item.companyName+"</option>")
         })
 
       })
@@ -50,8 +50,8 @@ export class PersonCreateComponent implements OnInit {
       .done(function(data){
         //会社と部署の欄の作成
         $.each(data,function(index,item){
-          $("#DepartmentList").append
-          ("<option class='departmentID' id="+item.departmentID+" value='"+item.departmentName+"'>")
+          $("#DepartmentSelect").append
+          ("<option class='DepartmentID' value='"+item.departmentID+"'>"+item.departmentID+":"+item.departmentName+"</option>")
         })
 
       })
@@ -64,8 +64,8 @@ export class PersonCreateComponent implements OnInit {
 
   StaffRedister() :void {
     var staffName = $("#staffName").val()
-    var companyID = $(".companyID").attr("id")
-    var departmentID = $(".departmentID").attr("id")
+    var companyID = $("#CompanySelect").val()
+    var departmentID = $("#DepartmentSelect").val()
     var ExectionNumber = $("#ExectionNumber").val()
     var Memo = $("#memo").val()
     var registerInfo = {
@@ -83,7 +83,7 @@ export class PersonCreateComponent implements OnInit {
         async: true,
         url: "https://localhost:7059/Management/register",
         type: "Post",
-        data:registerJson,
+        data: registerJson,
         //dataType:"json",
         contentType: 'application/json',
         // "crossDomain":true,
@@ -98,7 +98,7 @@ export class PersonCreateComponent implements OnInit {
 
       })
       .done(function(){
-        alert(staffName+"作成しました")
+        alert(staffName+"さんを作成しました")
       })
       .fail(function(XMLHttpRequest, textStatus, errorThrown){
         alert("ERROR")
