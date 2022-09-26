@@ -29,6 +29,9 @@ export class HomeComponent implements OnInit {
     this.router.navigate(["/person-real-editing"],{queryParams:{id:staffNumber} })
    }
 
+   SearchClick() :void{
+    this.router.navigate(["/person-search"],{});
+   }
 
   ngOnInit(): void {
     let managementPerson: ManagementPerson[] = [];

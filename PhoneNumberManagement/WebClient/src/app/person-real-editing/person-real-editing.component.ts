@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { EditPerson } from '../person-edit/person-edit.viewmodel';
 import { RealEditingPerson } from './person-real-editing.viewmodel';
 import * as $ from 'jquery';
 import { Location } from '@angular/common';
-import { data } from 'jquery';
 
 @Component({
   selector: 'app-person-real-editing',

@@ -1,1 +1,46 @@
-<p>person-search works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SearchPerson</title>
+  <script src="person-search.component.ts"></script>
+</head>
+<body class="mat-typography">
+  <!--A-1.検索欄-->
+  <form method="get" action="#" class="SearchName"><!--methodは送信方法、actionは送信先(JSとかになるかな？)-->
+    <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
+    <datalist id="NameList">
+    </datalist>
+
+    <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"/>
+    <datalist id="DepartmentList">
+    </datalist>
+
+    <input type="text" size="25" placeholder="メモで検索"/>
+    <input type="submit" value="検索"/>
+  </form>
+
+  <!--A-2.一覧表示-->
+  <table border="5" id="table">
+    <tr>
+      <th>名前</th>
+      <th>会社名</th>
+      <th>部署</th>
+      <th>内線番号</th>
+      <th>メモ</th>
+    </tr>
+    <tr *ngFor="let person of managementPerson">
+      <td>{{person.StaffName}}</td>
+      <td>{{person.CompanyName}}</td>
+      <td>{{person.DepartmentName}}</td>
+      <td>{{person.ExtensionNumber}}</td>
+      <td>{{person.Memo}}</td>
+      <td><button id="button" (click)="DetailClick(person.StaffNumber)">詳細</button></td>
+      <td><button id="button" (click)="EditClick(person.StaffNumber)">編集</button></td>
+    </tr>
+  </table>
+
+</body>
+</html>
