@@ -9,18 +9,16 @@
 </head>
 <body class="mat-typography">
   <!--A-1.検索欄-->
-  <form method="get" action="#" class="SearchName"><!--methodは送信方法、actionは送信先(JSとかになるかな？)-->
-    <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
-    <datalist id="NameList">
-    </datalist>
+  <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
+  <datalist id="NameList">
+  </datalist>
 
-    <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"/>
-    <datalist id="DepartmentList">
-    </datalist>
+  <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"/>
+  <datalist id="DepartmentList">
+  </datalist>
 
-    <input type="text" size="25" placeholder="メモで検索"/>
-    <input type="submit" value="検索"/>
-  </form>
+  <input id="Memo" type="text" size="25" placeholder="メモで検索"/>
+  <button (click)="SearchClick()">検索</button>
 
   <!--A-2.一覧表示-->
   <table border="5" id="table">

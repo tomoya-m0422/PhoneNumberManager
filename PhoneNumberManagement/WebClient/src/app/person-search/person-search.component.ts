@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery'
-import { Router, UrlHandlingStrategy } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, UrlHandlingStrategy } from '@angular/router';
 import { ManagementPerson } from './SearchPerson.viewmodel';
 import { isArrayLiteralExpression } from 'typescript';
-import { type } from 'jquery';
 
 @Component({
   selector: 'app-person-search',
@@ -14,7 +13,7 @@ export class PersonSearchComponent implements OnInit {
 
   managementPerson: ManagementPerson[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private activatedRoute: ActivatedRoute) {
     this.managementPerson = this.managementPerson
    }
 
@@ -28,30 +27,52 @@ export class PersonSearchComponent implements OnInit {
     this.router.navigate(["/person-real-editing"],{queryParams:{id:staffNumber} })
    }
 
-   //未完成
    SearchClick() :void{
-    this.router.navigate(["/person-search"]);
+    var staffName = $("#Name").val();
+    var departmentID = $(".depatmentabc").attr("id");
+    var memo = $("#Memo").val();
+    this.router.navigate(["/person-search"],{queryParams:{StaffName:staffName,DepartmentID:departmentID,Memo:memo}});
    }
 
 
   ngOnInit(): void {
     let managementPerson: ManagementPerson[]= [];
 
+    var staffName = null
+    var departmentID = null
+    var memo = null
+    this.activatedRoute.queryParamMap.subscribe((params:ParamMap)=>{
+       staffName = params.get("StaffName");
+       departmentID = params.get("DepartmentID");
+       memo = params.get("Memo");
+    })
+
+    var searchInfo = {
+      "StaffName" : staffName,
+      "CompanyID" : departmentID,
+      "Memo" : memo
+    };
+
+    var searchJson = JSON.stringify(searchInfo);
+    console.log(searchJson);
+
     $(function(){
       $.ajax(
         {
           async: false,
           url: "https://localhost:7059/Management/Search",
-          type: "get",
+          type: "post",
+          data: searchJson,
+          contentType: 'application/json',
           dataType: "json"
         }
       )
       .done(function(data){
-        alert("どーん")
         $.each(data,function(index,item){
           $("#NameList").append
           ("<option value='"+item.staffName+"'>")
         })
+
         $.each(data,function(index,item){
           managementPerson.push({
             StaffNumber: item.staffNumber,
@@ -84,11 +105,29 @@ export class PersonSearchComponent implements OnInit {
       .done(function(data){
         $.each(data,function(index,item){
           $("#DepartmentList").append
-          ('<option value="'+item.departmentName+'">')
+          ('<option class= "depatmentabc" id="'+item.departmentID+'" value="'+item.departmentName+'">')
         })
       })
       .fail(function(){
-        alert("EERROR:部署の検索欄")
+        alert("ERROR:部署の検索欄")
+      })
+    })
+
+    $(function(){
+      $.ajax({
+        async:false,
+        url:"https://localhost:7059/Management",
+        type:"get",
+        dataType:"json"
+      })
+      .done(function(data){
+        $.each(data,function(index,item){
+          $("#NameList").append
+          ('<option value="'+item.staffName+'">')
+        })
+      })
+      .fail(function(){
+        alert("ERROR:名前の検索欄")
       })
     })
   }

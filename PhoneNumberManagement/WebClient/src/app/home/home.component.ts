@@ -30,7 +30,11 @@ export class HomeComponent implements OnInit {
    }
 
    SearchClick() :void{
-    this.router.navigate(["/person-search"],{});
+    var staffName = $("#Name").val();
+    var departmentID = $(".depatmentabc").attr("data-id");
+    var memo = $("#Memo").val();
+    alert(departmentID);
+    //this.router.navigate(["/person-search"],{queryParams:{StaffName:staffName,DepartmentID:departmentID,Memo:memo}});
    }
 
   ngOnInit(): void {
@@ -52,9 +56,8 @@ export class HomeComponent implements OnInit {
           $.each(data,function(index,item){
             $("#NameList").append
             ('<option value="'+item.staffName+'">')
-
-
           })
+
           //A-2.一覧表示の初期処理
           $.each(data,function(index,item){
             managementPerson.push({
@@ -95,7 +98,7 @@ export class HomeComponent implements OnInit {
       .done(function(data){
         $.each(data,function(index,item){
           $("#DepartmentList").append
-          ('<option value="'+item.departmentName+'">')
+          ('<option class= "depatmentabc" data-id="'+item.departmentID+'" value="'+item.departmentName+'">')
         })
       })
       .fail(function(){

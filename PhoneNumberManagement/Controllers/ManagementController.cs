@@ -79,7 +79,7 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
 
-        #region 会社一覧取得
+        #region 会社一覧取得 HttpGet("Company")
         [HttpGet ("Company")]
         public ActionResult<IEnumerable<CompanyViewModel>> CompanyGet()
         {
@@ -106,8 +106,8 @@ namespace PhoneNumberManagement.Controllers
 
         #endregion
 
-        
-        #region 部署一覧取得
+
+        #region 部署一覧取得 HttpGet("Department")
         [HttpGet("Department")]
         public ActionResult<IEnumerable<DepartmentViewModel>> DepartmentGet()
         {
@@ -167,8 +167,8 @@ namespace PhoneNumberManagement.Controllers
 
         #endregion
 
-        #region 検索 HttpGet("Search")
-        [HttpGet("Search")]
+        #region 検索 HttpPost("Search")
+        [HttpPost("Search")]
         public IEnumerable<ManagementViewModel> SearchController(SearchViewModel search)
         {
             var Dto = setSearchDto(search);
@@ -245,7 +245,7 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
 
-        #region テスト用
+        #region テスト用 HttpGet("TestButton")
         [HttpGet("TestButton")]
         public string aaa()
         {
