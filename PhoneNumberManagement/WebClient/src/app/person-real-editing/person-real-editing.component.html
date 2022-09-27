@@ -19,30 +19,32 @@
     <th>メモ</th>
   </tr>
   <tr *ngFor="let person of realEditPerson">
-    <td id="StaffNumber">
+    <td id="StaffNumber" (click)="alertButton()">
     {{person.StaffNumber}}
     </td>
 
     <td>
-      <input id="StaffName" type="text" value="{{person.StaffName}}">
+      <input id="StaffName" type="text" value="{{person.StaffName}}" autocomplete="off">
     </td>
     <!--<td>{{person.CompanyID}}</td>-->
     <td>
       <select name="CompanySelect" id="CompanySelect">
+        <option value="" selected>{{person.CompanyID}}:{{person.CompanyName}}</option>
       </select>
     </td>
 
     <td>
       <select name="DepartmentSelect" id="DepartmentSelect">
+        <option value="" selected>{{person.DepartmentID}}:{{person.DepartmentName}}</option>
       </select>
     </td>
 
     <td>
-      <input id="ExtensionNumber" type="text" value="{{person.ExtensionNumber}}">
+      <input id="ExtensionNumber" type="text" value="{{person.ExtensionNumber}}" autocomplete="off">
     </td>
 
     <td>
-      <input id="Memo" type="text" value="{{person.Memo}}">
+      <input id="Memo" type="text" value="{{person.Memo}}" autocomplete="off">
     </td>
   </tr>
 </table>

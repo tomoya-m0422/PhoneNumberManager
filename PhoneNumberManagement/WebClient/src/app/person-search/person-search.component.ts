@@ -3,6 +3,7 @@ import * as $ from 'jquery'
 import { ActivatedRoute, ParamMap, Router, UrlHandlingStrategy } from '@angular/router';
 import { ManagementPerson } from './SearchPerson.viewmodel';
 import { isArrayLiteralExpression } from 'typescript';
+import { DepartmentViewModel } from './SearchPersonDepartment.ViewModel';
 
 @Component({
   selector: 'app-person-search',
@@ -12,44 +13,58 @@ import { isArrayLiteralExpression } from 'typescript';
 export class PersonSearchComponent implements OnInit {
 
   managementPerson: ManagementPerson[] = [];
+  departmentViewModel: DepartmentViewModel[] = [];
+  depertment: any;
 
   constructor(private router: Router,private activatedRoute: ActivatedRoute) {
-    this.managementPerson = this.managementPerson
+    this.managementPerson = this.managementPerson;
+    this.departmentViewModel = this.departmentViewModel;
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    };
    }
 
+   //削除ボタンの処理
    DetailClick(staffNumber:number): void{
     //alert("DetailClickできた!!")
     this.router.navigate(['/person-edit'],{queryParams:{id:staffNumber} })
     //this.router.navigate(['/products'], { queryParams: { order: 'popular' } });
    }
 
+   //編集ボタンの処理
    EditClick(staffNumber:number):void{
     this.router.navigate(["/person-real-editing"],{queryParams:{id:staffNumber} })
    }
 
+   //検索ボタンの処理
    SearchClick() :void{
     var staffName = $("#Name").val();
-    var departmentID = $(".depatmentabc").attr("id");
+    var departmentName = $("#Department").val();
     var memo = $("#Memo").val();
-    this.router.navigate(["/person-search"],{queryParams:{StaffName:staffName,DepartmentID:departmentID,Memo:memo}});
+    // alert(staffName);
+    // alert(departmentName);
+    // alert(memo);
+    this.router.navigate(["/person-search"],{queryParams:{StaffName:staffName,DepartmentName:departmentName,Memo:memo}});
    }
+
 
 
   ngOnInit(): void {
     let managementPerson: ManagementPerson[]= [];
+    let departmentViewModel: DepartmentViewModel[] = [];
 
     var staffName = null
-    var departmentID = null
+    var departmentName = null
     var memo = null
     this.activatedRoute.queryParamMap.subscribe((params:ParamMap)=>{
        staffName = params.get("StaffName");
-       departmentID = params.get("DepartmentID");
+       departmentName = params.get("DepartmentName");
        memo = params.get("Memo");
     })
 
     var searchInfo = {
       "StaffName" : staffName,
-      "CompanyID" : departmentID,
+      "DepartmentName" : departmentName,
       "Memo" : memo
     };
 
@@ -104,32 +119,35 @@ export class PersonSearchComponent implements OnInit {
       })
       .done(function(data){
         $.each(data,function(index,item){
-          $("#DepartmentList").append
-          ('<option class= "depatmentabc" id="'+item.departmentID+'" value="'+item.departmentName+'">')
+          departmentViewModel.push({
+            DepartmentID : item.departmentID,
+            DepartmentName: item.departmentName
+          })
         })
       })
       .fail(function(){
         alert("ERROR:部署の検索欄")
       })
     })
+    this.departmentViewModel = departmentViewModel;
 
-    $(function(){
-      $.ajax({
-        async:false,
-        url:"https://localhost:7059/Management",
-        type:"get",
-        dataType:"json"
-      })
-      .done(function(data){
-        $.each(data,function(index,item){
-          $("#NameList").append
-          ('<option value="'+item.staffName+'">')
-        })
-      })
-      .fail(function(){
-        alert("ERROR:名前の検索欄")
-      })
-    })
+    // $(function(){
+    //   $.ajax({
+    //     async:false,
+    //     url:"https://localhost:7059/Management",
+    //     type:"get",
+    //     dataType:"json"
+    //   })
+    //   .done(function(data){
+    //     $.each(data,function(index,item){
+    //       $("#NameList").append
+    //       ('<option value="'+item.staffName+'">')
+    //     })
+    //   })
+    //   .fail(function(){
+    //     alert("ERROR:名前の検索欄")
+    //   })
+    // })
   }
 
 }

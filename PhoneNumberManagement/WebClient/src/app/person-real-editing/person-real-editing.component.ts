@@ -19,6 +19,7 @@ export class PersonRealEditingComponent implements OnInit {
     this.realEditPerson = this.realEditPerson
    }
 
+
   ngOnInit(): void {
     //id受取
     var id = null
@@ -27,6 +28,7 @@ export class PersonRealEditingComponent implements OnInit {
     })
 
     let realEditPerson: RealEditingPerson[] = [];
+    //idによってURLが変わるため先に定義
     var url = "https://localhost:7059/Management/Detail/"+id;
     $(function(){
       $.ajax(
@@ -39,6 +41,7 @@ export class PersonRealEditingComponent implements OnInit {
       )
       .done(function(data){
         //alert("EditDone")
+        //社員情報をViewModel型にする
         realEditPerson.push({
           StaffNumber: data.staffNumber,
           StaffName: data.staffName,
@@ -93,15 +96,18 @@ export class PersonRealEditingComponent implements OnInit {
   })
   }
 
+  //更新ボタン処理
   updatingButton(): void{
     //alert("ok")
-    var staffNumber = $("#StaffNumber").text().trim()
+    //HTMLで記入した情報を変数に格納している
+    var staffNumber = $("#StaffNumber").text().trim() //←idに空白があるためtrimで空白を削除
     var staffName = $("#StaffName").val()
     var companyID = $("#CompanySelect").val()
     var departmentID = $("#DepartmentSelect").val()
     var extensionNumber = $("#ExtensionNumber").val()
     var memo = $("#Memo").val()
     //alert(memo);
+    //上記のデータをリスト型にしている
     var updatingData = {
       "staffNumber":staffNumber,
       "staffName":staffName,
@@ -110,7 +116,7 @@ export class PersonRealEditingComponent implements OnInit {
       "extensionNumber":extensionNumber,
       "memo":memo
     }
-
+    //データをBEに送るためにリストデータをJSONに変換
     var updatingJson = JSON.stringify(updatingData)
     console.log(updatingJson)
 
@@ -132,8 +138,13 @@ export class PersonRealEditingComponent implements OnInit {
 
   }
 
+  //戻るボタン
   backButton(): void{
     this.location.back();
+  }
+
+  alertButton(): void{
+    alert("IDは変更できません")
   }
 
 }

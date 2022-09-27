@@ -18,10 +18,16 @@
     <!--A-1.検索欄-->
     <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
     <datalist id="NameList">
+      <div *ngFor="let person of managementPerson">
+        <option value="{{person.StaffName}}"></option>
+      </div>
     </datalist>
 
     <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"/>
     <datalist id="DepartmentList">
+      <div *ngFor="let department of departmentViewModel">
+        <option value="{{department.DepartmentName}}"></option>
+      </div>
     </datalist>
 
     <input id="Memo" type="text" size="25" placeholder="メモで検索"/>
@@ -46,7 +52,7 @@
         <td><button id="button" (click)="EditClick(person.StaffNumber)">編集</button></td>
       </tr>
     </table>
-    <!--↓は無視しておｋ-->
+    <!--↓は無視しておｋ--->
     <button (click)="TestButton()">テストボタン</button>
 
   </body>

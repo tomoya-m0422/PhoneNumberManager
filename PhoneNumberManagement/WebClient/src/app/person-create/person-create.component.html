@@ -15,15 +15,18 @@
         <input id="staffName" type="text" autocomplete="off">
       </tr>
 
+      <!--C-1.会社欄-->
       <tr>
         <th>会社名</th>
         <select name="CompanySelect" id="CompanySelect">
+          <option value="" selected>選択してください</option>
         </select>
       </tr>
-
+      <!--C-2.部署欄-->
       <tr>
         <th>部署名</th>
         <select name="DepartmentSelect" id="DepartmentSelect">
+          <option value="" selected>選択してください</option>
         </select>
       </tr>
 
@@ -37,6 +40,7 @@
         <input id="memo" type="text" autocomplete="off">
       </tr>
 
+      <!--C-3.登録ボタン-->
       <button id="redister" (click)="StaffRedister()">登録</button>
       <input type="reset" value="リセット">
     </table>

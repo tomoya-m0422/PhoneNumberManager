@@ -26,13 +26,13 @@ namespace PhoneNumberManagement.DAO
         {
             //検索クエリの生成
             var query = "SELECT * FROM Person AS p LEFT JOIN Company AS c ON p.CompanyID = c.CompanyID LEFT JOIN Department AS d ON p.DepartmentID = d.DepartmentID " +
-                                "WHERE p.StaffName = @Name OR c.CompanyID = @CompanyID OR p.Memo = @Memo";
+                                "WHERE p.StaffName = @Name OR d.DepartmentName = @DepartmentName OR p.Memo = @Memo";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
             #region @を使えるようにする作業(commansd.Parameters)
             cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = search.StaffName;
-            cmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = search.CompanyID;     
+            cmd.Parameters.Add("@DepartmentName", SqlDbType.NVarChar).Value = search.DepartmentName;     
             cmd.Parameters.Add("@Memo", SqlDbType.NVarChar).Value = search.Memo;
             #endregion
 

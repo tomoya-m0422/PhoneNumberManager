@@ -27,6 +27,7 @@ export class ManagementPerson {
   public CompanyName: string;
   public DepartmentName: string;
 }
+
 //datamodelBaseを継承しないといけない
 
 /*

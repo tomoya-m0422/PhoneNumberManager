@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery'
 import { Router } from '@angular/router';
-import { ManagementPerson } from './home.viewmodel';
+import {ManagementPerson} from './home.viewmodel';
 import { isArrayLiteralExpression } from 'typescript';
 import { type } from 'jquery';
+import { DepartmentViewModel } from './department.viewmodel';
 
 @Component({
   selector: 'app-home',
@@ -14,31 +15,41 @@ import { type } from 'jquery';
 export class HomeComponent implements OnInit {
 
   managementPerson: ManagementPerson[] = [];
+  departmentViewModel: DepartmentViewModel[] = [];
+  depertment: any;
 
   constructor(private router: Router) {
-    this.managementPerson = this.managementPerson
+    this.managementPerson = this.managementPerson;
+    this.departmentViewModel = this.departmentViewModel;
    }
 
+   //削除ボタンの処理
    DetailClick(staffNumber:number): void{
     //alert("DetailClickできた!!")
     this.router.navigate(['/person-edit'],{queryParams:{id:staffNumber} })
     //this.router.navigate(['/products'], { queryParams: { order: 'popular' } });
    }
 
+   //編集ボタンの処理
    EditClick(staffNumber:number):void{
     this.router.navigate(["/person-real-editing"],{queryParams:{id:staffNumber} })
    }
 
+   //検索ボタンの処理
    SearchClick() :void{
     var staffName = $("#Name").val();
-    var departmentID = $(".depatmentabc").attr("data-id");
+    var departmentName = $("#Department").val();
     var memo = $("#Memo").val();
-    alert(departmentID);
-    //this.router.navigate(["/person-search"],{queryParams:{StaffName:staffName,DepartmentID:departmentID,Memo:memo}});
+    //alert(staffName);
+    //alert(departmentName);
+    //alert(memo);
+    this.router.navigate(["/person-search"],{queryParams:{StaffName:staffName,DepartmentName:departmentName,Memo:memo}});
    }
+
 
   ngOnInit(): void {
     let managementPerson: ManagementPerson[] = [];
+    let departmentViewModel: DepartmentViewModel[] = [];
     //#region 初期処理
     $(function () {
       $.ajax(
@@ -51,12 +62,6 @@ export class HomeComponent implements OnInit {
         }
       )
         .done(function (data) {
-          //alert("done")
-          //A-1.検索欄の初期処理
-          $.each(data,function(index,item){
-            $("#NameList").append
-            ('<option value="'+item.staffName+'">')
-          })
 
           //A-2.一覧表示の初期処理
           $.each(data,function(index,item){
@@ -85,8 +90,9 @@ export class HomeComponent implements OnInit {
         )
     }
     )
-
     this.managementPerson = managementPerson;
+
+    //A-1.検索欄
     //検索欄の部署の部分の処理
     $(function(){
       $.ajax({
@@ -97,17 +103,21 @@ export class HomeComponent implements OnInit {
       })
       .done(function(data){
         $.each(data,function(index,item){
-          $("#DepartmentList").append
-          ('<option class= "depatmentabc" data-id="'+item.departmentID+'" value="'+item.departmentName+'">')
+          departmentViewModel.push({
+            DepartmentID : item.departmentID,
+            DepartmentName: item.departmentName
+          })
         })
       })
       .fail(function(){
         alert("EERROR:部署の検索欄")
       })
     })
+    this.departmentViewModel = departmentViewModel;
   }
   //#endregion
 
+  //テストボタン
   TestButton(): void{
     $.ajax({
       type: "GET",

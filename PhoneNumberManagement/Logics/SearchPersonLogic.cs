@@ -32,7 +32,7 @@ namespace PhoneNumberManagement.Logics
             var searchMan = new SearchEntity();
 
             searchMan.StaffName = search.StaffName;
-            searchMan.CompanyID = search.CompanyID;
+            searchMan.DepartmentName = search.DepartmentName;
             searchMan.Memo = search.Memo;
 
             return searchMan;

@@ -9,6 +9,7 @@
 <body>
 
   <h1>詳細画面</h1>
+  <!--D-1.詳細表示-->
 <table border="5" id="edittable">
   <tr>
     <th>ID</th>
@@ -32,7 +33,9 @@
   </tr>
 </table>
 <div *ngFor="let person of editPerson">
+  <!--D-2.削除ボタン-->
   <button id="DeleteButton" (click)="DeleteClick(person.StaffNumber)">削除</button>
+  <!--D-3.編集ボタン-->
   <button id="EditButton" (click)="EditClick(person.StaffNumber)" >編集</button>
 </div>
 

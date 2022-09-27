@@ -20,15 +20,18 @@ export class PersonEditComponent implements OnInit {
    }
 
    //初期処理：詳細表示
+   //D-1.詳細表示
   ngOnInit(): void {
-    //id受取
+    //idをホーム画面から受取
     var id = null
     this.activatedRoute.queryParamMap.subscribe((params:ParamMap)=>{
        id = params.get("id");
     })
-
     let editPerson: EditPerson[] = [];
+
+    //受け取るidによってURLが変わるため先に定義しておく
     var url = "https://localhost:7059/Management/Detail/"+id;
+
     $(function(){
       $.ajax(
         {
@@ -58,6 +61,7 @@ export class PersonEditComponent implements OnInit {
   this.editPerson = editPerson;
   }
 
+  //D-2.削除ボタン
   //削除機能
   DeleteClick(id: number):void{
     //alert(id);
@@ -92,7 +96,9 @@ export class PersonEditComponent implements OnInit {
 
   }
 
+  //D-3.編集ボタン
   EditClick(staffNumber:number):void{
+    //idを編集画面に渡して遷移する
     this.router.navigate(["/person-real-editing"],{queryParams:{id:staffNumber} })
    }
 

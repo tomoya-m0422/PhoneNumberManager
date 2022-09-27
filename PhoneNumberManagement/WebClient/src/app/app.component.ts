@@ -2,6 +2,7 @@ import { getCurrencySymbol } from '@angular/common';
 //Angularが提供する標準モジュール
 //コンポーネントを定義するために必要なモジュール
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 //export文で外部公開の宣言で定義したクラスのコンポーネント構成情報を
@@ -20,7 +21,13 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'WebClient';
-}
 
+  constructor(private router: Router){
+  }
+
+  ngOnInit(): void{
+    this.router.navigateByUrl('/home');
+  }
+}
 
 

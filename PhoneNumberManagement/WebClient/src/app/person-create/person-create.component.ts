@@ -14,7 +14,8 @@ export class PersonCreateComponent implements OnInit {
 
   ngOnInit(): void {
     //初期処理
-    //会社の欄の作成
+
+    //C-1.会社欄
     $(function(){
       $.ajax(
         {
@@ -25,7 +26,6 @@ export class PersonCreateComponent implements OnInit {
         }
       )
       .done(function(data){
-        //会社と部署の欄の作成
         $.each(data,function(index,item){
           $("#CompanySelect").append
           ("<option class='CompanyID' id='"+item.companyID+"' value='"+item.companyID+"'>"+item.companyID+":"+item.companyName+"</option>")
@@ -37,7 +37,7 @@ export class PersonCreateComponent implements OnInit {
       })
     })
 
-    //部署の欄の作成
+    //C-2.部署欄
     $(function(){
       $.ajax(
         {
@@ -62,19 +62,27 @@ export class PersonCreateComponent implements OnInit {
 
   }
 
+  //C-3.登録ボタン
+  //登録ボタンを押下したときの処理
   StaffRedister() :void {
+
+    //HTMLで記入したデータを変数に格納
     var staffName = $("#staffName").val()
     var companyID = $("#CompanySelect").val()
     var departmentID = $("#DepartmentSelect").val()
     var ExectionNumber = $("#ExectionNumber").val()
     var Memo = $("#memo").val()
+
+    //上記の変数をリスト型に変換
     var registerInfo = {
       "StaffName":staffName,
       "CompanyID":companyID,
       "DepartmentID":departmentID,
       "ExtensionNumber":ExectionNumber,
       "Memo":Memo
-  };
+    };
+
+    //リストをBEに渡すためにJSONに変換
     var registerJson = JSON.stringify(registerInfo)
     console.log(registerJson)
 
@@ -95,16 +103,17 @@ export class PersonCreateComponent implements OnInit {
         //    withCredentials: true,
         //    X-Requested-With : 'XMLHttpRequest'
         // }
-
       })
+
       .done(function(){
         alert(staffName+"さんを作成しました")
       })
+
       .fail(function(XMLHttpRequest, textStatus, errorThrown){
-        alert("ERROR")
-        console.log(XMLHttpRequest.status);
-        console.log(textStatus);
-        console.log(errorThrown);
+        alert("ERROR:社員登録を行うことができませんでした")
+        // console.log(XMLHttpRequest.status);
+        // console.log(textStatus);
+        // console.log(errorThrown);
       })
     })
 
