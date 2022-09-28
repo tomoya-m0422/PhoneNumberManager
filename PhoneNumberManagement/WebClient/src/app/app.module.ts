@@ -12,6 +12,7 @@ import { PersonCreateComponent } from './person-create/person-create.component';
 import { HomeComponent } from './home/home.component';
 import { PersonRealEditingComponent } from './person-real-editing/person-real-editing.component';
 import { PersonSearchComponent } from './person-search/person-search.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PersonSearchComponent } from './person-search/person-search.component';
     //importしていることが前提
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSliderModule
   ],
   providers: [],
   //依存性注入

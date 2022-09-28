@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap, Router, UrlHandlingStrategy } from '@angular/
 import { ManagementPerson } from './SearchPerson.viewmodel';
 import { isArrayLiteralExpression } from 'typescript';
 import { DepartmentViewModel } from './SearchPersonDepartment.ViewModel';
+import { type } from 'jquery';
 
 @Component({
   selector: 'app-person-search',
@@ -14,11 +15,13 @@ export class PersonSearchComponent implements OnInit {
 
   managementPerson: ManagementPerson[] = [];
   departmentViewModel: DepartmentViewModel[] = [];
+  PersonName : ManagementPerson[] = [];
   depertment: any;
 
   constructor(private router: Router,private activatedRoute: ActivatedRoute) {
     this.managementPerson = this.managementPerson;
     this.departmentViewModel = this.departmentViewModel;
+    this.PersonName = this.PersonName;
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
     };
@@ -51,6 +54,7 @@ export class PersonSearchComponent implements OnInit {
 
   ngOnInit(): void {
     let managementPerson: ManagementPerson[]= [];
+    let PersonName : ManagementPerson[] = [];
     let departmentViewModel: DepartmentViewModel[] = [];
 
     var staffName = null
@@ -83,10 +87,10 @@ export class PersonSearchComponent implements OnInit {
         }
       )
       .done(function(data){
-        $.each(data,function(index,item){
-          $("#NameList").append
-          ("<option value='"+item.staffName+"'>")
-        })
+        // $.each(data,function(index,item){
+        //   $("#NameList").append
+        //   ("<option value='"+item.staffName+"'>")
+        // })
 
         $.each(data,function(index,item){
           managementPerson.push({
@@ -103,12 +107,38 @@ export class PersonSearchComponent implements OnInit {
       })
       .fail(function(){
         window.alert("ERROR:データベースと接続できませんでした");
-
       })
-
-
     })
     this.managementPerson = managementPerson;
+
+    //検索欄の名前の部分の処理
+    $(function(){
+      $.ajax({
+        async:false,
+        url:"https://localhost:7059/Management",
+        type: "get",
+        dataType: "json"
+      })
+      .done(function(data){
+         $.each(data,function(index,item){
+          PersonName.push({
+            StaffNumber: item.staffNumber,
+            StaffName: item.staffName,
+            CompanyID: item.companyID,
+            CompanyName: item.companyName,
+            DepartmentID: item.departmentID,
+            DepartmentName: item.departmentName,
+            ExtensionNumber: item.extensionNumber,
+            Memo: item.memo
+          })
+         })
+      })
+      .fail(function(){
+        alert("ERORR:名前の検索欄")
+      })
+    })
+    this.PersonName = PersonName;
+
     //検索欄の部署の部分の処理
     $(function(){
       $.ajax({
@@ -131,23 +161,6 @@ export class PersonSearchComponent implements OnInit {
     })
     this.departmentViewModel = departmentViewModel;
 
-    // $(function(){
-    //   $.ajax({
-    //     async:false,
-    //     url:"https://localhost:7059/Management",
-    //     type:"get",
-    //     dataType:"json"
-    //   })
-    //   .done(function(data){
-    //     $.each(data,function(index,item){
-    //       $("#NameList").append
-    //       ('<option value="'+item.staffName+'">')
-    //     })
-    //   })
-    //   .fail(function(){
-    //     alert("ERROR:名前の検索欄")
-    //   })
-    // })
   }
 
 }
