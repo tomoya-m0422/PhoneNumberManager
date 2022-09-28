@@ -59,7 +59,7 @@ namespace PhoneNumberManagement.Services
         #endregion
 
 
-        public List<ManagementDto> FirstService()
+        public IEnumerable<ManagementDto> FirstService()
         {
             var dto = new List<ManagementDto>();
             var connectionString = "Data Source=NCP-TM04945-1;Initial Catalog=ManagementDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
@@ -71,7 +71,7 @@ namespace PhoneNumberManagement.Services
                     //DB接続開始
                     connection.Open();
                     //SQLの実行
-                    dto = managementLogic.FirstLogic(connection);
+                    dto = (List<ManagementDto>)managementLogic.FirstLogic(connection);
                 }
                 catch (Exception exception)
                 {

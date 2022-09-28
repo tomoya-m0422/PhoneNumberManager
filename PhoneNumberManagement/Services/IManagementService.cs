@@ -18,7 +18,7 @@ namespace PhoneNumberManagement.Services
         #endregion
 
         #region 本番用
-        List<ManagementDto> FirstService();
+        IEnumerable<ManagementDto> FirstService();
         #endregion
     }
 

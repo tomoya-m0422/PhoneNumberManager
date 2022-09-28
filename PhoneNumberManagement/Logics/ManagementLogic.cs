@@ -2,6 +2,7 @@
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DAO;
 using System.Data.SqlClient;
+using PhoneNumberManagement.DXO.Management;
 
 namespace PhoneNumberManagement.Logics
 
@@ -10,27 +11,30 @@ namespace PhoneNumberManagement.Logics
     {
         #region メンバー変数
         private IManagementDao managementDao;
+        private ManagementEntityToDto entityToDto;
         #endregion 
 
         #region コンストラクタ
         public ManagementLogic()
         {
             this.managementDao = new ManagementDao();
+            this.entityToDto = new ManagementEntityToDto();
         }
         #endregion 
 
 
-        public List<ManagementDto> FirstLogic(SqlConnection connection)
+        public IEnumerable<ManagementDto> FirstLogic(SqlConnection connection)
         {
             //DaoにSQLServerからデータを取ってくるように指示したあとenetityにデータを入れる
             var entity = managementDao.FirstConnect(connection);
-            var result = setPhoneNumberManagementDto(entity);
+            //var result = setPhoneNumberManagementDto(entity);
+            var result = entityToDto.IEnumerableExchangeEntityToDto(entity);
             return result;
         }
 
 
-
-        public List<ManagementDto> setPhoneNumberManagementDto(IEnumerable<ManagementEntity> entities)
+        /*
+        public IEnumerable<ManagementDto> setPhoneNumberManagementDto(IEnumerable<ManagementEntity> entities)
         {
             var dtos = new List<ManagementDto>();
 
@@ -51,7 +55,7 @@ namespace PhoneNumberManagement.Logics
             }
             return dtos;
         }
-
+        */
     }
 }
 

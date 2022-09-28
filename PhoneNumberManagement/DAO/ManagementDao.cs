@@ -10,13 +10,12 @@ namespace PhoneNumberManagement.DAO
 
     public class ManagementDao : IManagementDao
     {
+
         #region 一覧取得
         public IEnumerable<ManagementEntity> FirstConnect(SqlConnection connection)
         {
             var query = "SELECT * FROM Person AS p,Company AS c,Department AS d WHERE p.CompanyID = c.CompanyID AND p.DepartmentID = d.DepartmentID";
-
             var result = connection.Query<ManagementEntity>(query);
-
             return result;
         }
         #endregion

@@ -13,9 +13,9 @@ namespace PhoneNumberManagement.DTO
         public string CompanyName { get; set; }
         public string DepartmentName { get; set; }
 
-        public static explicit operator ManagementDto(ManagementEntity v)
-        {
-            throw new NotImplementedException();
-        }
+        //public static explicit operator ManagementDto(ManagementEntity v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
