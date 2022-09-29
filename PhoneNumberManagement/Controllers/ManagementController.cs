@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using PhoneNumberManagement.DTO;
+using PhoneNumberManagement.DXO.Management;
 using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Services;
 using System.Net;
@@ -27,6 +28,7 @@ namespace PhoneNumberManagement.Controllers
         private DetailPersonService detailPersonService;
         private GetCompanyService getCompanyService;
         private GetDepartmentService getDepartmentService;
+        private ManagementDtoAndViewmodel managementDtoAndViewmodel;
         #endregion
 
         #region コンストラクター
@@ -40,6 +42,7 @@ namespace PhoneNumberManagement.Controllers
             this.detailPersonService = new DetailPersonService();
             this.getCompanyService = new GetCompanyService();
             this.getDepartmentService = new GetDepartmentService();
+            this.managementDtoAndViewmodel = new ManagementDtoAndViewmodel();
         }
         #endregion
 
@@ -50,32 +53,10 @@ namespace PhoneNumberManagement.Controllers
             //var response = this.Request.CreateResponse(HttpStatusCode.OK);
             //Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:4200");
             var service = managementService.FirstService();
-            var result = setManagementViewModel(service);
+            var result = managementDtoAndViewmodel.IEnumerableExchangeDtoToViewmodel(service);
+            //var result = setManagementViewModel(service);
             //return new HttpResponse(result);
             return Ok(result);
-        }
-
-
-        public IEnumerable<ManagementViewModel> setManagementViewModel(IEnumerable<ManagementDto> DTO)
-        {
-            var viewModels = new List<ManagementViewModel>();
-            foreach (var items in DTO)
-            {
-                var gomi = new ManagementViewModel();
-
-                gomi.StaffNumber = items.StaffNumber;
-                gomi.StaffName = items.StaffName;
-                gomi.CompanyID = items.CompanyID;
-                gomi.DepartmentID = items.DepartmentID;
-                gomi.ExtensionNumber = items.ExtensionNumber;
-                gomi.Memo = items.Memo;
-                gomi.DepartmentName = items.DepartmentName;
-                gomi.CompanyName = items.CompanyName;
-
-                viewModels.Add(gomi);
-            }
-
-            return viewModels;
         }
         #endregion
 
@@ -173,7 +154,7 @@ namespace PhoneNumberManagement.Controllers
         {
             var Dto = setSearchDto(search);
             var service = searchPersonService.searchService(Dto);
-            var result = setManagementViewModel(service);
+            var result = managementDtoAndViewmodel.IEnumerableExchangeDtoToViewmodel(service);
             return result;
         }
 
