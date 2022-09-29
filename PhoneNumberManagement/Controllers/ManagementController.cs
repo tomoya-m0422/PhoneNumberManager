@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DXO.Management;
+using PhoneNumberManagement.DXOs.Company;
+using PhoneNumberManagement.DXOs.Department;
+using PhoneNumberManagement.DXOs.Person;
 using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Services;
 using System.Net;
@@ -29,6 +32,9 @@ namespace PhoneNumberManagement.Controllers
         private GetCompanyService getCompanyService;
         private GetDepartmentService getDepartmentService;
         private ManagementDtoAndViewmodel managementDtoAndViewmodel;
+        private CompanyDtoAndViewmodel companyDtoAndViewmodel;
+        private DepartmentDtoAndViewmodel departmentDtoAndViewmodel;
+        private PersonDtoAndViewmodel personDtoAndViewmodel;
         #endregion
 
         #region コンストラクター
@@ -43,6 +49,9 @@ namespace PhoneNumberManagement.Controllers
             this.getCompanyService = new GetCompanyService();
             this.getDepartmentService = new GetDepartmentService();
             this.managementDtoAndViewmodel = new ManagementDtoAndViewmodel();
+            this.companyDtoAndViewmodel = new CompanyDtoAndViewmodel();
+            this.departmentDtoAndViewmodel = new DepartmentDtoAndViewmodel();
+            this.personDtoAndViewmodel = new PersonDtoAndViewmodel();   
         }
         #endregion
 
@@ -65,35 +74,18 @@ namespace PhoneNumberManagement.Controllers
         public ActionResult<IEnumerable<CompanyViewModel>> CompanyGet()
         {
             var service = getCompanyService.Service();
-            var result = setCompanyViewModel(service);
+            var result = companyDtoAndViewmodel.IEnumerableExchangeDtoToViewmodel(service);
             return Ok(result);
         }
 
-        public IEnumerable<CompanyViewModel> setCompanyViewModel(IEnumerable<CompanyDto> dtos)
-        {
-            var viewModel = new List<CompanyViewModel>();
-            
-            foreach(var items in dtos)
-            {
-                var company = new CompanyViewModel();
-
-                company.CompanyID = items.CompanyID;
-                company.CompanyName = items.CompanyName;
-
-                viewModel.Add(company);
-            }
-            return viewModel;
-        }
-
         #endregion
-
 
         #region 部署一覧取得 HttpGet("Department")
         [HttpGet("Department")]
         public ActionResult<IEnumerable<DepartmentViewModel>> DepartmentGet()
         {
             var service = getDepartmentService.Service();
-            var result = setDepartmentViewModel(service);
+            var result = departmentDtoAndViewmodel.IEnumerableExchangeDtoToViewmodel(service);
             return Ok(result);
         }
 
@@ -114,27 +106,13 @@ namespace PhoneNumberManagement.Controllers
         }
         #endregion
         
-
         #region　新規作成 HttpPost("register")
         [HttpPost("register")]
        public ActionResult registPerson(PersonViewModel viewModel)
        {
-            var result = setDtoRegistPerson(viewModel);
+            var result = personDtoAndViewmodel.ExchangeViewmodelToDto(viewModel);
             personRegisterService.registService(result);
             return Ok();
-       }
-
-       public PersonDto setDtoRegistPerson(PersonViewModel viewModel)
-       {
-            var registerMan = new PersonDto();
-           
-            registerMan.StaffName = viewModel.StaffName;
-            registerMan.CompanyID = viewModel.CompanyID;
-            registerMan.DepartmentID = viewModel.DepartmentID;
-            registerMan.ExtensionNumber = viewModel.ExtensionNumber;
-            registerMan.Memo = viewModel.Memo;  
-
-            return registerMan;
        }
         #endregion
 

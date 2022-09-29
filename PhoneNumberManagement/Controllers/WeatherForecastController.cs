@@ -38,22 +38,22 @@ namespace PhoneNumberManagement.Controllers
         //#endregion
 
         [HttpGet]
-        public IEnumerable<ManagementViewModel> Get()
+        public IEnumerable<CompanyViewModel> Get()
         //public string Get()
         {
             var service = managementService.FirstService();
-            var result = setManagementViewModel(service);
+            var result = setCompanyViewModel(service);
             return service;
 
         }
 
 
-        public IEnumerable<ManagementViewModel> setManagementViewModel(IEnumerable<ManagementDto> DTO)
+        public IEnumerable<CompanyViewModel> setCompanyViewModel(IEnumerable<ManagementDto> DTO)
         {
-            var viewModels = new List<ManagementViewModel>();
+            var viewModels = new List<CompanyViewModel>();
             foreach (var items in DTO)
             {
-                var gomi = new ManagementViewModel();
+                var gomi = new CompanyViewModel();
 
                 gomi.StaffNumber = items.StaffNumber;
                 gomi.StaffName = items.StaffName;

@@ -1,6 +1,6 @@
 ﻿using PhoneNumberManagement.DAO;
 using PhoneNumberManagement.DTO;
-using PhoneNumberManagement.Entity;
+using PhoneNumberManagement.DXOs.Department;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
@@ -8,34 +8,19 @@ namespace PhoneNumberManagement.Logics
     public class GetDepartmentLogic
     {
         private DepartmentDao DepartmentDao;
+        private DepartmentEntityAndDto departmentEntityAndDto;
 
         public GetDepartmentLogic()
         {
             this.DepartmentDao = new DepartmentDao();
+            this.departmentEntityAndDto = new DepartmentEntityAndDto();
         }
 
-        public List<DepartmentDto> Logic (SqlConnection connection)
+        public IEnumerable<DepartmentDto> Logic (SqlConnection connection)
         {
             var dao = DepartmentDao.Dao(connection);
-            var result = setDepartmentDto(dao);
+            var result = departmentEntityAndDto.IEnumerableExchangeEntityToDto(dao);
             return result;
-        }
-
-        public List<DepartmentDto> setDepartmentDto(IEnumerable<DepartmentEntity> entities)
-        {
-            var dtos = new List<DepartmentDto>();
-
-            foreach(var item in entities)
-            {
-                var baka = new DepartmentDto();
-
-                baka.DepartmentID = item.DepartmentID;
-                baka.DepartmentName = item.DepartmentName;
-
-                dtos.Add(baka);
-            }
-
-            return dtos;
         }
     }
 }

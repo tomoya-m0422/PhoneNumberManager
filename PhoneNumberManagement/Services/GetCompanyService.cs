@@ -19,7 +19,7 @@ namespace PhoneNumberManagement.Services
         #endregion
 
 
-        public List<CompanyDto> Service()
+        public IEnumerable<CompanyDto> Service()
         {
             var dto = new List<CompanyDto>();
             var connectionString = "Data Source=NCP-TM04945-1;Initial Catalog=ManagementDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
@@ -31,7 +31,7 @@ namespace PhoneNumberManagement.Services
                     //DB接続開始
                     connection.Open();
                     //SQLの実行
-                    dto = getCompanyLogic.Logic(connection);
+                    dto = (List<CompanyDto>)getCompanyLogic.Logic(connection);
                 }
                 catch (Exception exception)
                 {
