@@ -25,9 +25,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>ViewModelデータ</returns>
         public PersonViewModel ExchangeDtoToViewmodel(PersonDto personDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<PersonDto,PersonViewModel>(personDtos); 
         }
 
@@ -38,9 +36,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>DTOデータ</returns>
         public PersonDto ExchangeViewmodelToDto(PersonViewModel personViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<PersonViewModel,PersonDto>(personViewModels);
         }
         #endregion
@@ -53,9 +49,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>ViewModel型のデータを返す</returns>
         public List<PersonViewModel> ListExchangeDtoToViewmodel(List<PersonDto> personDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<List<PersonDto>, List<PersonViewModel>>(personDtos);
         }
 
@@ -66,9 +60,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>DTO型のデータを返す</returns>
         public List<PersonDto> ListExchangeViewmodelToDto(List<PersonViewModel> personViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<List<PersonViewModel>, List<PersonDto>>(personViewModels);
         }
         #endregion
@@ -81,9 +73,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns></returns>
         public IEnumerable<PersonViewModel> IEnumerableExchangeDtoToViewmodel(IEnumerable<PersonDto> personDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<IEnumerable<PersonDto>, IEnumerable<PersonViewModel>>(personDtos);
         }
 
@@ -94,9 +84,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns></returns>
         public IEnumerable<PersonDto> IEnumerableExchangeViewmodelToDto(IEnumerable<PersonViewModel> personViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<IEnumerable<PersonViewModel>, IEnumerable<PersonDto>>(personViewModels);
         }
         #endregion

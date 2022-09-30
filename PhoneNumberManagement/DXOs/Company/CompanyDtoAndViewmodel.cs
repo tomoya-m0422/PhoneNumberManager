@@ -16,6 +16,20 @@ namespace PhoneNumberManagement.DXOs.Company
             cfg.CreateMap<CompanyViewModel, CompanyDto>();
         });
 
+        #region List,IEnumerable型以外のViewModelとDTOの変換
+        public CompanyViewModel ExchangeDtoToViewmodel(CompanyDto companyDtos)
+        {
+            var mapper = dtoToViewmodelOverride.CreateMapper();
+            return mapper.Map<CompanyDto,CompanyViewModel>(companyDtos);
+        }
+
+        public CompanyDto ExchangeViewmodelToDto(CompanyViewModel companyViewModels)
+        {
+            var mapper = viewmodelToDtoOverride.CreateMapper();
+            return mapper.Map<CompanyViewModel,CompanyDto>(companyViewModels);
+        }
+        #endregion
+
         #region List型のDtoとViewModelの入れ替え処理
         /// <summary>
         /// DTOデータをViewModelに入れ替える 
@@ -24,9 +38,7 @@ namespace PhoneNumberManagement.DXOs.Company
         /// <returns>ViewModel型のデータを返す</returns>
         public List<CompanyViewModel> ListExchangeDtoToViewmodel(List<CompanyDto> companyDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<List<CompanyDto>, List<CompanyViewModel>>(companyDtos);
         }
 
@@ -37,9 +49,7 @@ namespace PhoneNumberManagement.DXOs.Company
         /// <returns>DTO型のデータを返す</returns>
         public List<CompanyDto> ListExchangeViewmodelToDto(List<CompanyViewModel> companyViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<List<CompanyViewModel>, List<CompanyDto>>(companyViewModels);
         }
         #endregion
@@ -52,9 +62,7 @@ namespace PhoneNumberManagement.DXOs.Company
         /// <returns></returns>
         public IEnumerable<CompanyViewModel> IEnumerableExchangeDtoToViewmodel(IEnumerable<CompanyDto> companyDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<IEnumerable<CompanyDto>, IEnumerable<CompanyViewModel>>(companyDtos);
         }
 
@@ -65,9 +73,7 @@ namespace PhoneNumberManagement.DXOs.Company
         /// <returns></returns>
         public IEnumerable<CompanyDto> IEnumerableExchangeViewmodelToDto(IEnumerable<CompanyViewModel> companyViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<IEnumerable<CompanyViewModel>, IEnumerable<CompanyDto>>(companyViewModels);
         }
         #endregion

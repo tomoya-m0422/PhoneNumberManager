@@ -16,7 +16,19 @@ namespace PhoneNumberManagement.DXOs.Department
             cfg.CreateMap<DepartmentViewModel, DepartmentDto>();
         });
 
-        
+        #region List,IEnumerable型以外のViewModelとDtoの詰め替え処理
+        public DepartmentViewModel ExchangeDtoToViewmodel (DepartmentDto departmentDtos)
+        {
+            var mapper = dtoToViewmodelOverride.CreateMapper();
+            return mapper.Map<DepartmentDto,DepartmentViewModel>(departmentDtos);
+        }
+
+        public DepartmentDto ExchangeViewmodelToDto(DepartmentViewModel departmentViewModel)
+        {
+            var mapper = viewmodelToDtoOverride.CreateMapper();
+            return mapper.Map<DepartmentViewModel, DepartmentDto>(departmentViewModel);
+        }
+        #endregion
 
         #region List型のDtoとViewModelの入れ替え処理
         /// <summary>
@@ -26,9 +38,7 @@ namespace PhoneNumberManagement.DXOs.Department
         /// <returns>ViewModel型のデータを返す</returns>
         public List<DepartmentViewModel> ListExchangeDtoToViewmodel(List<DepartmentDto> departmentDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<List<DepartmentDto>, List<DepartmentViewModel>>(departmentDtos);
         }
 
@@ -39,9 +49,7 @@ namespace PhoneNumberManagement.DXOs.Department
         /// <returns>DTO型のデータを返す</returns>
         public List<DepartmentDto> ListExchangeViewmodelToDto(List<DepartmentViewModel> departmentViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<List<DepartmentViewModel>, List<DepartmentDto>>(departmentViewModels);
         }
         #endregion
@@ -54,9 +62,7 @@ namespace PhoneNumberManagement.DXOs.Department
         /// <returns></returns>
         public IEnumerable<DepartmentViewModel> IEnumerableExchangeDtoToViewmodel(IEnumerable<DepartmentDto> departmentDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<IEnumerable<DepartmentDto>, IEnumerable<DepartmentViewModel>>(departmentDtos);
         }
 
@@ -67,9 +73,7 @@ namespace PhoneNumberManagement.DXOs.Department
         /// <returns></returns>
         public IEnumerable<DepartmentDto> IEnumerableExchangeViewmodelToDto(IEnumerable<DepartmentViewModel> departmentViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<IEnumerable<DepartmentViewModel>, IEnumerable<DepartmentDto>>(departmentViewModels);
         }
         #endregion

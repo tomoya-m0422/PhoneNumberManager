@@ -16,6 +16,20 @@ namespace PhoneNumberManagement.DXOs.Department
             cfg.CreateMap<DepartmentDto, DepartmentEntity>();
         });
 
+        #region List,IEnumerable型以外のEntityとDtoの入れ替え
+        public DepartmentDto ExchangeEntityToDto(DepartmentEntity departmentEntitys)
+        {
+            var mapper = EntityToDtoOverride.CreateMapper();
+            return mapper.Map<DepartmentEntity, DepartmentDto>(departmentEntitys);
+        }
+
+        public DepartmentEntity ExchangeDtoToEntity(DepartmentDto departmentDtos)
+        {
+            var mapper = DtoToEntityOverride.CreateMapper();
+            return mapper.Map<DepartmentDto, DepartmentEntity>(departmentDtos);
+        }
+        #endregion
+
         #region List型のEntityとDtoの入れ替え処理
         /// <summary>
         /// EntityデータをDtoに入れ替える 

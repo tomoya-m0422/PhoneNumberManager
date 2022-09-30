@@ -25,9 +25,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>DTOデータ</returns>
         public PersonDto ExchangeEntityToDto(PersonEntity personEntities)
         {
-            var config = EntityToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = EntityToDtoOverride.CreateMapper();
             return mapper.Map<PersonEntity, PersonDto>(personEntities);
         }
 
@@ -38,9 +36,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>Entityデータ</returns>
         public PersonEntity ExchangeDtoToEntity(PersonDto personDtos)
         {
-            var config = DtoToEntityOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = DtoToEntityOverride.CreateMapper();
             return mapper.Map<PersonDto, PersonEntity>(personDtos);
         }
         #endregion
@@ -53,9 +49,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>Dto型のデータを返す</returns>
         public List<PersonDto> ListExchangeDtoToEntity(List<PersonEntity> personEntities)
         {
-            var config = DtoToEntityOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = DtoToEntityOverride.CreateMapper();
             return mapper.Map<List<PersonEntity>, List<PersonDto>>(personEntities);
         }
 
@@ -66,9 +60,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>Entity型のデータを返す</returns>
         public List<PersonEntity> ListExchangeEntityToDto(List<PersonDto> personDtos)
         {
-            var config = EntityToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = EntityToDtoOverride.CreateMapper();
             return mapper.Map<List<PersonDto>, List<PersonEntity>>(personDtos);
         }
         #endregion
@@ -81,9 +73,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>Dto型のデータを返す</returns>
         public IEnumerable<PersonDto> IEnumerableExchangeEntityToDto(IEnumerable<PersonEntity> personEntities)
         {
-            var config = EntityToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = EntityToDtoOverride.CreateMapper();
             return mapper.Map<IEnumerable<PersonEntity>, IEnumerable<PersonDto>>(personEntities);
         }
 
@@ -94,9 +84,7 @@ namespace PhoneNumberManagement.DXOs.Person
         /// <returns>Entity型のデータを返す</returns>
         public IEnumerable<PersonEntity> IEnumerableExchangeDtoToEntity(IEnumerable<PersonDto> personDtos)
         {
-            var config = DtoToEntityOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = DtoToEntityOverride.CreateMapper();
             return mapper.Map<IEnumerable<PersonDto>, IEnumerable<PersonEntity>>(personDtos);
         }
         #endregion

@@ -28,9 +28,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns>DTO型のデータを返す</returns>
         public ManagementDto ExchangeEntityToDto(ManagementEntity managementEntities)
         {
-            var config = entityToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = entityToDtoOverride.CreateMapper();
             return mapper.Map<ManagementEntity, ManagementDto>(managementEntities);
         }
 
@@ -42,9 +40,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns>Entity型のデータを返す</returns>
         public ManagementEntity ExchangeDtoToEntity(ManagementDto managementDtos)
         {
-            var config = dtoToEntityOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToEntityOverride.CreateMapper();
             return mapper.Map<ManagementDto, ManagementEntity>(managementDtos);
         }
         #endregion
@@ -57,9 +53,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns>DTO型のデータを返す</returns>
         public List<ManagementDto> ListExchangeEntityToDto(List<ManagementEntity> managementEntities)
         {
-            var config = entityToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = entityToDtoOverride.CreateMapper();
             return mapper.Map<List<ManagementEntity>, List<ManagementDto>>(managementEntities);
         }
 
@@ -71,9 +65,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns>Entity型のデータを返す</returns>
         public List<ManagementEntity> ListExchangeDtoToEntity(List<ManagementDto> managementDtos)
         {
-            var config = dtoToEntityOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToEntityOverride.CreateMapper();
             return mapper.Map<List<ManagementDto>, List<ManagementEntity>>(managementDtos);
         }
         #endregion
@@ -86,9 +78,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns></returns>
         public IEnumerable<ManagementDto> IEnumerableExchangeEntityToDto(IEnumerable<ManagementEntity> managementEntities)
         {
-            var config = entityToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = entityToDtoOverride.CreateMapper();
             return mapper.Map<IEnumerable<ManagementEntity>, IEnumerable<ManagementDto>>(managementEntities);
         }
 
@@ -99,9 +89,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns></returns>
         public IEnumerable<ManagementEntity> IEnumerableExchangeDtoToEntity(IEnumerable<ManagementDto> managementDtos)
         {
-            var config = dtoToEntityOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToEntityOverride.CreateMapper();
             return mapper.Map<IEnumerable<ManagementDto>, IEnumerable<ManagementEntity>>(managementDtos);
         }
 

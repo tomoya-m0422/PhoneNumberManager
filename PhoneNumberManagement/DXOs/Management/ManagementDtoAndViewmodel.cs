@@ -16,6 +16,8 @@ namespace PhoneNumberManagement.DXO.Management
             cfg.CreateMap<ManagementViewModel, ManagementDto>();
         });
 
+
+
         #region List,IEnumerable以外ののDTOとViewModelの入れ替え作業
         /// <summary>
         /// DTOデータをViewModelに入れ替える 
@@ -24,9 +26,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns></returns>
         public ManagementViewModel ExchangeDtoToViewmodel(ManagementDto managementDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<ManagementDto, ManagementViewModel>(managementDtos);
         }
 
@@ -37,9 +37,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns></returns>
         public ManagementDto ExchangeViewmodelToDto(ManagementViewModel managementViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<ManagementViewModel, ManagementDto>(managementViewModels);
         }
         #endregion
@@ -52,9 +50,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns>ViewModel型のデータを返す</returns>
         public List<ManagementViewModel> ListExchangeDtoToViewmodel (List<ManagementDto> managementDtos)
         {
-            var config =  dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<List<ManagementDto>, List<ManagementViewModel>>(managementDtos);
         }
 
@@ -65,9 +61,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns>DTO型のデータを返す</returns>
         public List<ManagementDto> ListExchangeViewmodelToDto (List<ManagementViewModel> managementViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<List<ManagementViewModel>, List<ManagementDto>>(managementViewModels);
         }
         #endregion
@@ -80,9 +74,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns></returns>
         public IEnumerable<ManagementViewModel> IEnumerableExchangeDtoToViewmodel(IEnumerable<ManagementDto> managementDtos)
         {
-            var config = dtoToViewmodelOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = dtoToViewmodelOverride.CreateMapper();
             return mapper.Map<IEnumerable<ManagementDto>, IEnumerable<ManagementViewModel>>(managementDtos);
         }
 
@@ -93,9 +85,7 @@ namespace PhoneNumberManagement.DXO.Management
         /// <returns></returns>
         public IEnumerable<ManagementDto> IEnumerableExchangeViewmodelToDto (IEnumerable<ManagementViewModel> managementViewModels)
         {
-            var config = viewmodelToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = viewmodelToDtoOverride.CreateMapper();
             return mapper.Map<IEnumerable<ManagementViewModel>, IEnumerable<ManagementDto>>(managementViewModels);
         }
         #endregion

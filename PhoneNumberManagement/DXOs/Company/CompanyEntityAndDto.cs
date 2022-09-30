@@ -16,6 +16,20 @@ namespace PhoneNumberManagement.DXOs.Company
             cfg.CreateMap<CompanyDto, CompanyEntity>();
         });
 
+        #region List,IEnumerable型以外のEntityとDTOの入れ替え
+        public CompanyDto ExchangeEntityToDto(CompanyEntity companyEntitys)
+        {
+            var mapper = EntityToDtoOverride.CreateMapper();
+            return mapper.Map<CompanyEntity,CompanyDto>(companyEntitys);
+        }
+
+        public CompanyEntity ExchangeDtoToEntity(CompanyDto companyDtos)
+        {
+            var mapper = DtoToEntityOverride.CreateMapper();
+            return mapper.Map<CompanyDto, CompanyEntity>(companyDtos);
+        }
+        #endregion
+
         #region List型のEntityとDtoの入れ替え処理
         /// <summary>
         /// EntityデータをDtoに入れ替える 
@@ -24,9 +38,7 @@ namespace PhoneNumberManagement.DXOs.Company
         /// <returns>Dto型のデータを返す</returns>
         public List<CompanyDto> ListExchangeDtoToEntity(List<CompanyEntity> companyEntities)
         {
-            var config = EntityToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = EntityToDtoOverride.CreateMapper();
             return mapper.Map<List<CompanyEntity>, List<CompanyDto>>(companyEntities);
         }
 
@@ -37,9 +49,7 @@ namespace PhoneNumberManagement.DXOs.Company
         /// <returns>Entity型のデータを返す</returns>
         public List<CompanyEntity> ListExchangeEntityToDto(List<CompanyDto> companyDtos)
         {
-            var config = DtoToEntityOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = DtoToEntityOverride.CreateMapper();
             return mapper.Map<List<CompanyDto>, List<CompanyEntity>>(companyDtos);
         }
         #endregion
@@ -52,9 +62,7 @@ namespace PhoneNumberManagement.DXOs.Company
         /// <returns>Dto型のデータを返す</returns>
         public IEnumerable<CompanyDto> IEnumerableExchangeEntityToDto(IEnumerable<CompanyEntity> companyEntities)
         {
-            var config = EntityToDtoOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = EntityToDtoOverride.CreateMapper();
             return mapper.Map<IEnumerable<CompanyEntity>, IEnumerable<CompanyDto>>(companyEntities);
         }
 
@@ -65,9 +73,7 @@ namespace PhoneNumberManagement.DXOs.Company
         /// <returns>Entity型のデータを返す</returns>
         public IEnumerable<CompanyEntity> IEnumerableExchangeDtoToEntity(IEnumerable<CompanyDto> companyDtos)
         {
-            var config = DtoToEntityOverride;
-
-            var mapper = config.CreateMapper();
+            var mapper = DtoToEntityOverride.CreateMapper();
             return mapper.Map<IEnumerable<CompanyDto>, IEnumerable<CompanyEntity>>(companyDtos);
         }
         #endregion
