@@ -6,6 +6,8 @@ using PhoneNumberManagement.DXO.Management;
 using PhoneNumberManagement.DXOs.Company;
 using PhoneNumberManagement.DXOs.Department;
 using PhoneNumberManagement.DXOs.Person;
+using PhoneNumberManagement.DXOs.Search;
+using PhoneNumberManagement.DXOs.StaffNumber;
 using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Services;
 using System.Net;
@@ -35,6 +37,8 @@ namespace PhoneNumberManagement.Controllers
         private CompanyDtoAndViewmodel companyDtoAndViewmodel;
         private DepartmentDtoAndViewmodel departmentDtoAndViewmodel;
         private PersonDtoAndViewmodel personDtoAndViewmodel;
+        private SearchDtoAndViewmodel searchDtoAndViewmodel;
+        private StaffNumberDtoAndViewmodel staffNumberDtoAndViewmodel;
         #endregion
 
         #region コンストラクター
@@ -52,6 +56,9 @@ namespace PhoneNumberManagement.Controllers
             this.companyDtoAndViewmodel = new CompanyDtoAndViewmodel();
             this.departmentDtoAndViewmodel = new DepartmentDtoAndViewmodel();
             this.personDtoAndViewmodel = new PersonDtoAndViewmodel();   
+            this.searchDtoAndViewmodel = new SearchDtoAndViewmodel();
+            this.staffNumberDtoAndViewmodel = new StaffNumberDtoAndViewmodel();
+
         }
         #endregion
 
@@ -117,11 +124,12 @@ namespace PhoneNumberManagement.Controllers
         #endregion
 
         #region  削除 HttpGet ("Delete/{staffNumber}")
-        [HttpGet("Delete/{staffNumber}")]
-        public ActionResult DeletePerson(int staffNumber)
+        [HttpPost("Delete")]
+        public void DeletePerson(StaffNumberViewModel staffNumber)
         {
-            deletePersonService.deleteService(staffNumber);
-            return Ok();
+            var result = staffNumberDtoAndViewmodel.ExchangeViewmodelToDto(staffNumber);
+            deletePersonService.deleteService(result);
+            //return Ok();
         }
 
         #endregion
@@ -130,52 +138,20 @@ namespace PhoneNumberManagement.Controllers
         [HttpPost("Search")]
         public IEnumerable<ManagementViewModel> SearchController(SearchViewModel search)
         {
-            var Dto = setSearchDto(search);
+            var Dto = searchDtoAndViewmodel.ExchangeViewmodelToDto(search);
             var service = searchPersonService.searchService(Dto);
             var result = managementDtoAndViewmodel.IEnumerableExchangeDtoToViewmodel(service);
             return result;
         }
-
-        public SearchDto setSearchDto (SearchViewModel search)
-        {
-            var searchMan = new SearchDto();
-            searchMan.StaffName = search.StaffName;
-            searchMan.DepartmentName = search.DepartmentName;
-            searchMan.Memo = search.Memo;
-
-            return searchMan;
-        }
         #endregion
 
-        #region 詳細 HttpGet("Fetail/{id}")
-        [HttpGet("Detail/{id}")]
-        public ManagementViewModel DetailController(int id)
+        #region 詳細 HttpPost("Detail")
+        [HttpPost("Detail")]
+        public ManagementViewModel DetailController(StaffNumberViewModel id)
         {
-            var Dto = setDetailDto(id);
+            var Dto = staffNumberDtoAndViewmodel.ExchangeViewmodelToDto(id);
             var service = detailPersonService.detailService(Dto);
-            var result = setDownManagementViewModel(service);
-            return result;
-        }
-
-        public DetailDto setDetailDto(int detail)
-        {
-            var detailMan = new DetailDto();
-            detailMan.StaffNumber = detail;
-            return detailMan;
-        }
-
-        public ManagementViewModel setDownManagementViewModel(ManagementDto service)
-        {
-            var result = new ManagementViewModel();
-            result.StaffNumber = service.StaffNumber;
-            result.StaffName = service.StaffName;
-            result.CompanyID = service.CompanyID;
-            result.CompanyName = service.CompanyName;
-            result.DepartmentID = service.DepartmentID;
-            result.DepartmentName = service.DepartmentName;
-            result.Memo = service.Memo;
-            result.ExtensionNumber = service.ExtensionNumber;
-
+            var result = managementDtoAndViewmodel.ExchangeDtoToViewmodel(service);
             return result;
         }
         #endregion
@@ -184,23 +160,8 @@ namespace PhoneNumberManagement.Controllers
         [HttpPost("edit")]
         public void editController(PersonViewModel personViewModel)
         {
-            var result = setDtoEditPerson(personViewModel);
+            var result = personDtoAndViewmodel.ExchangeViewmodelToDto(personViewModel);
             editPersonService.editService(result);
-
-        }
-
-        public PersonDto setDtoEditPerson (PersonViewModel personViewModel)
-        {
-            var editMan = new PersonDto();
-
-            editMan.StaffNumber = personViewModel.StaffNumber;
-            editMan.StaffName = personViewModel.StaffName;
-            editMan.CompanyID = personViewModel.CompanyID;
-            editMan.DepartmentID = personViewModel.DepartmentID;
-            editMan.ExtensionNumber = personViewModel.ExtensionNumber;
-            editMan.Memo = personViewModel.Memo;
-
-            return editMan;
         }
         #endregion
 

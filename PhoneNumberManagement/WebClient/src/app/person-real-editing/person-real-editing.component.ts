@@ -27,16 +27,23 @@ export class PersonRealEditingComponent implements OnInit {
        id = params.get("id");
     })
 
+    var editingInfo = {
+      "StaffNumber":id
+    }
+
+    var editingJson = JSON.stringify(editingInfo);
+
     let realEditPerson: RealEditingPerson[] = [];
     //idによってURLが変わるため先に定義
-    var url = "https://localhost:7059/Management/Detail/"+id;
     $(function(){
       $.ajax(
         {
           async: false,
-          url: url,
-          type: "GET",
-          dataType: "json"
+          url: "https://localhost:7059/Management/Detail",
+          type: "POST",
+          data: editingJson,
+          //dataType: "json"
+          contentType:'application/json'
         }
       )
       .done(function(data){

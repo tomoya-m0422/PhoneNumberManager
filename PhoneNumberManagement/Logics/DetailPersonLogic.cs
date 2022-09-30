@@ -1,5 +1,7 @@
 ﻿using PhoneNumberManagement.DAO;
 using PhoneNumberManagement.DTO;
+using PhoneNumberManagement.DXO.Management;
+using PhoneNumberManagement.DXOs.StaffNumber;
 using PhoneNumberManagement.Entity;
 using System.Data.SqlClient;
 
@@ -9,42 +11,25 @@ namespace PhoneNumberManagement.Logics
     {
         #region メンバー変数
         private ManagementDao managementDao;
+        private ManagementEntityAndDto managementEntityAndDto;
+        private StaffNumberEntityAndDto staffNumberEntityAndDto;
         #endregion
 
         #region コンストラクタ
         public DetailPersonLogic()
         {
             this.managementDao = new ManagementDao();
+            this.managementEntityAndDto = new ManagementEntityAndDto();
+            this.staffNumberEntityAndDto = new StaffNumberEntityAndDto();
         }
+
         #endregion
 
-        public ManagementDto detailLogic(SqlConnection connection,DetailDto staffNumber)
+        public ManagementDto detailLogic(SqlConnection connection,StaffNumberDto staffNumber)
         {
-            var upEntity = setEntityDetailLogic(staffNumber);
+            var upEntity = staffNumberEntityAndDto.ExchangeDtoToEntity(staffNumber);
             var downEntity = managementDao.detailDao(connection,upEntity);
-            var result = setDtoDetailLogic(downEntity);
-            return result;
-        }
-
-        public DetailPersonEntity setEntityDetailLogic(DetailDto number)
-        {
-            var entity = new DetailPersonEntity();
-            entity.StaffNumber = number.StaffNumber;
-            return entity;
-        }
-
-        public ManagementDto setDtoDetailLogic(ManagementEntity entity)
-        {
-            var result = new ManagementDto();
-            result.StaffNumber = entity.StaffNumber;
-            result.StaffName = entity.StaffName;
-            result.CompanyID = entity.CompanyID;
-            result.CompanyName = entity.CompanyName;
-            result.DepartmentID = entity.DepartmentID;
-            result.DepartmentName = entity.DepartmentName;
-            result.Memo = entity.Memo;
-            result.ExtensionNumber = entity.ExtensionNumber;
-
+            var result = managementEntityAndDto.ExchangeEntityToDto(downEntity);
             return result;
         }
     }

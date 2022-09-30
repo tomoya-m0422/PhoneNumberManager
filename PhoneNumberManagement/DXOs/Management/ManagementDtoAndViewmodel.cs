@@ -16,6 +16,34 @@ namespace PhoneNumberManagement.DXO.Management
             cfg.CreateMap<ManagementViewModel, ManagementDto>();
         });
 
+        #region List,IEnumerable以外ののDTOとViewModelの入れ替え作業
+        /// <summary>
+        /// DTOデータをViewModelに入れ替える 
+        /// </summary>
+        /// <param name="managementDtos">Serviceから渡されたDtoデータ</param>
+        /// <returns></returns>
+        public ManagementViewModel ExchangeDtoToViewmodel(ManagementDto managementDtos)
+        {
+            var config = dtoToViewmodelOverride;
+
+            var mapper = config.CreateMapper();
+            return mapper.Map<ManagementDto, ManagementViewModel>(managementDtos);
+        }
+
+        /// <summary>
+        /// ViewModelデータをDTOを入れ替える
+        /// </summary>
+        /// <param name="managementViewModels">FromtEndから渡されたViewModelデータ</param>
+        /// <returns></returns>
+        public ManagementDto ExchangeViewmodelToDto(ManagementViewModel managementViewModels)
+        {
+            var config = viewmodelToDtoOverride;
+
+            var mapper = config.CreateMapper();
+            return mapper.Map<ManagementViewModel, ManagementDto>(managementViewModels);
+        }
+        #endregion
+
         #region List型のDtoとViewModelの入れ替え処理
         /// <summary>
         /// DTOデータをViewModelに入れ替える 

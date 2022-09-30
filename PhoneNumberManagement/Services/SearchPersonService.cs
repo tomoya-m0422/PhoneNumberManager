@@ -32,7 +32,7 @@ namespace PhoneNumberManagement.Services
                     //DB接続開始
                     connection.Open();
                     //SQLの実行
-                    dto = searchPersonLogic.searchLogic(connection,search);
+                    dto = (List<ManagementDto>)searchPersonLogic.searchLogic(connection,search);
                 }
                 catch (Exception exception)
                 {

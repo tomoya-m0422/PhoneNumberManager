@@ -27,18 +27,26 @@ export class PersonEditComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe((params:ParamMap)=>{
        id = params.get("id");
     })
-    let editPerson: EditPerson[] = [];
+    console.log(id);
 
-    //受け取るidによってURLが変わるため先に定義しておく
-    var url = "https://localhost:7059/Management/Detail/"+id;
+    var DetailInfo={
+      "staffNumber":id
+    }
+
+    var DetailJson = JSON.stringify(DetailInfo)
+    console.log(DetailJson)
+
+    let editPerson: EditPerson[] = [];
 
     $(function(){
       $.ajax(
         {
           async: false,
-          url: url,
-          type: "GET",
-          dataType: "json"
+          url: "https://localhost:7059/Management/Detail",
+          type: "POST",
+          data: DetailJson,
+          dataType: "json",
+          contentType:'application/json'
         }
       )
       .done(function(data){
@@ -66,16 +74,21 @@ export class PersonEditComponent implements OnInit {
   DeleteClick(id: number):void{
     //alert(id);
     var deleteConfirm = confirm("削除してもよろしいでしょうか");
-    var aurl = "https://localhost:7059/Management/Delete/"+id;
+    var DeleteInfo ={
+      "staffNumber": id
+    }
+    var DeleteJson = JSON.stringify(DeleteInfo);
+    //var aurl = "https://localhost:7059/Management/Delete/"+id;
     const that = this
     if(deleteConfirm == true){
       $(function(){
         $.ajax({
           async: false,
-          url: aurl,
-          type: "GET",
-          //dataType:"json"
-          //contentType: "application/json"
+          url: "https://localhost:7059/Management/Delete",
+          type: "POST",
+          data: DeleteJson,
+          //dataType:"json",
+          contentType: "application/json"
         })
         .done(function(){
           alert("削除しました")

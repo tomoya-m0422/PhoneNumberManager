@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.departmentViewModel = this.departmentViewModel;
    }
 
-   //削除ボタンの処理
+   //詳細ボタンの処理
    DetailClick(staffNumber:number): void{
     //alert("DetailClickできた!!")
     this.router.navigate(['/person-edit'],{queryParams:{id:staffNumber} })

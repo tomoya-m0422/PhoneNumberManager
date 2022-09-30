@@ -1,5 +1,7 @@
 ﻿using PhoneNumberManagement.DAO;
 using PhoneNumberManagement.DTO;
+using PhoneNumberManagement.DXO.Management;
+using PhoneNumberManagement.DXOs.Search;
 using PhoneNumberManagement.Entity;
 using PhoneNumberManagement.Models;
 using System.Data.SqlClient;
@@ -10,53 +12,25 @@ namespace PhoneNumberManagement.Logics
     {
         #region メンバー変数
         private ManagementDao managementDao;
+        private SearchEntityAndDto searchEntityAndDto;
+        private ManagementEntityAndDto managementEntityAndDto;
         #endregion
 
         #region コンストラクタ
         public SearchPersonLogic()
         {
             this.managementDao = new ManagementDao();
+            this.searchEntityAndDto = new SearchEntityAndDto();
+            this.managementEntityAndDto = new ManagementEntityAndDto();
         }
         #endregion
 
-        public List<ManagementDto> searchLogic (SqlConnection connection , SearchDto search)
+        public IEnumerable<ManagementDto> searchLogic (SqlConnection connection , SearchDto search)
         {
-            var entity = setEntitySearchLogic(search);
+            var entity = searchEntityAndDto.ExchangeDtoToEntity(search);
             var entities = managementDao.searchDao(connection, entity);
-            var result = setDtoSearchLogic(entities);
+            var result = managementEntityAndDto.IEnumerableExchangeEntityToDto(entities);
             return result;
-        }
-
-        public SearchEntity setEntitySearchLogic (SearchDto search)
-        {
-            var searchMan = new SearchEntity();
-
-            searchMan.StaffName = search.StaffName;
-            searchMan.DepartmentName = search.DepartmentName;
-            searchMan.Memo = search.Memo;
-
-            return searchMan;
-        }
-
-        public List<ManagementDto> setDtoSearchLogic(IEnumerable<ManagementEntity>entities)
-        {
-            var dtos = new List<ManagementDto>();
-            foreach(var entity in entities)
-            {
-                var dto = new ManagementDto();
-
-                dto.StaffNumber = entity.StaffNumber;
-                dto.StaffName = entity.StaffName;
-                dto.CompanyID = entity.CompanyID;
-                dto.DepartmentID = entity.DepartmentID;
-                dto.ExtensionNumber = entity.ExtensionNumber;
-                dto.Memo = entity.Memo;
-                dto.DepartmentName = entity.DepartmentName;
-                dto.CompanyName = entity.CompanyName;
-
-                dtos.Add(dto);
-            }
-            return dtos;
         }
 
     }

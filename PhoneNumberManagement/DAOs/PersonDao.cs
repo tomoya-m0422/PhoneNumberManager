@@ -31,9 +31,9 @@ namespace PhoneNumberManagement.DAO
         #endregion
 
         #region 削除
-        public void deleteDao(SqlConnection connection ,int staffNumber)
+        public void deleteDao(SqlConnection connection ,StaffNumberEntity staffNumber)
         {
-            var query = "DELETE FROM Person WHERE StaffNumber =" + staffNumber+";";
+            var query = "DELETE FROM Person WHERE StaffNumber =" + staffNumber.StaffNumber+";";
             connection.Query<PersonEntity>(query);
         }
         #endregion

@@ -1,4 +1,5 @@
-﻿using PhoneNumberManagement.Logics;
+﻿using PhoneNumberManagement.DTO;
+using PhoneNumberManagement.Logics;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
@@ -17,7 +18,7 @@ namespace PhoneNumberManagement.Services
         #endregion
 
 
-        public void deleteService(int staffNumber)
+        public void deleteService(StaffNumberDto staffNumber)
         {
             var connectionString = "Data Source=NCP-TM04945-1;Initial Catalog=ManagementDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             using (var connection = new SqlConnection(connectionString))

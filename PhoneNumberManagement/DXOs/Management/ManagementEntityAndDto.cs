@@ -20,7 +20,34 @@ namespace PhoneNumberManagement.DXO.Management
             cfg.CreateMap<ManagementDto, ManagementEntity>();
         });
 
-        
+        #region List,IEnumerable型以外のEntityとDTOの入れ替え処理
+        /// <summary>
+        /// EntityデータをDTOに詰め替える(List)
+        /// </summary>
+        /// <param name="managementEntities">DAOでもらったEntityのことを指している</param>
+        /// <returns>DTO型のデータを返す</returns>
+        public ManagementDto ExchangeEntityToDto(ManagementEntity managementEntities)
+        {
+            var config = entityToDtoOverride;
+
+            var mapper = config.CreateMapper();
+            return mapper.Map<ManagementEntity, ManagementDto>(managementEntities);
+        }
+
+        /// <summary>
+        /// DTOデータをEntityに詰め替える(List)
+        /// </summary>
+        /// <param name="managementDtos">LogicからもらったDtoのことを指している</param>
+        /// <param name="overrideNull">true を指定すると NULL 値を上書きします。デフォルトでは false となります。</param>
+        /// <returns>Entity型のデータを返す</returns>
+        public ManagementEntity ExchangeDtoToEntity(ManagementDto managementDtos)
+        {
+            var config = dtoToEntityOverride;
+
+            var mapper = config.CreateMapper();
+            return mapper.Map<ManagementDto, ManagementEntity>(managementDtos);
+        }
+        #endregion
 
         #region List型のEntityとDTOの入れ替え処理
         /// <summary>

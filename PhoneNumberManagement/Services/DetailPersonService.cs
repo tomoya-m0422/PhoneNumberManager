@@ -17,7 +17,7 @@ namespace PhoneNumberManagement.Services
         }
         #endregion
 
-        public ManagementDto detailService(DetailDto staffNumber)
+        public ManagementDto detailService(StaffNumberDto staffNumber)
         {
             var dto = new ManagementDto();
             var connectionString = "Data Source=NCP-TM04945-1;Initial Catalog=ManagementDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";

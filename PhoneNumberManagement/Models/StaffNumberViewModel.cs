@@ -1,6 +1,6 @@
 ﻿namespace PhoneNumberManagement.Models
 {
-    public class DetailViewModel
+    public class StaffNumberViewModel
     {
         public int StaffNumber { get; set; }
     }

@@ -58,7 +58,7 @@ namespace PhoneNumberManagement.DAO
         #endregion
 
         #region 詳細
-        public ManagementEntity detailDao(SqlConnection connection, DetailPersonEntity upEntity)
+        public ManagementEntity detailDao(SqlConnection connection, StaffNumberEntity upEntity)
         {
             var query = "SELECT * FROM Person AS p,Company AS c,Department AS d " +
                                 "WHERE p.StaffNumber = @Number AND p.CompanyID = c.CompanyID AND p.DepartmentID = d.DepartmentID";
