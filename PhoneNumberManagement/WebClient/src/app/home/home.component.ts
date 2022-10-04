@@ -5,6 +5,10 @@ import {ManagementPerson} from './home.viewmodel';
 import { isArrayLiteralExpression } from 'typescript';
 import { type } from 'jquery';
 import { DepartmentViewModel } from './department.viewmodel';
+import {AfterViewInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +21,9 @@ export class HomeComponent implements OnInit {
   managementPerson: ManagementPerson[] = [];
   departmentViewModel: DepartmentViewModel[] = [];
   depertment: any;
+  selectedValue: string | undefined;
+  displayedColumns: string[] = ['名前', '会社名', '部署名', '内線番号',"メモ"];
+
 
   constructor(private router: Router) {
     this.managementPerson = this.managementPerson;

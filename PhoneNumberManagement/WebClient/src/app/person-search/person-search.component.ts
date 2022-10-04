@@ -17,6 +17,8 @@ export class PersonSearchComponent implements OnInit {
   departmentViewModel: DepartmentViewModel[] = [];
   PersonName : ManagementPerson[] = [];
   depertment: any;
+  selectedValue: string | undefined;
+  displayedColumns: string[] = ['名前', '会社名', '部署名', '内線番号',"メモ"];
 
   constructor(private router: Router,private activatedRoute: ActivatedRoute) {
     this.managementPerson = this.managementPerson;

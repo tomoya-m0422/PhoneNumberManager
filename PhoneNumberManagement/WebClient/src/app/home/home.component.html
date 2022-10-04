@@ -16,22 +16,52 @@
 
   <body class="mat-typography">
     <!--A-1.検索欄-->
-    <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
+      <mat-form-field  appearance="fill">
+        <mat-label>Name</mat-label>
+        <mat-select [(ngModel)]="selectedValue">
+          <mat-option *ngFor="let person of managementPerson" [value]="person.StaffName">
+            {{person.StaffName}}
+          </mat-option>
+        </mat-select>
+        <input id="Name" value="{{selectedValue}}" hidden >
+      </mat-form-field>
+
+    <!-- <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
     <datalist id="NameList">
       <div *ngFor="let person of managementPerson">
         <option value="{{person.StaffName}}"></option>
       </div>
-    </datalist>
+    </datalist> -->
 
-    <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"/>
+    <mat-form-field  appearance="fill">
+      <mat-label>Department</mat-label>
+      <mat-select [(ngModel)]="selectedValue">
+        <mat-option *ngFor="let Department of departmentViewModel" [value]="Department.DepartmentName">
+          {{Department.DepartmentName}}
+        </mat-option>
+      </mat-select>
+      <input id="Department" value="{{selectedValue}}" hidden >
+    </mat-form-field>
+
+    <!-- <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"/>
     <datalist id="DepartmentList">
       <div *ngFor="let department of departmentViewModel">
         <option value="{{department.DepartmentName}}"></option>
       </div>
-    </datalist>
+    </datalist> -->
 
-    <input id="Memo" type="text" size="25" placeholder="メモで検索"/>
-    <button (click)="SearchClick()">検索</button>
+    <!-- <input id="Memo" type="text" size="25" placeholder="メモで検索"/> -->
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Memo</mat-label>
+      <input id="Memo" matInput placeholder="Ex. Pizza">
+    </mat-form-field>
+
+    <button (click)="SearchClick()">
+      <span class="material-icons">
+        search
+      </span>
+    </button>
 
     <!--A-2.一覧表示-->
     <table border="5" id="table">
@@ -52,8 +82,10 @@
         <td><button id="button" (click)="EditClick(person.StaffNumber)">編集</button></td>
       </tr>
     </table>
+
     <!--↓は無視しておｋ--->
     <button (click)="TestButton()">テストボタン</button>
+
 
   </body>
 </html>

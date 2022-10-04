@@ -1,8 +1,23 @@
-<h1>電話番号管理システム</h1>
-<nav>
-  <a routerLink="/home">ホーム</a>
-  /
-  <a routerLink="/person-create">新規登録</a>
-  <!-- <mat-slider min="1" max="100" step="1" value="50"></mat-slider> -->
-</nav>
+<header>
+
+  <button id="MainButton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/home">
+      <mat-icon>home</mat-icon>
+      <span>ホーム</span>
+    </button>
+    <button mat-menu-item routerLink="/person-create">
+      <mat-icon>new_label</mat-icon>
+      <span>新規登録</span>
+    </button>
+  </mat-menu>
+
+  <h1 id="Title">
+    電話番号管理システム
+  </h1>
+
+</header>
+
 <router-outlet></router-outlet>

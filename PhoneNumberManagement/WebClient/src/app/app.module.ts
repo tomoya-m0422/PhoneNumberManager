@@ -12,7 +12,8 @@ import { PersonCreateComponent } from './person-create/person-create.component';
 import { HomeComponent } from './home/home.component';
 import { PersonRealEditingComponent } from './person-real-editing/person-real-editing.component';
 import { PersonSearchComponent } from './person-search/person-search.component';
-import { MatSliderModule } from '@angular/material/slider';
+import { MaterialModule } from './material/material.module';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { MatSliderModule } from '@angular/material/slider';
     PersonCreateComponent,
     HomeComponent,
     PersonRealEditingComponent,
-    PersonSearchComponent
+    PersonSearchComponent,
   ],
   imports: [
     //現在のモジュールで私用する他のモジュール宣言
@@ -30,7 +31,8 @@ import { MatSliderModule } from '@angular/material/slider';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [],
   //依存性注入
