@@ -1,20 +1,22 @@
 ﻿using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Logics;
+using PhoneNumberManagement.Logics.Interface;
 using PhoneNumberManagement.Models;
+using PhoneNumberManagement.Services.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
 {
-    public class EditPersonService
+    public class EditPersonService : IEditPersonService
     {
         #region メンバー変数
-        private EditPersonLogic editPersonLogic;
+        private IEditPersonLogic editPersonLogic;
         #endregion
 
         #region コンストラクタ
-        public EditPersonService()
+        public EditPersonService(IEditPersonLogic editPersonLogic)
         {
-            editPersonLogic = new EditPersonLogic();
+            editPersonLogic =  this.editPersonLogic;
         }
         #endregion
 

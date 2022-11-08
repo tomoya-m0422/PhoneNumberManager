@@ -1,12 +1,10 @@
-﻿using PhoneNumberManagement.Logics;
+﻿using PhoneNumberManagement.DAO;
 using PhoneNumberManagement.DTO;
-using System.Runtime.CompilerServices;
-using PhoneNumberManagement.Models;
-using System.Data.SqlTypes;
+using PhoneNumberManagement.DXO.Management;
+using PhoneNumberManagement.Logics;
+using PhoneNumberManagement.Logics.Interface;
+using PhoneNumberManagement.Services.Interface;
 using System.Data.SqlClient;
-using static Dapper.SqlMapper;
-using PhoneNumberManagement.DAO;
-using System;
 
 namespace PhoneNumberManagement.Services
 
@@ -48,13 +46,14 @@ namespace PhoneNumberManagement.Services
         #region 本番用
 
         #region メンバー変数
-        private ManagementLogic managementLogic;
+        private IManagementLogic managementLogic;
         #endregion
 
         #region コンストラクタ
-        public ManagementService()
+        public ManagementService(IManagementLogic managementLogic)
         {
-            this.managementLogic = new ManagementLogic();
+            //this.managementLogic = new ManagementLogic(new ManagementDao(),new ManagementEntityAndDtoDxo());
+            this.managementLogic = managementLogic;
         }
         #endregion
 
@@ -70,8 +69,8 @@ namespace PhoneNumberManagement.Services
                 {
                     //DB接続開始
                     connection.Open();
-                    //SQLの実行
-                    dto = (List<ManagementDto>)managementLogic.FirstLogic(connection);
+                    //SQLの実行(接続するための情報をLogicに渡す)
+                    dto = managementLogic.FirstLogic(connection);
                 }
                 catch (Exception exception)
                 {

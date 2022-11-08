@@ -1,5 +1,7 @@
 ﻿using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Logics;
+using PhoneNumberManagement.Logics.Interface;
+using PhoneNumberManagement.Services.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
@@ -8,13 +10,13 @@ namespace PhoneNumberManagement.Services
     {
 
         #region メンバー変数
-        private RegistPersonLogic personRegistLogic;
+        private IRegistPersonLogic personRegistLogic;
         #endregion
 
         #region コンストラクター
-        public RedistPersonService()
+        public RedistPersonService(IRegistPersonLogic personRegistLogic)
         {
-            this.personRegistLogic = new RegistPersonLogic();
+            personRegistLogic = this.personRegistLogic;
         }
         #endregion
 

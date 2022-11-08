@@ -15,53 +15,46 @@
   </head>
 
   <body class="mat-typography">
+    <div id = "SearchForm">
     <!--A-1.検索欄-->
+    <span class="material-icons">
+      search
+    </span>
+
+      <!--Name部分の入力欄-->
       <mat-form-field  appearance="fill">
         <mat-label>Name</mat-label>
-        <mat-select [(ngModel)]="selectedValue">
-          <mat-option *ngFor="let person of managementPerson" [value]="person.StaffName">
+        <mat-select [(ngModel)]="selectedNameValue">
+          <mat-option *ngFor="let person of PersonName" [value]="person.StaffName">
             {{person.StaffName}}
           </mat-option>
         </mat-select>
-        <input id="Name" value="{{selectedValue}}" hidden >
+        <input id="Name" value="{{selectedNameValue}}" hidden >
       </mat-form-field>
 
-    <!-- <input list="NameList" id="Name" name="Name" placeholder="名前を入力または選択" autocomplete="off"/>
-    <datalist id="NameList">
-      <div *ngFor="let person of managementPerson">
-        <option value="{{person.StaffName}}"></option>
-      </div>
-    </datalist> -->
-
+    <!--Department部分の入力欄-->
     <mat-form-field  appearance="fill">
       <mat-label>Department</mat-label>
-      <mat-select [(ngModel)]="selectedValue">
+      <mat-select [(ngModel)]="selectedDepartmentValue">
         <mat-option *ngFor="let Department of departmentViewModel" [value]="Department.DepartmentName">
           {{Department.DepartmentName}}
         </mat-option>
       </mat-select>
-      <input id="Department" value="{{selectedValue}}" hidden >
+      <input id="Department" value="{{selectedDepartmentValue}}" hidden >
     </mat-form-field>
 
-    <!-- <input list="DepartmentList" id="Department" name="Department" placeholder="部署を入力または選択" autocomplete="off"/>
-    <datalist id="DepartmentList">
-      <div *ngFor="let department of departmentViewModel">
-        <option value="{{department.DepartmentName}}"></option>
-      </div>
-    </datalist> -->
-
-    <!-- <input id="Memo" type="text" size="25" placeholder="メモで検索"/> -->
-
+    <!--Memo部分の入力欄-->
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Memo</mat-label>
       <input id="Memo" matInput placeholder="Ex. Pizza">
     </mat-form-field>
 
+    <!--検索ボタン-->
     <button (click)="SearchClick()">
-      <span class="material-icons">
-        search
-      </span>
+      検索
     </button>
+
+  </div>
 
     <!--A-2.一覧表示-->
     <table border="5" id="table">
@@ -71,6 +64,8 @@
         <th>部署</th>
         <th>内線番号</th>
         <th>メモ</th>
+        <th>詳細</th>
+        <th>編集</th>
       </tr>
       <tr *ngFor="let person of managementPerson">
         <td>{{person.StaffName}}</td>
@@ -78,14 +73,28 @@
         <td>{{person.DepartmentName}}</td>
         <td>{{person.ExtensionNumber}}</td>
         <td>{{person.Memo}}</td>
-        <td><button id="button" (click)="DetailClick(person.StaffNumber)">詳細</button></td>
-        <td><button id="button" (click)="EditClick(person.StaffNumber)">編集</button></td>
+
+        <!--詳細ボタン-->
+        <td class="DetailEditButton">
+          <button class="materialButton" (click)="DetailClick(person.StaffNumber)">
+            <span class="material-icons">
+              visibility
+            </span>
+          </button>
+        </td>
+
+        <!--編集ボタン-->
+        <td class="DetailEditButton">
+          <button class="materialButton" (click)="EditClick(person.StaffNumber)">
+            <span class="material-icons">
+              edit
+            </span>
+          </button>
+        </td>
       </tr>
     </table>
 
-    <!--↓は無視しておｋ--->
-    <button (click)="TestButton()">テストボタン</button>
-
-
+    <!-- ↓は無視しておｋ-
+    <button (click)="TestButton()">テストボタン</button> -->
   </body>
 </html>

@@ -1,20 +1,24 @@
-﻿using PhoneNumberManagement.DTO;
+﻿using PhoneNumberManagement.DAO;
+using PhoneNumberManagement.DTO;
+using PhoneNumberManagement.DXOs.Company;
 using PhoneNumberManagement.Logics;
+using PhoneNumberManagement.Logics.Interface;
+using PhoneNumberManagement.Services.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
 {
-    public class GetCompanyService
+    public class GetCompanyService : IGetCompanyService
     {
 
         #region メンバー変数
-        private GetCompanyLogic getCompanyLogic;
+        private IGetCompanyLogic getCompanyLogic;
         #endregion
 
         #region コンストラクタ
-        public GetCompanyService()
+        public GetCompanyService( IGetCompanyLogic getCompanyLogic)
         {
-            this.getCompanyLogic = new GetCompanyLogic();
+            this.getCompanyLogic = new GetCompanyLogic(new CompanyDao(),new CompanyEntityAndDtoDxo());
         }
         #endregion
 

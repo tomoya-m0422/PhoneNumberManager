@@ -4,19 +4,21 @@ using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Entity;
 using PhoneNumberManagement.Logics;
 using System.Data.SqlClient;
+using PhoneNumberManagement.Services.Interface;
+using PhoneNumberManagement.Logics.Interface;
 
 namespace PhoneNumberManagement.Services
 {
-    public class SearchPersonService
+    public class SearchPersonService :ISearchPersonService
     {
         #region メンバー変数
-        private SearchPersonLogic searchPersonLogic;
+        private ISearchPersonLogic searchPersonLogic;
         #endregion
 
         #region コンストラクタ
-        public SearchPersonService()
+        public SearchPersonService(ISearchPersonLogic searchPersonLogic)
         {
-            searchPersonLogic = new SearchPersonLogic();
+            searchPersonLogic = this.searchPersonLogic;
         }
         #endregion
 

@@ -1,20 +1,23 @@
 ﻿using PhoneNumberManagement.DAO;
+using PhoneNumberManagement.DAOs.Interface;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DXOs.Company;
+using PhoneNumberManagement.DXOs.Company.Interface;
 using PhoneNumberManagement.Entity;
+using PhoneNumberManagement.Logics.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
 {
-    public class GetCompanyLogic
+    public class GetCompanyLogic : IGetCompanyLogic
     {
-        private CompanyDao companyDao;
-        private CompanyEntityAndDto companyEntityAndDto;
+        private ICompanyDao companyDao;
+        private ICompanyEntityAndDtoDxo companyEntityAndDto;
 
-        public GetCompanyLogic()
+        public GetCompanyLogic(ICompanyDao companyDao, ICompanyEntityAndDtoDxo companyEntityAndDto)
         {
-            this.companyDao = new CompanyDao();
-            this.companyEntityAndDto = new CompanyEntityAndDto();
+            companyDao = this.companyDao;
+            companyEntityAndDto = this.companyEntityAndDto;
         }
 
         public IEnumerable<CompanyDto> Logic(SqlConnection connection)

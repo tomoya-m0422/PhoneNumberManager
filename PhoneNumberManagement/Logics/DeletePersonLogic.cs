@@ -1,20 +1,27 @@
 ﻿using PhoneNumberManagement.DAO;
+using PhoneNumberManagement.DAOs.Interface;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DXOs.StaffNumber;
+using PhoneNumberManagement.DXOs.StaffNumber.Interface;
+using PhoneNumberManagement.Logics.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
 {
-    public class DeletePersonLogic
+    public class DeletePersonLogic : IDeletePersonLogic
     {
-        private PersonDao personDao;
-        private StaffNumberEntityAndDto staffNumberEntityAndDto;
+        #region メンバー変数
+        private IPersonDao personDao;
+        private IStaffNumberEntityAndDtoDxo staffNumberEntityAndDto;
+        #endregion
 
-        public DeletePersonLogic()
+        #region コンストラクタ
+        public DeletePersonLogic(IPersonDao personDao, IStaffNumberEntityAndDtoDxo staffNumberEntityAndDto)
         {
-            this.personDao = new PersonDao();
-            this.staffNumberEntityAndDto = new StaffNumberEntityAndDto();
+            personDao = this.personDao;
+            staffNumberEntityAndDto = this.staffNumberEntityAndDto;
         }
+        #endregion
 
         public void deleteLogic(SqlConnection connection, StaffNumberDto staffNumber)
         {

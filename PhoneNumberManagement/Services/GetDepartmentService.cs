@@ -1,17 +1,25 @@
-﻿using PhoneNumberManagement.DTO;
+﻿using PhoneNumberManagement.DAO;
+using PhoneNumberManagement.DTO;
+using PhoneNumberManagement.DXOs.Department;
 using PhoneNumberManagement.Logics;
+using PhoneNumberManagement.Logics.Interface;
+using PhoneNumberManagement.Services.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
 {
-    public class GetDepartmentService
+    public class GetDepartmentService :IGetDepartmentService
     {
-        private GetDepartmentLogic getDepartmentLogic;
+        #region メンバー変数
+        private IGetDepartmentLogic getDepartmentLogic;
+        #endregion
 
-        public GetDepartmentService()
+        #region コンストラクタ
+        public GetDepartmentService( IGetDepartmentLogic getDepartmentLogic)
         {
-            this.getDepartmentLogic = new GetDepartmentLogic();
+            this.getDepartmentLogic = new GetDepartmentLogic(new DepartmentDao(),new DepartmentEntityAndDtoDxo());
         }
+        #endregion
 
         public List<DepartmentDto> Service()
         {

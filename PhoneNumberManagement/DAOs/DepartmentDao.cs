@@ -1,10 +1,11 @@
 ﻿using Dapper;
+using PhoneNumberManagement.DAOs.Interface;
 using PhoneNumberManagement.Entity;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.DAO
 {
-    public class DepartmentDao
+    public class DepartmentDao : IDepartmentDao
     {
         public IEnumerable<DepartmentEntity> Dao (SqlConnection connection)
         {

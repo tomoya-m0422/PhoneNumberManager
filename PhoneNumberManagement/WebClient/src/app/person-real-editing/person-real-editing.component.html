@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <h1>編集画面</h1>
+  <h1 id="Title">編集画面</h1>
 <table border="5" id="edittable">
   <tr>
     <th>ID</th>
@@ -49,8 +49,17 @@
   </tr>
 </table>
 
-<button (click)="updatingButton()">更新する</button>
-<button (click)="backButton()">キャンセル</button>
+<div class="Buttons">
+  <button (click)="updatingButton()">
+    更新する
+  </button>
+
+  <button (click)="backButton()">
+    キャンセル
+  </button>
+</div>
+
+
 </body>
 
 

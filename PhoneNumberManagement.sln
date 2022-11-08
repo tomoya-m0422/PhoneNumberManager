@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.3.32811.315
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneNumberManagement", "PhoneNumberManagement\PhoneNumberManagement.csproj", "{A42DAA14-2133-40DF-859E-87649CF86D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneNumberManagement", "PhoneNumberManagement\PhoneNumberManagement.csproj", "{A42DAA14-2133-40DF-859E-87649CF86D89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneNumberManagementTest", "PhoneNumberManagementTest2022\PhoneNumberManagementTest.csproj", "{BF941F3A-2899-478A-AE7B-5434A0CA4E24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A42DAA14-2133-40DF-859E-87649CF86D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A42DAA14-2133-40DF-859E-87649CF86D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A42DAA14-2133-40DF-859E-87649CF86D89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF941F3A-2899-478A-AE7B-5434A0CA4E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF941F3A-2899-478A-AE7B-5434A0CA4E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF941F3A-2899-478A-AE7B-5434A0CA4E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF941F3A-2899-478A-AE7B-5434A0CA4E24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

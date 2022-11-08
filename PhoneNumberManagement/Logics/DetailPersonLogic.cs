@@ -1,26 +1,30 @@
 ﻿using PhoneNumberManagement.DAO;
+using PhoneNumberManagement.DAOs.Interface;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DXO.Management;
+using PhoneNumberManagement.DXOs.Management.Interface;
 using PhoneNumberManagement.DXOs.StaffNumber;
+using PhoneNumberManagement.DXOs.StaffNumber.Interface;
 using PhoneNumberManagement.Entity;
+using PhoneNumberManagement.Logics.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
 {
-    public class DetailPersonLogic
+    public class DetailPersonLogic : IDetailPersonLogic
     {
         #region メンバー変数
-        private ManagementDao managementDao;
-        private ManagementEntityAndDto managementEntityAndDto;
-        private StaffNumberEntityAndDto staffNumberEntityAndDto;
+        private IManagementDao managementDao;
+        private IManagementEntityAndDtoDxo managementEntityAndDto;
+        private IStaffNumberEntityAndDtoDxo staffNumberEntityAndDto;
         #endregion
 
         #region コンストラクタ
-        public DetailPersonLogic()
+        public DetailPersonLogic(IManagementDao managementDao, IManagementEntityAndDtoDxo managementEntityAndDto, IStaffNumberEntityAndDtoDxo staffNumberEntityAndDto)
         {
-            this.managementDao = new ManagementDao();
-            this.managementEntityAndDto = new ManagementEntityAndDto();
-            this.staffNumberEntityAndDto = new StaffNumberEntityAndDto();
+            managementDao = this.managementDao;
+            managementEntityAndDto = this.managementEntityAndDto;
+            staffNumberEntityAndDto = this.staffNumberEntityAndDto;
         }
 
         #endregion

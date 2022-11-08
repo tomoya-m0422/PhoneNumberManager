@@ -1,24 +1,27 @@
 ﻿using PhoneNumberManagement.DAO;
+using PhoneNumberManagement.DAOs.Interface;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DXOs.Person;
+using PhoneNumberManagement.DXOs.Person.Interface;
 using PhoneNumberManagement.Entity;
+using PhoneNumberManagement.Logics.Interface;
 using PhoneNumberManagement.Models;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
 {
-    public class EditPersonLogic
+    public class EditPersonLogic : IEditPersonLogic
     {
         #region メンバー変数
-        private PersonDao personDao;
-        private PersonEntityAndDto personEntityAndDto;
+        private IPersonDao personDao;
+        private IPersonEntityAndDtoDxo personEntityAndDto;
         #endregion
 
         #region コンストラクタ
-        public EditPersonLogic()
+        public EditPersonLogic(IPersonDao personDao, IPersonEntityAndDtoDxo personEntityAndDto)
         {
-            this.personDao = new PersonDao();
-            this.personEntityAndDto = new PersonEntityAndDto();
+            personDao = this.personDao;
+            personEntityAndDto = this.personEntityAndDto;
         }
         #endregion
 

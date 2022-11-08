@@ -7,44 +7,63 @@
   <title>新規登録画面</title>
 </head>
 <body>
-  <h1>新規登録画面</h1>
-  <form id="form">
-    <table>
-      <tr>
-        <th>社員名</th>
-        <input id="staffName" type="text" autocomplete="off">
-      </tr>
+  <h1 id="Title">新規登録画面</h1>
 
-      <!--C-1.会社欄-->
-      <tr>
-        <th>会社名</th>
-        <select name="CompanySelect" id="CompanySelect">
-          <option value="" selected>選択してください</option>
-        </select>
-      </tr>
+  <div id="Form">
+
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Name</mat-label>
+          <input id="Name" matInput placeholder="Ex. 田中 太郎" autocomplete="off">
+        </mat-form-field>
+
+        <br>
+
+        <!--C-1.会社欄-->
+        <mat-form-field  appearance="fill">
+          <mat-label>Company</mat-label>
+          <mat-select [(ngModel)]="selectedCompanyID">
+            <mat-option *ngFor="let Company of companyViewModel" [value]="Company.CompanyID">
+              {{Company.CompanyID}}:{{Company.CompanyName}}
+            </mat-option>
+          </mat-select>
+          <input id="Company" value="{{selectedCompanyID}}" hidden >
+        </mat-form-field>
+
+        <br>
+
       <!--C-2.部署欄-->
-      <tr>
-        <th>部署名</th>
-        <select name="DepartmentSelect" id="DepartmentSelect">
-          <option value="" selected>選択してください</option>
-        </select>
-      </tr>
+        <mat-form-field  appearance="fill">
+          <mat-label>Department</mat-label>
+          <mat-select [(ngModel)]="selectedDepartmentID">
+            <mat-option *ngFor="let Department of departmentViewModel" [value]="Department.DepartmentID">
+              {{Department.DepartmentID}}:{{Department.DepartmentName}}
+            </mat-option>
+          </mat-select>
+          <input id="Department" value="{{selectedDepartmentID}}" hidden >
+        </mat-form-field>
 
-      <tr>
-        <th>内線番号</th>
-        <input id="ExectionNumber" type="text" autocomplete="off">
-      </tr>
+        <br>
 
-      <tr>
-        <th>メモ</th>
-        <input id="memo" type="text" autocomplete="off">
-      </tr>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>ExectionNumber</mat-label>
+          <input id="ExectionNumber" matInput placeholder="Ex. 4275" autocomplete="off">
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Memo</mat-label>
+          <input id="Memo" matInput placeholder="Ex. Pizza" autocomplete="off">
+        </mat-form-field>
+
+        <br>
 
       <!--C-3.登録ボタン-->
       <button id="redister" (click)="StaffRedister()">登録</button>
       <input type="reset" value="リセット">
-    </table>
-  </form>
+
+  </div>
 
 
 </body>

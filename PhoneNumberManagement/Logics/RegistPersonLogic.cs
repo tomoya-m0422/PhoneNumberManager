@@ -3,21 +3,24 @@ using PhoneNumberManagement.Entity;
 using System.Data.SqlClient;
 using PhoneNumberManagement.DAO;
 using PhoneNumberManagement.DXOs.Person;
+using PhoneNumberManagement.Logics.Interface;
+using PhoneNumberManagement.DAOs.Interface;
+using PhoneNumberManagement.DXOs.Person.Interface;
 
 namespace PhoneNumberManagement.Logics
 {
     public class RegistPersonLogic : IRegistPersonLogic
     {
         #region メンバー変数
-        private PersonDao personRegistDao;
-        private PersonEntityAndDto personEntityAndDto;
+        private IPersonDao personRegistDao;
+        private IPersonEntityAndDtoDxo personEntityAndDto;
         #endregion
 
         #region　コンストラクター
-        public RegistPersonLogic()
+        public RegistPersonLogic(IPersonDao personRegistDao, IPersonEntityAndDtoDxo personEntityAndDto)
         {
-            this.personRegistDao = new PersonDao();
-            this.personEntityAndDto = new PersonEntityAndDto();
+            personRegistDao = this.personRegistDao;
+            personEntityAndDto = this.personEntityAndDto;
         }
         #endregion
 

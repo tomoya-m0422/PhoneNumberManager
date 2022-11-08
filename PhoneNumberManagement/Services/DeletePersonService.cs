@@ -1,19 +1,21 @@
 ﻿using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Logics;
+using PhoneNumberManagement.Logics.Interface;
+using PhoneNumberManagement.Services.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
 {
-    public class DeletePersonService
+    public class DeletePersonService : IDeletePersonService
     {
         #region メンバー変数
-        private DeletePersonLogic deletePersonLogic;
+        private IDeletePersonLogic deletePersonLogic;
         #endregion
 
         #region コンストラクタ
-        public DeletePersonService()
+        public DeletePersonService(IDeletePersonLogic deletePersonLogic)
         {
-            deletePersonLogic = new DeletePersonLogic();
+            deletePersonLogic = this.deletePersonLogic;
         }
         #endregion
 

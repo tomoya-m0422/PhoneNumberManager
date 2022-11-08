@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
+﻿using Microsoft.AspNetCore.Mvc;
+using PhoneNumberManagement.DAO;
+using PhoneNumberManagement.DAOs.Interface;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DXO.Management;
 using PhoneNumberManagement.DXOs.Company;
+using PhoneNumberManagement.DXOs.Company.Interface;
 using PhoneNumberManagement.DXOs.Department;
+using PhoneNumberManagement.DXOs.Department.Interface;
+using PhoneNumberManagement.DXOs.Management.Interface;
 using PhoneNumberManagement.DXOs.Person;
+using PhoneNumberManagement.DXOs.Person.Interface;
 using PhoneNumberManagement.DXOs.Search;
+using PhoneNumberManagement.DXOs.Search.Interface;
 using PhoneNumberManagement.DXOs.StaffNumber;
+using PhoneNumberManagement.DXOs.StaffNumber.Interface;
+using PhoneNumberManagement.Logics;
 using PhoneNumberManagement.Models;
 using PhoneNumberManagement.Services;
-using System.Net;
-using System.Text;
-using System.Web;
-using static Dapper.SqlMapper;
+using PhoneNumberManagement.Services.Interface;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,39 +29,39 @@ namespace PhoneNumberManagement.Controllers
     {
 
         #region メンバー変数
-        private ManagementService managementService;
-        private RedistPersonService personRegisterService;
-        private DeletePersonService deletePersonService;
-        private SearchPersonService searchPersonService;
-        private EditPersonService editPersonService;
-        private DetailPersonService detailPersonService;
-        private GetCompanyService getCompanyService;
-        private GetDepartmentService getDepartmentService;
-        private ManagementDtoAndViewmodel managementDtoAndViewmodel;
-        private CompanyDtoAndViewmodel companyDtoAndViewmodel;
-        private DepartmentDtoAndViewmodel departmentDtoAndViewmodel;
-        private PersonDtoAndViewmodel personDtoAndViewmodel;
-        private SearchDtoAndViewmodel searchDtoAndViewmodel;
-        private StaffNumberDtoAndViewmodel staffNumberDtoAndViewmodel;
+        private IManagementService managementService;
+        private IRedistPersonService personRegisterService;
+        private IDeletePersonService deletePersonService;
+        private ISearchPersonService searchPersonService;
+        private IEditPersonService editPersonService;
+        private IDetailPersonService detailPersonService;
+        private IGetCompanyService getCompanyService;
+        private IGetDepartmentService getDepartmentService;
+        private IManagementDtoAndViewmodelDxo managementDtoAndViewmodel;
+        private ICompanyDtoAndViewmodelDxo companyDtoAndViewmodel;
+        private IDepartmentDtoAndViewmodelDxo departmentDtoAndViewmodel;
+        private IPersonDtoAndViewmodelDxo personDtoAndViewmodel;
+        private ISearchDtoAndViewmodelDxo searchDtoAndViewmodel;
+        private IStaffNumberDtoAndViewmodelDxo staffNumberDtoAndViewmodel;
         #endregion
 
         #region コンストラクター
         public ManagementController()
         {
-            this.managementService = new ManagementService();
-            this.personRegisterService = new RedistPersonService();
-            this.deletePersonService = new DeletePersonService();
-            this.searchPersonService = new SearchPersonService();
-            this.editPersonService = new EditPersonService();
-            this.detailPersonService = new DetailPersonService();
-            this.getCompanyService = new GetCompanyService();
-            this.getDepartmentService = new GetDepartmentService();
-            this.managementDtoAndViewmodel = new ManagementDtoAndViewmodel();
-            this.companyDtoAndViewmodel = new CompanyDtoAndViewmodel();
-            this.departmentDtoAndViewmodel = new DepartmentDtoAndViewmodel();
-            this.personDtoAndViewmodel = new PersonDtoAndViewmodel();   
-            this.searchDtoAndViewmodel = new SearchDtoAndViewmodel();
-            this.staffNumberDtoAndViewmodel = new StaffNumberDtoAndViewmodel();
+            this.managementService = new ManagementService(new ManagementLogic(new ManagementDao(),new ManagementEntityAndDtoDxo()));
+            this.personRegisterService = new RedistPersonService(new RegistPersonLogic(new PersonDao(),new PersonEntityAndDtoDxo()));
+            this.deletePersonService = new DeletePersonService(new DeletePersonLogic(new PersonDao(),new StaffNumberEntityAndDtoDxo()));
+            this.searchPersonService = new SearchPersonService(new SearchPersonLogic(new ManagementDao(),new SearchEntityAndDtoDxo(),new ManagementEntityAndDtoDxo()));
+            this.editPersonService = new EditPersonService(new EditPersonLogic(new PersonDao(),new PersonEntityAndDtoDxo()));
+            this.detailPersonService = new DetailPersonService(new DetailPersonLogic(new ManagementDao(),new ManagementEntityAndDtoDxo(),new StaffNumberEntityAndDtoDxo()));
+            this.getCompanyService = new GetCompanyService(new GetCompanyLogic(new CompanyDao(),new CompanyEntityAndDtoDxo()));
+            this.getDepartmentService = new GetDepartmentService(new GetDepartmentLogic(new DepartmentDao(),new DepartmentEntityAndDtoDxo()));
+            this.managementDtoAndViewmodel = new ManagementDtoAndViewmodelDxo();
+            this.companyDtoAndViewmodel = new CompanyDtoAndViewmodelDxo();
+            this.departmentDtoAndViewmodel = new DepartmentDtoAndViewmodelDxo();
+            this.personDtoAndViewmodel = new PersonDtoAndViewmodelDxo();
+            this.searchDtoAndViewmodel = new SearchDtoAndViewmodelDxo();
+            this.staffNumberDtoAndViewmodel = new StaffNumberDtoAndViewmodelDxo();
 
         }
         #endregion

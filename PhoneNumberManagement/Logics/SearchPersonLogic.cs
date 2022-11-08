@@ -1,27 +1,31 @@
 ﻿using PhoneNumberManagement.DAO;
+using PhoneNumberManagement.DAOs.Interface;
 using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.DXO.Management;
+using PhoneNumberManagement.DXOs.Management.Interface;
 using PhoneNumberManagement.DXOs.Search;
+using PhoneNumberManagement.DXOs.Search.Interface;
 using PhoneNumberManagement.Entity;
+using PhoneNumberManagement.Logics.Interface;
 using PhoneNumberManagement.Models;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Logics
 {
-    public class SearchPersonLogic
+    public class SearchPersonLogic : ISearchPersonLogic
     {
         #region メンバー変数
-        private ManagementDao managementDao;
-        private SearchEntityAndDto searchEntityAndDto;
-        private ManagementEntityAndDto managementEntityAndDto;
+        private IManagementDao managementDao;
+        private ISearchEntityAndDtoDxo searchEntityAndDto;
+        private IManagementEntityAndDtoDxo managementEntityAndDto;
         #endregion
 
         #region コンストラクタ
-        public SearchPersonLogic()
+        public SearchPersonLogic(IManagementDao managementDao, ISearchEntityAndDtoDxo searchEntityAndDto, IManagementEntityAndDtoDxo managementEntityAndDto)
         {
-            this.managementDao = new ManagementDao();
-            this.searchEntityAndDto = new SearchEntityAndDto();
-            this.managementEntityAndDto = new ManagementEntityAndDto();
+            managementDao = this.managementDao;
+            searchEntityAndDto = this.searchEntityAndDto;
+            managementEntityAndDto = this.managementEntityAndDto;
         }
         #endregion
 

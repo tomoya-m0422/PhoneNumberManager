@@ -2,17 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { Router } from '@angular/router';
 import { data, post } from 'jquery';
+import { CompanyViewModel } from './CompanyViewModel';
+import { DepartmentViewModel } from './DepartmentViewModel';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-person-create',
   templateUrl: './person-create.component.html',
   styleUrls: ['./person-create.component.scss']
 })
+
 export class PersonCreateComponent implements OnInit {
 
   constructor() { }
 
+  companyViewModel: CompanyViewModel[] = [];
+  departmentViewModel: DepartmentViewModel[] = [];
+  selectedCompanyID: string| undefined;
+  selectedDepartmentID: string| undefined;
+
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
   ngOnInit(): void {
+    let departmentViewModel: DepartmentViewModel[] = [];
+    let companyViewModel: CompanyViewModel[] = [];
     //初期処理
 
     //C-1.会社欄
@@ -23,42 +36,41 @@ export class PersonCreateComponent implements OnInit {
           url: "https://localhost:7059/Management/Company",
           type: "get",
           dataType: "json",
-        }
-      )
+        })
       .done(function(data){
         $.each(data,function(index,item){
-          $("#CompanySelect").append
-          ("<option class='CompanyID' id='"+item.companyID+"' value='"+item.companyID+"'>"+item.companyID+":"+item.companyName+"</option>")
+          companyViewModel.push({
+            CompanyID : item.companyID,
+            CompanyName : item.companyName
+          })
         })
-
       })
       .fail(function(){
         window.alert("ERROR:会社欄");
       })
     })
-
+    this.companyViewModel = companyViewModel;
     //C-2.部署欄
     $(function(){
-      $.ajax(
-        {
-          async: false,
-          url: "https://localhost:7059/Management/Department",
-          type: "get",
-          dataType: "json",
-        }
-      )
+      $.ajax({
+        async:false,
+        url:"https://localhost:7059/Management/Department",
+        type: "get",
+        dataType: "json"
+      })
       .done(function(data){
-        //会社と部署の欄の作成
         $.each(data,function(index,item){
-          $("#DepartmentSelect").append
-          ("<option class='DepartmentID' value='"+item.departmentID+"'>"+item.departmentID+":"+item.departmentName+"</option>")
+          departmentViewModel.push({
+            DepartmentID : item.departmentID,
+            DepartmentName: item.departmentName
+          })
         })
-
       })
       .fail(function(){
-        window.alert("ERROR:部署欄");
+        alert("EERROR:部署の検索欄")
       })
     })
+    this.departmentViewModel = departmentViewModel;
 
   }
 
@@ -67,11 +79,15 @@ export class PersonCreateComponent implements OnInit {
   StaffRedister() :void {
 
     //HTMLで記入したデータを変数に格納
-    var staffName = $("#staffName").val()
-    var companyID = $("#CompanySelect").val()
-    var departmentID = $("#DepartmentSelect").val()
+    var staffName = $("#Name").val()
+    var companyID = $("#Company").val()
+    var departmentID = $("#Department").val()
     var ExectionNumber = $("#ExectionNumber").val()
-    var Memo = $("#memo").val()
+    var Memo = $("#Memo").val()
+
+    //alert(staffName)
+    //alert(companyID)
+    //alert(departmentID)
 
     //上記の変数をリスト型に変換
     var registerInfo = {
@@ -94,15 +110,6 @@ export class PersonCreateComponent implements OnInit {
         data: registerJson,
         //dataType:"json",
         contentType: 'application/json',
-        // "crossDomain":true,
-        // "headers":{
-        //   "accept": "application/json",
-        //   "Access-Control-Allow-Origin":"*"
-        // }
-        //  xhrFields: {
-        //    withCredentials: true,
-        //    X-Requested-With : 'XMLHttpRequest'
-        // }
       })
 
       .done(function(){
@@ -116,7 +123,5 @@ export class PersonCreateComponent implements OnInit {
         // console.log(errorThrown);
       })
     })
-
   }
-
 }

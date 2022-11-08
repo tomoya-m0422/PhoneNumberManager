@@ -1,19 +1,21 @@
 ﻿using PhoneNumberManagement.DTO;
 using PhoneNumberManagement.Logics;
+using PhoneNumberManagement.Logics.Interface;
+using PhoneNumberManagement.Services.Interface;
 using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
 {
-    public class DetailPersonService
+    public class DetailPersonService : IDetailPersonService
     {
         #region　メンバー変数
-        private DetailPersonLogic detailPersonLogic;
+        private IDetailPersonLogic detailPersonLogic;
         #endregion
 
         #region コンストラクタ
-        public DetailPersonService()
+        public DetailPersonService(IDetailPersonLogic detailPersonLogic)
         {
-            this.detailPersonLogic = new DetailPersonLogic();
+            detailPersonLogic = this.detailPersonLogic;
         }
         #endregion
 
