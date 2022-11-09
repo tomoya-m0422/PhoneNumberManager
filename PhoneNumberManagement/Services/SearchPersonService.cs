@@ -18,7 +18,7 @@ namespace PhoneNumberManagement.Services
         #region コンストラクタ
         public SearchPersonService(ISearchPersonLogic searchPersonLogic)
         {
-            searchPersonLogic = this.searchPersonLogic;
+            this.searchPersonLogic = searchPersonLogic;
         }
         #endregion
 

@@ -16,7 +16,7 @@ namespace PhoneNumberManagement.Services
         #region コンストラクタ
         public EditPersonService(IEditPersonLogic editPersonLogic)
         {
-            editPersonLogic =  this.editPersonLogic;
+            this.editPersonLogic =  editPersonLogic;
         }
         #endregion
 

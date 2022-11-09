@@ -33,7 +33,7 @@ namespace PhoneNumberManagement.Services
                     //DB接続開始
                     connection.Open();
                     //SQLの実行
-                    dto = (List<DepartmentDto>)getDepartmentLogic.Logic(connection);
+                    dto = getDepartmentLogic.Logic(connection);
                 }
                 catch (Exception exception)
                 {

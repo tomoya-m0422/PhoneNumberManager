@@ -20,8 +20,8 @@ namespace PhoneNumberManagement.Logics
         #region コンストラクタ
         public EditPersonLogic(IPersonDao personDao, IPersonEntityAndDtoDxo personEntityAndDto)
         {
-            personDao = this.personDao;
-            personEntityAndDto = this.personEntityAndDto;
+            this.personDao = personDao;
+            this.personEntityAndDto = personEntityAndDto;
         }
         #endregion
 

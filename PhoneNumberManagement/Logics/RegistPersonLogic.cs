@@ -19,8 +19,8 @@ namespace PhoneNumberManagement.Logics
         #region　コンストラクター
         public RegistPersonLogic(IPersonDao personRegistDao, IPersonEntityAndDtoDxo personEntityAndDto)
         {
-            personRegistDao = this.personRegistDao;
-            personEntityAndDto = this.personEntityAndDto;
+            this.personRegistDao = personRegistDao;
+            this.personEntityAndDto = personEntityAndDto;
         }
         #endregion
 
@@ -30,18 +30,18 @@ namespace PhoneNumberManagement.Logics
             personRegistDao.registDao(connection,personEntities);
         }
 
-        public PersonEntity setRegistLogic(PersonDto personDtos)
-        {
-            var registerMan = new PersonEntity();
+        //public PersonEntity setRegistLogic(PersonDto personDtos)
+        //{
+        //    var registerMan = new PersonEntity();
 
-            registerMan.StaffName = personDtos.StaffName;
-            registerMan.CompanyID = personDtos.CompanyID;
-            registerMan.DepartmentID = personDtos.DepartmentID;
-            registerMan.ExtensionNumber = personDtos.ExtensionNumber;
-            registerMan.Memo = personDtos.Memo;
+        //    registerMan.StaffName = personDtos.StaffName;
+        //    registerMan.CompanyID = personDtos.CompanyID;
+        //    registerMan.DepartmentID = personDtos.DepartmentID;
+        //    registerMan.ExtensionNumber = personDtos.ExtensionNumber;
+        //    registerMan.Memo = personDtos.Memo;
 
-            return registerMan;
+        //    return registerMan;
 
-        }
+        //}
     }
 }

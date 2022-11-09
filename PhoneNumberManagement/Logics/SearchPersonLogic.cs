@@ -23,9 +23,9 @@ namespace PhoneNumberManagement.Logics
         #region コンストラクタ
         public SearchPersonLogic(IManagementDao managementDao, ISearchEntityAndDtoDxo searchEntityAndDto, IManagementEntityAndDtoDxo managementEntityAndDto)
         {
-            managementDao = this.managementDao;
-            searchEntityAndDto = this.searchEntityAndDto;
-            managementEntityAndDto = this.managementEntityAndDto;
+            this.managementDao = managementDao;
+            this.searchEntityAndDto = searchEntityAndDto;
+            this.managementEntityAndDto = managementEntityAndDto;
         }
         #endregion
 

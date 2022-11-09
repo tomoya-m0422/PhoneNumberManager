@@ -18,13 +18,13 @@ namespace PhoneNumberManagement.Logics
         #region コンストラクタ
         public DeletePersonLogic(IPersonDao personDao, IStaffNumberEntityAndDtoDxo staffNumberEntityAndDto)
         {
-            personDao = this.personDao;
-            staffNumberEntityAndDto = this.staffNumberEntityAndDto;
+            this.personDao = personDao;
+            this.staffNumberEntityAndDto = staffNumberEntityAndDto;
         }
         #endregion
 
         public void deleteLogic(SqlConnection connection, StaffNumberDto staffNumber)
-        {
+{
             var result =staffNumberEntityAndDto.ExchangeDtoToEntity(staffNumber);
             personDao.deleteDao(connection, result);
         }

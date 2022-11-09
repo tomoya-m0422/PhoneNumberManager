@@ -11,22 +11,22 @@ namespace PhoneNumberManagement.Logics
     public class GetDepartmentLogic : IGetDepartmentLogic
     {
         #region メンバー変数
-        private IDepartmentDao DepartmentDao;
+        private IDepartmentDao departmentDao;
         private IDepartmentEntityAndDtoDxo departmentEntityAndDto;
         #endregion
 
         #region コンストラクター
-        public GetDepartmentLogic(IDepartmentDao DepartmentDao, IDepartmentEntityAndDtoDxo departmentEntityAndDto)
+        public GetDepartmentLogic(IDepartmentDao departmentDao, IDepartmentEntityAndDtoDxo departmentEntityAndDto)
         {
-            DepartmentDao = this.DepartmentDao;
-            departmentEntityAndDto = this.departmentEntityAndDto;
+            this.departmentDao = departmentDao;
+            this.departmentEntityAndDto = departmentEntityAndDto;
         }
         #endregion
 
-        public IEnumerable<DepartmentDto> Logic (SqlConnection connection)
+        public List<DepartmentDto> Logic (SqlConnection connection)
         {
-            var dao = DepartmentDao.Dao(connection);
-            var result = departmentEntityAndDto.IEnumerableExchangeEntityToDto(dao);
+            var dao = departmentDao.Dao(connection);
+            var result = departmentEntityAndDto.ListExchangeDtoToEntity(dao);
             return result;
         }
     }

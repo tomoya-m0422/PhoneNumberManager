@@ -22,9 +22,9 @@ namespace PhoneNumberManagement.Logics
         #region コンストラクタ
         public DetailPersonLogic(IManagementDao managementDao, IManagementEntityAndDtoDxo managementEntityAndDto, IStaffNumberEntityAndDtoDxo staffNumberEntityAndDto)
         {
-            managementDao = this.managementDao;
-            managementEntityAndDto = this.managementEntityAndDto;
-            staffNumberEntityAndDto = this.staffNumberEntityAndDto;
+            this.managementDao = managementDao;
+            this.managementEntityAndDto = managementEntityAndDto;
+            this.staffNumberEntityAndDto = staffNumberEntityAndDto;
         }
 
         #endregion

@@ -15,7 +15,7 @@ namespace PhoneNumberManagement.Services
         #region コンストラクタ
         public DetailPersonService(IDetailPersonLogic detailPersonLogic)
         {
-            detailPersonLogic = this.detailPersonLogic;
+            this.detailPersonLogic = detailPersonLogic;
         }
         #endregion
 

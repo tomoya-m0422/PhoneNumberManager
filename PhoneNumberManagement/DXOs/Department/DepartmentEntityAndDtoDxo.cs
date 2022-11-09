@@ -39,9 +39,8 @@ namespace PhoneNumberManagement.DXOs.Department
         /// <returns>Dto型のデータを返す</returns>
         public List<DepartmentDto> ListExchangeDtoToEntity(List<DepartmentEntity> departmentEntities)
         {
-            var config = DtoToEntityOverride;
 
-            var mapper = config.CreateMapper();
+            var mapper = EntityToDtoOverride.CreateMapper();
             return mapper.Map<List<DepartmentEntity>, List<DepartmentDto>>(departmentEntities);
         }
 
@@ -52,9 +51,8 @@ namespace PhoneNumberManagement.DXOs.Department
         /// <returns>Entity型のデータを返す</returns>
         public List<DepartmentEntity> ListExchangeEntityToDto(List<DepartmentDto> departmentDtos)
         {
-            var config = EntityToDtoOverride;
 
-            var mapper = config.CreateMapper();
+            var mapper = DtoToEntityOverride.CreateMapper();
             return mapper.Map<List<DepartmentDto>, List<DepartmentEntity>>(departmentDtos);
         }
         #endregion

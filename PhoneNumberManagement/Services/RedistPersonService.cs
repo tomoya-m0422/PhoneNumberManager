@@ -16,7 +16,7 @@ namespace PhoneNumberManagement.Services
         #region コンストラクター
         public RedistPersonService(IRegistPersonLogic personRegistLogic)
         {
-            personRegistLogic = this.personRegistLogic;
+            this.personRegistLogic = personRegistLogic;
         }
         #endregion
 
