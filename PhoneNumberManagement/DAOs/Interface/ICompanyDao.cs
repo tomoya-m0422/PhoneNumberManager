@@ -5,6 +5,6 @@ namespace PhoneNumberManagement.DAOs.Interface
 {
     public interface ICompanyDao
     {
-        IEnumerable<CompanyEntity> Dao(SqlConnection connection);
+        List<CompanyEntity> Dao(SqlConnection connection);
     }
 }

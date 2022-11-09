@@ -16,14 +16,14 @@ namespace PhoneNumberManagement.Logics
 
         public GetCompanyLogic(ICompanyDao companyDao, ICompanyEntityAndDtoDxo companyEntityAndDto)
         {
-            companyDao = this.companyDao;
-            companyEntityAndDto = this.companyEntityAndDto;
+            this.companyDao = companyDao;
+            this.companyEntityAndDto = companyEntityAndDto;
         }
 
-        public IEnumerable<CompanyDto> Logic(SqlConnection connection)
+        public List<CompanyDto> Logic(SqlConnection connection)
         {
             var dao = companyDao.Dao(connection);
-            var result = companyEntityAndDto.IEnumerableExchangeEntityToDto(dao);
+            var result = companyEntityAndDto.ListExchangeDtoToEntity(dao);
             return result;
         }
     }

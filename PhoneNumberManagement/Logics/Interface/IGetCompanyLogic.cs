@@ -5,6 +5,6 @@ namespace PhoneNumberManagement.Logics.Interface
 {
     public interface IGetCompanyLogic
     {
-        IEnumerable<CompanyDto> Logic(SqlConnection connection);
+        List<CompanyDto> Logic(SqlConnection connection);
     }
 }

@@ -8,13 +8,13 @@ namespace PhoneNumberManagement.DAO
 {
     public class CompanyDao : ICompanyDao
     {
-        public IEnumerable<CompanyEntity> Dao(SqlConnection connection)
+        public List<CompanyEntity> Dao(SqlConnection connection)
         {
             var query = "SELECT * FROM Company";
 
             var result = connection.Query<CompanyEntity>(query);
 
-            return  result;
+            return (List<CompanyEntity>)result;
         }
     }
 }

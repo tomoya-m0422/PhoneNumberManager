@@ -15,7 +15,7 @@ namespace PhoneNumberManagement.Services
         #region コンストラクタ
         public DeletePersonService(IDeletePersonLogic deletePersonLogic)
         {
-            deletePersonLogic = this.deletePersonLogic;
+            this.deletePersonLogic = deletePersonLogic;
         }
         #endregion
 
