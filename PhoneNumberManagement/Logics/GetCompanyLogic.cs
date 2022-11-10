@@ -1,9 +1,6 @@
-﻿using PhoneNumberManagement.DAO;
-using PhoneNumberManagement.DAOs.Interface;
+﻿using PhoneNumberManagement.DAOs.Interface;
 using PhoneNumberManagement.DTO;
-using PhoneNumberManagement.DXOs.Company;
 using PhoneNumberManagement.DXOs.Company.Interface;
-using PhoneNumberManagement.Entity;
 using PhoneNumberManagement.Logics.Interface;
 using System.Data.SqlClient;
 

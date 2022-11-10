@@ -18,7 +18,7 @@ namespace PhoneNumberManagement.Services
         #region コンストラクタ
         public GetCompanyService( IGetCompanyLogic getCompanyLogic)
         {
-            this.getCompanyLogic = new GetCompanyLogic(new CompanyDao(),new CompanyEntityAndDtoDxo());
+            this.getCompanyLogic = getCompanyLogic;
         }
         #endregion
 
