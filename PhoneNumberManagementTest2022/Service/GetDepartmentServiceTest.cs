@@ -8,16 +8,16 @@ using System.Runtime.Serialization;
 namespace PhoneNumberManagementTest.Service
 {
     [TestClass]
-    public class GetCompanyServiceTest
+    public class GetDepartmentServiceTest
     {
         #region メンバー変数とコンストラクタ
-        public Mock<IGetCompanyLogic> mock;
-        public GetCompanyService service;
+        public Mock<IGetDepartmentLogic> mock;
+        public GetDepartmentService service;
 
-        public GetCompanyServiceTest()
+        public GetDepartmentServiceTest()
         {
-            this.mock = new Mock<IGetCompanyLogic>();
-            this.service = new GetCompanyService(mock.Object);
+            this.mock = new Mock<IGetDepartmentLogic>();
+            this.service = new GetDepartmentService(mock.Object);
         }
         #endregion
 
@@ -25,14 +25,15 @@ namespace PhoneNumberManagementTest.Service
         [TestMethod]
         public void ServiceOkTest()
         {
-            List<CompanyDto> companyDto = new List<CompanyDto>();
+            List<DepartmentDto>  departmentDto = new List<DepartmentDto>();
+
             mock.Setup(x => x.Logic(It.IsAny<SqlConnection>()))
-                .Returns(companyDto);
+                .Returns(departmentDto);
 
             var result = service.Service();
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(companyDto, result);
+            Assert.AreEqual(departmentDto, result);
         }
         #endregion
 
@@ -40,10 +41,9 @@ namespace PhoneNumberManagementTest.Service
         [TestMethod]
         public void ServiceExceptionTest()
         {
-            var exep = FormatterServices.GetUninitializedObject(typeof(Exception)) as Exception;
+            var hoge = FormatterServices.GetUninitializedObject(typeof(Exception)) as Exception;
             mock.Setup(x => x.Logic(It.IsAny<SqlConnection>()))
-                .Throws(exep);
-
+                .Throws(hoge);
             var ex2 = String.Empty;
 
             try
@@ -52,10 +52,10 @@ namespace PhoneNumberManagementTest.Service
             }
             catch(Exception ex)
             {
-                ex2 = ex.Message;
+                ex2=ex.Message;
                 Assert.IsNotNull(ex);
             }
-            Assert.AreNotEqual(String.Empty, ex2);
+            Assert.IsNotNull(String.Empty, ex2);
         }
         #endregion
 
@@ -63,19 +63,18 @@ namespace PhoneNumberManagementTest.Service
         [TestMethod]
         public void ServiceSqlExceptionTest()
         {
-            var exep = FormatterServices.GetUninitializedObject(typeof(SqlException)) as SqlException;
+            var hoge = FormatterServices.GetUninitializedObject(typeof(SqlException)) as SqlException;
             mock.Setup(x => x.Logic(It.IsAny<SqlConnection>()))
-                .Throws(exep);
-
+                .Throws(hoge);
             var ex2 = String.Empty;
 
             try
             {
                 var result = service.Service();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                if(ex is SqlException)
+                if (ex is SqlException)
                 {
                     ex2 = ex.Message;
                     Assert.IsNotNull(ex);
@@ -85,9 +84,8 @@ namespace PhoneNumberManagementTest.Service
                     ex2 = String.Empty;
                 }
             }
-            Assert.AreNotEqual(String.Empty, ex2);
+            Assert.IsNotNull(String.Empty, ex2);
         }
         #endregion
-
     }
 }

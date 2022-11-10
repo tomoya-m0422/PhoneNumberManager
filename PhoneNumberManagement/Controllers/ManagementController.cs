@@ -49,7 +49,7 @@ namespace PhoneNumberManagement.Controllers
         public ManagementController()
         {
             this.managementService = new ManagementService(new ManagementLogic(new ManagementDao(),new ManagementEntityAndDtoDxo()));
-            this.personRegisterService = new RedistPersonService(new RegistPersonLogic(new PersonDao(),new PersonEntityAndDtoDxo()));
+            this.personRegisterService = new RegistPersonService(new RegistPersonLogic(new PersonDao(),new PersonEntityAndDtoDxo()));
             this.deletePersonService = new DeletePersonService(new DeletePersonLogic(new PersonDao(),new StaffNumberEntityAndDtoDxo()));
             this.searchPersonService = new SearchPersonService(new SearchPersonLogic(new ManagementDao(),new SearchEntityAndDtoDxo(),new ManagementEntityAndDtoDxo()));
             this.editPersonService = new EditPersonService(new EditPersonLogic(new PersonDao(),new PersonEntityAndDtoDxo()));

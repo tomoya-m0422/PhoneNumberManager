@@ -17,7 +17,7 @@ namespace PhoneNumberManagement.Services
         #region コンストラクタ
         public GetDepartmentService( IGetDepartmentLogic getDepartmentLogic)
         {
-            this.getDepartmentLogic = new GetDepartmentLogic(new DepartmentDao(),new DepartmentEntityAndDtoDxo());
+            this.getDepartmentLogic = getDepartmentLogic;
         }
         #endregion
 

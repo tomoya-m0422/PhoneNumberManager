@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace PhoneNumberManagement.Services
 {
-    public class RedistPersonService : IRedistPersonService
+    public class RegistPersonService : IRedistPersonService
     {
 
         #region メンバー変数
@@ -14,7 +14,7 @@ namespace PhoneNumberManagement.Services
         #endregion
 
         #region コンストラクター
-        public RedistPersonService(IRegistPersonLogic personRegistLogic)
+        public RegistPersonService(IRegistPersonLogic personRegistLogic)
         {
             this.personRegistLogic = personRegistLogic;
         }
